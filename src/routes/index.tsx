@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Instagram, Linkedin, MessageCircle, Globe, ShoppingBag, Smartphone, ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import heroDiamond from "@/assets/hero-diamond.jpg";
+import heroDiamond from "@/assets/conselt-diamond.png.asset.json";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -10,13 +10,13 @@ import blog3 from "@/assets/blog-3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Vertex — Transforme o seu sonho em realidade" },
+      { title: "Conselt — Transforme o seu sonho em realidade" },
       {
         name: "description",
         content:
           "Estúdio digital especializado em websites, e-commerce e aplicativos sob medida. Design premium, tecnologia de ponta.",
       },
-      { property: "og:title", content: "Vertex — Estúdio Digital Premium" },
+      { property: "og:title", content: "Conselt — Estúdio Digital Premium" },
       {
         property: "og:description",
         content: "Websites, e-commerce e apps com design minimalista e tecnologia de ponta.",
@@ -86,7 +86,7 @@ function Header() {
         <a href="#home" className="flex items-center gap-2 group">
           <Logo className="w-9 h-9 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" />
           <span className="font-display font-extrabold tracking-tight text-lg text-foreground">
-            VERTEX
+            CONSELT
           </span>
         </a>
 
@@ -212,10 +212,10 @@ function Hero() {
           <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl rounded-full" />
           <div className="relative w-full max-w-[520px] aspect-square">
             <img
-              src={heroDiamond}
-              alt="Diamante Vertex — símbolo de precisão e energia"
-              width={1600}
-              height={1408}
+              src={heroDiamond.url}
+              alt="Diamante Conselt — símbolo de precisão e energia"
+              width={490}
+              height={490}
               className="w-full h-full object-contain animate-[float_6s_ease-in-out_infinite]"
               style={{
                 filter: "drop-shadow(0 30px 60px oklch(0.55 0.22 255 / 0.25))",
@@ -398,7 +398,7 @@ function Footer() {
         <div>
           <div className="flex items-center gap-2">
             <Logo className="w-9 h-9" />
-            <span className="font-display font-extrabold tracking-tight text-lg">VERTEX</span>
+            <span className="font-display font-extrabold tracking-tight text-lg">CONSELT</span>
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-sm leading-relaxed">
             Transformamos ideias em produtos digitais premium. Baseados no Brasil, atuando no mundo.
@@ -436,7 +436,7 @@ function Footer() {
             Contato
           </div>
           <ul className="mt-4 space-y-2 text-sm text-foreground/80">
-            <li>ola@vertex.digital</li>
+            <li>contato@conselt.com.br</li>
             <li>+55 11 99999-0000</li>
             <li>São Paulo · Brasil</li>
           </ul>
@@ -445,7 +445,7 @@ function Footer() {
 
       <div className="border-t border-border">
         <div className="mx-auto max-w-7xl px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-          <div>© 2026 Vertex Digital. Todos os direitos reservados.</div>
+          <div>© 2026 Conselt Digital. Todos os direitos reservados.</div>
           <div>Feito com precisão em São Paulo.</div>
         </div>
       </div>
