@@ -432,8 +432,7 @@ function Footer() {
         </div>
 
         <div>
-          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            Contato
+          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground h-[1em]">
           </div>
           <ul className="mt-4 space-y-2 text-sm text-foreground/80">
             <li>contato@conselt.com.br</li>
