@@ -38,6 +38,10 @@
 
   --font-display: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-opensans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-white: #ffffff;
+  --color-brand-blue: #073a7d;
 }
 
 :root {
