@@ -367,57 +367,45 @@ function Blog() {
 
 function Footer() {
   return (
-    <footer id="contatos" className="relative bg-background border-t border-border">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16 grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div>
-          <div className="flex items-center gap-2">
-            <Logo className="w-9 h-9" />
-            <span className="font-display font-extrabold tracking-tight text-lg">CONSELT</span>
-          </div>
-          <p className="mt-4 text-sm text-muted-foreground max-w-sm leading-relaxed">
-            Transformamos ideias em produtos digitais premium. Baseados no Brasil, atuando no mundo.
-          </p>
-          <div className="mt-6 flex items-center gap-1">
-            {[Instagram, Linkedin, MessageCircle].map((Icon, i) => (
-              <a
-                key={i}
-                href="#"
-                className="p-2.5 rounded-full text-foreground/60 hover:text-primary hover:bg-accent transition-all duration-300"
-              >
-                <Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
-              </a>
-            ))}
-          </div>
+    <footer id="contatos" className="relative bg-brand-white border-t border-brand-blue/10 font-opensans text-brand-blue">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16 grid gap-10 items-start md:grid-cols-[auto_1fr_auto]">
+        <div className="flex items-start">
+          <Logo className="w-14 h-14" />
         </div>
 
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            Navegação
-          </div>
-          <ul className="mt-4 space-y-2 text-sm">
-            {navLinks.map((l) => (
-              <li key={l.label}>
-                <a href={l.href} className="text-foreground/80 hover:text-primary transition-colors">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <nav className="flex flex-col items-center gap-3">
+          {navLinks.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              className="text-sm font-semibold uppercase tracking-widest text-brand-blue hover:opacity-70 transition-opacity"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
 
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground h-[1em]">
-          </div>
-          <ul className="mt-4 space-y-2 text-sm text-foreground/80">
-            <li>contato@conselt.com.br</li>
-            <li>+55 11 99999-0000</li>
-            <li>São Paulo · Brasil</li>
-          </ul>
+        <div className="flex flex-col items-center md:items-start gap-3">
+          <div className="text-sm font-bold uppercase tracking-widest text-brand-blue">Siga-nos</div>
+          {[
+            { Icon: MessageCircle, label: "WhatsApp" },
+            { Icon: Instagram, label: "Instagram" },
+            { Icon: Linkedin, label: "LinkedIn" },
+          ].map(({ Icon, label }) => (
+            <a
+              key={label}
+              href="#"
+              aria-label={label}
+              className="text-brand-blue hover:opacity-70 transition-opacity"
+            >
+              <Icon className="w-5 h-5" strokeWidth={1.75} />
+            </a>
+          ))}
         </div>
       </div>
 
-      <div className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+      <div className="border-t border-brand-blue/10">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-brand-blue/70">
           <div>© 2026 Conselt Digital. Todos os direitos reservados.</div>
           <div>Feito com precisão em São Paulo.</div>
         </div>
