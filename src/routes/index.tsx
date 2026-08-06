@@ -368,39 +368,59 @@ function Blog() {
 function Footer() {
   return (
     <footer id="contatos" className="relative bg-brand-white border-t border-brand-blue/10 font-opensans text-brand-blue">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16 grid gap-10 items-start md:grid-cols-[auto_1fr_auto]">
-        <div className="flex items-start">
-          <Logo className="w-14 h-14" />
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16 grid gap-12 items-start lg:grid-cols-2">
+        <div className="flex flex-col sm:flex-row items-start gap-8">
+          <Logo className="w-28 h-28 shrink-0" />
+
+          <div className="flex flex-wrap gap-x-14 gap-y-8">
+            <nav className="flex flex-col items-start gap-3">
+              {navLinks.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  className="text-sm font-semibold uppercase tracking-widest text-brand-blue hover:opacity-70 transition-opacity"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="flex flex-col items-start gap-3">
+              <div className="text-sm font-bold uppercase tracking-widest text-brand-blue">
+                Siga-nos
+              </div>
+              {[
+                { Icon: MessageCircle, label: "WhatsApp" },
+                { Icon: Instagram, label: "Instagram" },
+                { Icon: Linkedin, label: "LinkedIn" },
+              ].map(({ Icon, label }) => (
+                <a
+                  key={label}
+                  href="#"
+                  aria-label={label}
+                  className="text-brand-blue hover:opacity-70 transition-opacity"
+                >
+                  <Icon className="w-5 h-5" strokeWidth={1.75} />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <nav className="flex flex-col items-center gap-3">
-          {navLinks.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="text-sm font-semibold uppercase tracking-widest text-brand-blue hover:opacity-70 transition-opacity"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex flex-col items-center md:items-start gap-3">
-          <div className="text-sm font-bold uppercase tracking-widest text-brand-blue">Siga-nos</div>
-          {[
-            { Icon: MessageCircle, label: "WhatsApp" },
-            { Icon: Instagram, label: "Instagram" },
-            { Icon: Linkedin, label: "LinkedIn" },
-          ].map(({ Icon, label }) => (
-            <a
-              key={label}
-              href="#"
-              aria-label={label}
-              className="text-brand-blue hover:opacity-70 transition-opacity"
-            >
-              <Icon className="w-5 h-5" strokeWidth={1.75} />
-            </a>
-          ))}
+        <div className="w-full">
+          <div className="overflow-hidden rounded-2xl border border-brand-blue/15">
+            <iframe
+              title="Mapa CONSELT — Universidade Federal de Uberlândia"
+              src="https://maps.google.com/maps?q=Universidade%20Federal%20de%20Uberl%C3%A2ndia%2C%20Av%20Jo%C3%A3o%20Naves%20de%20%C3%81vila%2C%202121%2C%20Bloco%201N%2C%20Santa%20M%C3%B4nica%2C%20Uberl%C3%A2ndia%20-%20MG%2C%2038408-144&z=16&output=embed"
+              className="w-full h-64 lg:h-72 border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+          <p className="mt-3 text-xs leading-relaxed text-brand-blue/80">
+            Universidade Federal de Uberlândia — Av. João Naves de Ávila, Bloco 1N, 2121 — Sala 06,
+            Saraiva, Uberlândia - MG, 38408-144
+          </p>
         </div>
       </div>
 
