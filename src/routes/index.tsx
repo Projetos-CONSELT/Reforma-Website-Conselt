@@ -81,13 +81,10 @@ const posts = [
 function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border/60">
+    <header className="fixed top-0 inset-x-0 z-50 bg-brand-white border-b border-brand-blue/10">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 grid grid-cols-[auto_1fr_auto] items-center gap-6">
         <a href="#home" className="flex items-center gap-2 group">
-          <Logo className="w-9 h-9 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" />
-          <span className="font-display font-extrabold tracking-tight text-lg text-foreground">
-            CONSELT
-          </span>
+          <Logo className="w-10 h-10 transition-transform duration-300 group-hover:scale-110" />
         </a>
 
         <nav className="hidden lg:flex items-center justify-center gap-10">
@@ -95,59 +92,36 @@ function Header() {
             <a
               key={l.label}
               href={l.href}
-              className="relative text-sm font-semibold uppercase tracking-wider text-foreground/70 hover:text-foreground transition-colors duration-300 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:h-0.5 after:w-0 after:bg-gradient-primary after:transition-all after:duration-300 hover:after:w-full"
+              className="relative font-opensans text-sm font-semibold uppercase tracking-wider text-brand-blue transition-opacity duration-300 hover:opacity-70 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:h-0.5 after:w-0 after:bg-brand-blue after:transition-all after:duration-300 hover:after:w-full"
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-1">
-          {[
-            { Icon: Instagram, label: "Instagram" },
-            { Icon: Linkedin, label: "LinkedIn" },
-            { Icon: MessageCircle, label: "WhatsApp" },
-          ].map(({ Icon, label }) => (
-            <a
-              key={label}
-              href="#"
-              aria-label={label}
-              className="p-2.5 rounded-full text-foreground/60 hover:text-primary hover:bg-accent transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
-            </a>
-          ))}
-        </div>
-
         <button
           onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 rounded-lg hover:bg-accent transition-colors"
+          className="lg:hidden col-start-3 justify-self-end p-2 rounded-lg text-brand-blue hover:bg-brand-blue/5 transition-colors"
           aria-label="Menu"
         >
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
+        <div className="hidden lg:block" />
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border/60 bg-background/95 backdrop-blur-xl">
+        <div className="lg:hidden border-t border-brand-blue/10 bg-brand-white">
           <nav className="flex flex-col p-6 gap-4">
             {navLinks.map((l) => (
               <a
                 key={l.label}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-sm font-semibold uppercase tracking-wider text-foreground/70 hover:text-primary transition-colors"
+                className="font-opensans text-sm font-semibold uppercase tracking-wider text-brand-blue hover:opacity-70 transition-opacity"
               >
                 {l.label}
               </a>
             ))}
-            <div className="flex items-center gap-2 pt-2">
-              {[Instagram, Linkedin, MessageCircle].map((Icon, i) => (
-                <a key={i} href="#" className="p-2.5 rounded-full hover:bg-accent">
-                  <Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
-                </a>
-              ))}
-            </div>
           </nav>
         </div>
       )}
