@@ -144,16 +144,16 @@ function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-8 items-center">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-[0.3em] uppercase text-muted-foreground font-montserrat">
+          <p className="text-sm font-semibold tracking-[0.3em] uppercase text-brand-blue/70 font-montserrat">
             Transforme o seu
           </p>
-          <h1 className="mt-3 font-montserrat font-black uppercase leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-foreground">
+          <h1 className="mt-3 font-montserrat font-black uppercase leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-brand-blue">
             Sonho em
             <br />
             <span className="text-gradient-primary">Realidade</span>
           </h1>
 
-          <p className="mt-8 text-lg text-muted-foreground max-w-lg leading-relaxed font-montserrat">
+          <p className="mt-8 text-lg text-brand-blue/70 max-w-lg leading-relaxed font-montserrat">
             Somos apaixonados por tecnologia e pela forma como ela pode impactar pessoas e ideias.
             Criamos produtos digitais que unem design, performance e propósito.
           </p>
@@ -161,7 +161,7 @@ function Hero() {
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
               href="#portfolio"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue/80 hover:text-primary transition-colors"
             >
               Ver portfólio
               <ArrowUpRight className="w-4 h-4" />
@@ -184,12 +184,12 @@ function Hero() {
               }}
             />
             {/* Floating accents */}
-            <div className="absolute top-6 -right-2 w-16 h-16 rounded-2xl bg-background/80 backdrop-blur border border-border shadow-card grid place-items-center animate-[float_5s_ease-in-out_infinite_reverse]">
+            <div className="absolute top-6 -right-2 w-16 h-16 rounded-2xl bg-white/80 backdrop-blur border border-brand-blue/10 shadow-card grid place-items-center animate-[float_5s_ease-in-out_infinite_reverse]">
               <Logo className="w-8 h-8" />
             </div>
-            <div className="absolute bottom-10 -left-4 px-4 py-3 rounded-2xl bg-background/90 backdrop-blur border border-border shadow-card">
-              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Projetos</div>
-              <div className="font-display font-extrabold text-xl text-foreground">+120</div>
+            <div className="absolute bottom-10 -left-4 px-4 py-3 rounded-2xl bg-white/90 backdrop-blur border border-brand-blue/10 shadow-card">
+              <div className="text-[10px] uppercase tracking-widest text-brand-blue/60">Projetos</div>
+              <div className="font-display font-extrabold text-xl text-brand-blue">+120</div>
             </div>
           </div>
         </div>
