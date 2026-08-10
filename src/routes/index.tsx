@@ -144,33 +144,21 @@ function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-8 items-center">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-accent text-accent-foreground border border-primary/10">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            Estúdio Digital Premium
-          </span>
-
-          <p className="mt-6 text-sm font-semibold tracking-[0.3em] uppercase text-muted-foreground">
+          <p className="text-sm font-semibold tracking-[0.3em] uppercase text-muted-foreground font-montserrat">
             Transforme o seu
           </p>
-          <h1 className="mt-3 font-display font-black uppercase leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-foreground">
+          <h1 className="mt-3 font-montserrat font-black uppercase leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-foreground">
             Sonho em
             <br />
             <span className="text-gradient-primary">Realidade</span>
           </h1>
 
-          <p className="mt-8 text-lg text-muted-foreground max-w-lg leading-relaxed">
+          <p className="mt-8 text-lg text-muted-foreground max-w-lg leading-relaxed font-montserrat">
             Somos apaixonados por tecnologia e pela forma como ela pode impactar pessoas e ideias.
             Criamos produtos digitais que unem design, performance e propósito.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href="#contatos"
-              className="group inline-flex items-center gap-3 px-7 py-4 rounded-full bg-gradient-primary text-primary-foreground text-sm font-semibold shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
-            >
-              Fale Conosco
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </a>
             <a
               href="#portfolio"
               className="inline-flex items-center gap-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
