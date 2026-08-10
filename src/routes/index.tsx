@@ -144,7 +144,7 @@ function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-8 items-center">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-[0.3em] uppercase text-brand-blue/70 font-montserrat">
+          <p className="text-lg font-semibold tracking-[0.3em] uppercase text-brand-blue/70 font-montserrat">
             Transforme o seu
           </p>
           <h1 className="mt-3 font-montserrat font-black uppercase leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-brand-blue">
