@@ -79,11 +79,11 @@
   --gradient-soft: linear-gradient(180deg, oklch(0.16 0.02 260) 0%, oklch(0.19 0.03 260) 100%);
   --gradient-hero: radial-gradient(
       1000px 600px at 80% 20%,
-      oklch(0.45 0.22 260 / 0.35),
+      oklch(0.98 0.005 250 / 0.9),
       transparent 60%
     ),
-    radial-gradient(700px 500px at 10% 90%, oklch(0.5 0.2 250 / 0.25), transparent 60%),
-    linear-gradient(180deg, oklch(0.14 0.02 260) 0%, oklch(0.18 0.03 260) 100%);
+    radial-gradient(700px 500px at 10% 90%, oklch(0.95 0.01 250 / 0.7), transparent 60%),
+    linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.96 0.008 250) 100%);
   --gradient-border: linear-gradient(135deg, oklch(0.68 0.20 250 / 0.7), oklch(0.5 0.2 250 / 0.15));
 
   --shadow-soft: 0 8px 24px -12px oklch(0.55 0.22 255 / 0.5);
