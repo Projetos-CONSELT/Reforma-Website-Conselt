@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Instagram, Linkedin, MessageCircle, Globe, ShoppingBag, Smartphone, ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight, ArrowUpRight, Briefcase, Globe, Handshake, Lightbulb, Building, Instagram, Linkedin, MessageCircle, Menu, ShieldCheck, Sparkles, Star, Smartphone, ShoppingBag, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import heroDiamond from "@/assets/conselt-diamond.png.asset.json";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
@@ -77,6 +78,202 @@ const posts = [
     excerpt: "Princípios de usabilidade para produtos móveis premium.",
   },
 ];
+
+const partnerships = [
+  {
+    icon: Star,
+    name: "Agência Alpha",
+    desc: "Design colaborativo e soluções digitais estratégicas.",
+  },
+  {
+    icon: Briefcase,
+    name: "Network Beta",
+    desc: "Performance e crescimento para marcas em expansão.",
+  },
+  {
+    icon: Sparkles,
+    name: "Studio Gamma",
+    desc: "Comunicação criativa com impacto visual consistente.",
+  },
+  {
+    icon: ShieldCheck,
+    name: "Hub Delta",
+    desc: "Integração de tecnologia com experiência do usuário.",
+  },
+];
+
+const stats = [
+  {
+    icon: Handshake,
+    label: "Anos de MERCADO",
+    value: "+25",
+  },
+  {
+    icon: Lightbulb,
+    label: "Clientes SATISFEITOS",
+    value: "+100",
+  },
+  {
+    icon: Building,
+    label: "Projetos ENTREGUES",
+    value: "+115",
+  },
+];
+
+const carouselPartnerships =
+  partnerships.length >= 9
+    ? partnerships
+    : Array.from({ length: Math.ceil(9 / partnerships.length) }, () => partnerships).flat();
+
+function Partnerships() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (!carouselApi) {
+      return;
+    }
+
+    const updateIndex = () => {
+      const currentSlide = carouselApi.selectedScrollSnap();
+      setActiveIndex(((currentSlide % partnerships.length) + partnerships.length) % partnerships.length);
+    };
+
+    updateIndex();
+    carouselApi.on("select", updateIndex);
+    carouselApi.on("reInit", updateIndex);
+
+    return () => {
+      carouselApi.off("select", updateIndex);
+      carouselApi.off("reInit", updateIndex);
+    };
+  }, [carouselApi]);
+
+  useEffect(() => {
+    if (!carouselApi || isPaused) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      carouselApi.scrollNext();
+    }, 3500);
+
+    return () => window.clearInterval(timer);
+  }, [carouselApi, isPaused]);
+
+  return (
+    <section id="parcerias" className="py-24 lg:py-36 bg-background">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="mt-0 pt-0 overflow-hidden rounded-[2rem] bg-transparent pb-16">
+          <div className="mx-auto max-w-7xl px-6 py-4 lg:px-10 lg:py-6">
+            <div className="grid gap-4 md:grid-cols-3">
+              {stats.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.label}
+                    className="flex flex-col items-center gap-4 rounded-[1.5rem] bg-slate-900/95 px-6 py-8 text-center text-white shadow-xl shadow-slate-950/30"
+                  >
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-sky-500/10 text-sky-300">
+                      <Icon className="h-7 w-7" />
+                    </div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-200">
+                      {item.label}
+                    </p>
+                    <div className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
+                      {item.value}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-2xl">
+          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">
+            Parceiros
+          </p>
+          <h2 className="mt-4 font-display font-black uppercase text-4xl sm:text-5xl lg:text-6xl leading-tight text-foreground">
+            Nossos <span className="text-gradient-primary">Parceiros</span>
+          </h2>
+        </div>
+
+        <div
+          className="relative mt-12 overflow-visible w-full max-w-full px-4 mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <Carousel
+            className="relative"
+            opts={{
+              containScroll: "trimSnaps",
+              align: "start",
+              dragFree: false,
+              draggable: false,
+              loop: true,
+              slidesToScroll: 1,
+              skipSnaps: false,
+            }}
+            setApi={setCarouselApi}
+          >
+            <CarouselPrevious
+              aria-label="Parceiro anterior"
+              className="absolute left-0 top-1/2 z-20 -translate-y-1/2 -translate-x-[5rem] rounded-full bg-gradient-primary text-primary-foreground p-3 shadow-soft hover:shadow-glow"
+            />
+            <CarouselNext
+              aria-label="Próximo parceiro"
+              className="absolute right-0 top-1/2 z-20 -translate-y-1/2 translate-x-[5rem] rounded-full bg-gradient-primary text-primary-foreground p-3 shadow-soft hover:shadow-glow"
+            />
+            <CarouselContent className="flex gap-2 pb-6 w-full">
+              {carouselPartnerships.map((item, index) => {
+                const Icon = item.icon;
+
+                return (
+                  <CarouselItem
+                    key={`${item.name}-${index}`}
+                    className="min-w-0 flex-none w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] max-w-full"
+                  >
+                    <div className="aspect-square w-full max-w-full overflow-hidden rounded-[1.75rem] border border-border/70 bg-background/90 p-4 text-foreground shadow-soft flex flex-col justify-between">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-3xl bg-primary/10 text-primary shadow-sm shadow-primary/10">
+                        <Icon className="h-8 w-8" />
+                      </div>
+                      <div>
+                        <h3 className="mt-6 text-sm font-bold uppercase text-foreground break-words whitespace-normal">
+                          {item.name}
+                        </h3>
+                        <p className="mt-3 text-xs leading-relaxed text-muted-foreground break-words whitespace-normal">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+          </Carousel>
+
+          <div className="mt-8 flex justify-center gap-3">
+            {partnerships.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                  activeIndex === index ? "bg-white shadow-sm shadow-white/20" : "bg-white/30"
+                }`}
+                aria-label={`Parceiro ${index + 1}`}
+                aria-current={activeIndex === index ? "true" : "false"}
+                onClick={() => carouselApi?.scrollTo(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -197,7 +394,7 @@ function Hero() {
 
 function Services() {
   return (
-    <section id="quem-somos" className="py-24 lg:py-36 bg-background">
+    <section id="quem-somos" className="py-24 lg:py-36 bg-transparent">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl mb-16 lg:mb-20">
           <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">
@@ -267,8 +464,8 @@ function Services() {
 function Blog() {
   const [active, setActive] = useState("Todos");
   return (
-    <section id="blog" className="py-24 lg:py-36 bg-gradient-soft">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <section id="blog" className="pt-16 lg:pt-24 pb-0 bg-transparent">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 mb-0">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">
@@ -419,8 +616,11 @@ function Index() {
     <main className="min-h-screen bg-background text-foreground">
       <Header />
       <Hero />
-      <Services />
-      <Blog />
+      <div className="bg-gradient-to-b from-[#07090e] via-[#0b0f19] to-[#07090e]">
+        <Services />
+        <Blog />
+        <Partnerships />
+      </div>
       <Footer />
     </main>
   );
