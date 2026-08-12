@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ArrowRight, ArrowUpRight, Briefcase, Globe, Handshake, Lightbulb, Building, Instagram, Linkedin, MessageCircle, Menu, ShieldCheck, Sparkles, Star, Smartphone, ShoppingBag, X } from "lucide-react";
+import { useState } from "react";
+import { Instagram, Linkedin, MessageCircle, Globe, ShoppingBag, Smartphone, ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import heroDiamond from "@/assets/conselt-diamond.png.asset.json";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
@@ -79,215 +78,6 @@ const posts = [
   },
 ];
 
-const partnerships = [
-  {
-    name: "Constru EJ",
-    image: "/parceiros/parceiros1.png",
-    square: false,
-  },
-  {
-    name: "La Biblioteca",
-    image: "/parceiros/parceiros2.png",
-    square: false,
-  },
-  {
-    name: "ARCHÉJR",
-    image: "/parceiros/parceiros4.png",
-    square: false,
-  },
-  {
-    name: "LOL",
-    image: "/parceiros/parceiros3.png",
-    square: false,
-  },
-  {
-    name: "Atuar Cursos",
-    image: "/parceiros/parceiros5.png",
-    square: true,
-  },
-];
-
-const stats = [
-  {
-    icon: Handshake,
-    label: "Anos de MERCADO",
-    value: "+25",
-  },
-  {
-    icon: Lightbulb,
-    label: "Clientes SATISFEITOS",
-    value: "+150",
-  },
-  {
-    icon: Building,
-    label: "Projetos ENTREGUES",
-    value: "+115",
-  },
-];
-
-const carouselPartnerships = partnerships;
-
-function Partnerships() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    if (!carouselApi) {
-      return;
-    }
-
-    const updateIndex = () => {
-      setActiveIndex(carouselApi.selectedScrollSnap());
-    };
-
-    updateIndex();
-    carouselApi.on("select", updateIndex);
-    carouselApi.on("reInit", updateIndex);
-
-    return () => {
-      carouselApi.off("select", updateIndex);
-      carouselApi.off("reInit", updateIndex);
-    };
-  }, [carouselApi]);
-
-  useEffect(() => {
-    if (!carouselApi || isPaused) {
-      return;
-    }
-
-    const timer = window.setInterval(() => {
-      carouselApi.scrollNext();
-    }, 3500);
-
-    return () => window.clearInterval(timer);
-  }, [carouselApi, isPaused]);
-
-  return (
-    <section id="parcerias" className="py-24 lg:py-36 bg-background">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="mt-0 pt-0 overflow-hidden rounded-[2rem] bg-transparent pb-16">
-          <div className="mx-auto max-w-7xl px-6 py-4 lg:px-10 lg:py-6">
-            <div className="grid gap-4 md:grid-cols-3">
-              {stats.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <div
-                    key={item.label}
-                    className="flex flex-col items-center gap-4 rounded-[1.5rem] bg-slate-900/95 px-6 py-8 text-center text-white shadow-xl shadow-slate-950/30"
-                  >
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-sky-500/10 text-sky-300">
-                      <Icon className="h-7 w-7" />
-                    </div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-200">
-                      {item.label}
-                    </p>
-                    <div className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
-                      {item.value}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">
-            Parceiros
-          </p>
-          <h2 className="mt-4 font-display font-black uppercase text-4xl sm:text-5xl lg:text-6xl leading-tight text-foreground">
-            Nossos <span className="text-gradient-primary">Parceiros</span>
-          </h2>
-        </div>
-
-        <div
-          className="relative mt-12 overflow-visible w-full max-w-full px-4 mx-auto"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <Carousel
-            className="relative"
-            opts={{
-              containScroll: "trimSnaps",
-              align: "start",
-              dragFree: false,
-              draggable: false,
-              loop: true,
-              slidesToScroll: 1,
-              skipSnaps: false,
-            }}
-            setApi={setCarouselApi}
-          >
-            <CarouselPrevious
-              aria-label="Parceiro anterior"
-              className="absolute left-0 top-1/2 z-20 -translate-y-1/2 -translate-x-[5rem] rounded-full bg-gradient-primary text-primary-foreground p-3 shadow-soft hover:shadow-glow"
-            />
-            <CarouselNext
-              aria-label="Próximo parceiro"
-              className="absolute right-0 top-1/2 z-20 -translate-y-1/2 translate-x-[5rem] rounded-full bg-gradient-primary text-primary-foreground p-3 shadow-soft hover:shadow-glow"
-            />
-            <CarouselContent className="flex gap-2 pb-6 w-full">
-              {carouselPartnerships.map((item, index) => {
-                const Icon = item.icon ?? Star;
-
-                return (
-                  <CarouselItem
-                    key={`${item.name}-${index}`}
-                    className="min-w-0 flex-none w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] max-w-full"
-                  >
-                    <div className="aspect-square w-full max-w-full overflow-hidden rounded-[1.75rem] border border-border/70 bg-[#1e2632] p-6 shadow-soft flex flex-col justify-between items-center relative">
-                      <div className="absolute left-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-sky-500/10 text-sky-300">
-                        <Icon className="h-4 w-4" />
-                      </div>
-
-                      <div className="flex flex-1 w-full items-center justify-center pt-6 pb-3">
-                        {item.image ? (
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className={
-                              item.square
-                                ? "h-36 w-36 rounded-xl object-contain"
-                                : "h-36 w-auto max-w-[84%] object-contain"
-                            }
-                          />
-                        ) : null}
-                      </div>
-
-                      <div className="mt-2 w-full text-center">
-                        <p className="text-sm font-bold uppercase tracking-[0.12em] text-white/90">
-                          {item.name}
-                        </p>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                );
-              })}
-            </CarouselContent>
-          </Carousel>
-
-          <div className="mt-8 flex justify-center gap-3">
-            {partnerships.map((_, index) => (
-              <button
-                key={index}
-                type="button"
-                className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
-                  activeIndex === index ? "bg-white shadow-sm shadow-white/20" : "bg-white/30"
-                }`}
-                aria-label={`Parceiro ${index + 1}`}
-                aria-current={activeIndex === index ? "true" : "false"}
-                onClick={() => carouselApi?.scrollTo(index)}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Header() {
   const [open, setOpen] = useState(false);
   return (
@@ -342,26 +132,48 @@ function Header() {
 function Hero() {
   return (
     <section id="home" className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-gradient-hero">
+      {/* Subtle grid texture */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(oklch(0.22 0.02 260) 1px, transparent 1px), linear-gradient(90deg, oklch(0.22 0.02 260) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+      />
+
       <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-8 items-center">
         <div className="max-w-2xl">
-          <p className="text-xl font-semibold tracking-[0.3em] uppercase text-brand-blue/70 font-montserrat">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-accent text-accent-foreground border border-primary/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            Estúdio Digital Premium
+          </span>
+
+          <p className="mt-6 text-sm font-semibold tracking-[0.3em] uppercase text-muted-foreground">
             Transforme o seu
           </p>
-          <h1 className="mt-3 font-montserrat font-black uppercase leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-brand-blue">
+          <h1 className="mt-3 font-display font-black uppercase leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-foreground">
             Sonho em
             <br />
             <span className="text-gradient-primary">Realidade</span>
           </h1>
 
-          <p className="mt-8 text-lg text-brand-blue/70 max-w-lg leading-relaxed font-montserrat">
+          <p className="mt-8 text-lg text-muted-foreground max-w-lg leading-relaxed">
             Somos apaixonados por tecnologia e pela forma como ela pode impactar pessoas e ideias.
             Criamos produtos digitais que unem design, performance e propósito.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
+              href="#contatos"
+              className="group inline-flex items-center gap-3 px-7 py-4 rounded-full bg-gradient-primary text-primary-foreground text-sm font-semibold shadow-soft hover:shadow-glow hover:-translate-y-0.5 transition-all duration-300"
+            >
+              Fale Conosco
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+            <a
               href="#portfolio"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue/80 hover:text-primary transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-colors"
             >
               Ver portfólio
               <ArrowUpRight className="w-4 h-4" />
@@ -384,12 +196,12 @@ function Hero() {
               }}
             />
             {/* Floating accents */}
-            <div className="absolute top-6 -right-2 w-16 h-16 rounded-2xl bg-white/80 backdrop-blur border border-brand-blue/10 shadow-card grid place-items-center animate-[float_5s_ease-in-out_infinite_reverse]">
+            <div className="absolute top-6 -right-2 w-16 h-16 rounded-2xl bg-background/80 backdrop-blur border border-border shadow-card grid place-items-center animate-[float_5s_ease-in-out_infinite_reverse]">
               <Logo className="w-8 h-8" />
             </div>
-            <div className="absolute bottom-10 -left-4 px-4 py-3 rounded-2xl bg-white/90 backdrop-blur border border-brand-blue/10 shadow-card">
-              <div className="text-[10px] uppercase tracking-widest text-brand-blue/60">Projetos</div>
-              <div className="font-display font-extrabold text-xl text-brand-blue">+120</div>
+            <div className="absolute bottom-10 -left-4 px-4 py-3 rounded-2xl bg-background/90 backdrop-blur border border-border shadow-card">
+              <div className="text-[10px] uppercase tracking-widest text-muted-foreground">Projetos</div>
+              <div className="font-display font-extrabold text-xl text-foreground">+120</div>
             </div>
           </div>
         </div>
@@ -407,7 +219,7 @@ function Hero() {
 
 function Services() {
   return (
-    <section id="quem-somos" className="py-24 lg:py-36 bg-transparent">
+    <section id="quem-somos" className="py-24 lg:py-36 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl mb-16 lg:mb-20">
           <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">
@@ -477,8 +289,8 @@ function Services() {
 function Blog() {
   const [active, setActive] = useState("Todos");
   return (
-    <section id="blog" className="pt-16 lg:pt-24 pb-0 bg-transparent">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 mb-0">
+    <section id="blog" className="py-24 lg:py-36 bg-gradient-soft">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary">
@@ -556,53 +368,51 @@ function Blog() {
 function Footer() {
   return (
     <footer id="contatos" className="relative bg-brand-white border-t border-brand-blue/10 font-opensans text-brand-blue">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-8 lg:gap-10 items-center lg:grid-cols-[auto_1fr_1fr_1.6fr]">
-        {/* Diamante — o mais à esquerda possível, proporcional à altura do mapa */}
-        <Logo className="w-28 h-28 lg:w-40 lg:h-40 xl:w-48 xl:h-48 shrink-0 justify-self-start" />
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-16 items-start lg:grid-cols-2">
+        <div className="flex flex-col sm:flex-row items-start gap-10 lg:gap-12">
+          <Logo className="w-36 h-36 lg:w-44 lg:h-44 shrink-0" />
 
-        {/* Páginas empilhadas e centralizadas */}
-        <nav className="flex flex-col items-center gap-4 justify-self-center">
-          {navLinks.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="font-opensans text-base lg:text-lg font-semibold uppercase tracking-widest text-brand-blue hover:opacity-70 transition-opacity"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
+          <div className="flex flex-col sm:flex-row gap-10 lg:gap-12">
+            <nav className="flex flex-col items-start gap-4">
+              {navLinks.map((l) => (
+                <a
+                  key={l.label}
+                  href={l.href}
+                  className="font-opensans text-base lg:text-lg font-semibold uppercase tracking-widest text-brand-blue hover:opacity-70 transition-opacity"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </nav>
 
-        {/* Siga-nos centralizado, ícones centralizados abaixo */}
-        <div className="flex flex-col items-center gap-4 justify-self-center">
-          <div className="font-opensans text-base lg:text-lg font-bold uppercase tracking-widest text-brand-blue">
-            Siga-nos
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            {[
-              { Icon: MessageCircle, label: "WhatsApp" },
-              { Icon: Instagram, label: "Instagram" },
-              { Icon: Linkedin, label: "LinkedIn" },
-            ].map(({ Icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={label}
-                className="text-brand-blue hover:opacity-70 transition-opacity"
-              >
-                <Icon className="w-7 h-7 lg:w-8 lg:h-8" strokeWidth={1.75} />
-              </a>
-            ))}
+            <div className="flex flex-col items-start gap-4">
+              <div className="font-opensans text-base lg:text-lg font-bold uppercase tracking-widest text-brand-blue">
+                Siga-nos
+              </div>
+              {[
+                { Icon: MessageCircle, label: "WhatsApp" },
+                { Icon: Instagram, label: "Instagram" },
+                { Icon: Linkedin, label: "LinkedIn" },
+              ].map(({ Icon, label }) => (
+                <a
+                  key={label}
+                  href="#"
+                  aria-label={label}
+                  className="text-brand-blue hover:opacity-70 transition-opacity"
+                >
+                  <Icon className="w-7 h-7 lg:w-8 lg:h-8" strokeWidth={1.75} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Mapa ocupando o lado direito */}
-        <div className="w-full justify-self-stretch">
+        <div className="w-full">
           <div className="overflow-hidden rounded-2xl border border-brand-blue/15">
             <iframe
               title="Mapa CONSELT — Universidade Federal de Uberlândia"
               src="https://maps.google.com/maps?q=Universidade%20Federal%20de%20Uberl%C3%A2ndia%2C%20Av%20Jo%C3%A3o%20Naves%20de%20%C3%81vila%2C%202121%2C%20Bloco%201N%2C%20Santa%20M%C3%B4nica%2C%20Uberl%C3%A2ndia%20-%20MG%2C%2038408-144&z=16&output=embed"
-              className="w-full h-64 lg:h-96 border-0"
+              className="w-full h-80 lg:h-96 border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
@@ -629,11 +439,8 @@ function Index() {
     <main className="min-h-screen bg-background text-foreground">
       <Header />
       <Hero />
-      <div className="bg-gradient-to-b from-[#07090e] via-[#0b0f19] to-[#07090e]">
-        <Services />
-        <Blog />
-        <Partnerships />
-      </div>
+      <Services />
+      <Blog />
       <Footer />
     </main>
   );
