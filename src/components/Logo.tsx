@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/conselt-diamond.png.asset.json";
+import diamondImg from "@/assets/conselt-diamond-icon.png";
 
 interface LogoProps {
   className?: string;
@@ -7,8 +7,8 @@ interface LogoProps {
 export function Logo({ className }: LogoProps) {
   return (
     <img
-      src={logoAsset.url}
-      alt="Conselt"
+      src={diamondImg}
+      alt="Conselt Diamante"
       className={className}
       width={490}
       height={490}

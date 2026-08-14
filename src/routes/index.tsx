@@ -1,9 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, ArrowUpRight, Briefcase, Globe, Handshake, Lightbulb, Building, Instagram, Linkedin, MessageCircle, Menu, ShieldCheck, Sparkles, Star, Smartphone, ShoppingBag, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe, Smartphone, ShoppingBag, Star, Handshake, Lightbulb, Building } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import heroDiamond from "@/assets/conselt-diamond.png.asset.json";
+import heroDiamond from "@/assets/conselt-diamond-icon.png";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
@@ -27,14 +29,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Quem Somos", href: "#quem-somos" },
-  { label: "Portfólio", href: "#portfolio" },
-  { label: "Contatos", href: "#contatos" },
-  { label: "Blog", href: "#blog" },
-];
-
 const services = [
   {
     icon: Globe,
@@ -53,7 +47,7 @@ const services = [
   },
 ];
 
-const categories = ["Todos", "Tecnologia", "Design", "Negócios", "UX"];
+const categories = ["Todos", "Tecnologia", "Negócios", "UX"];
 
 const posts = [
   {
@@ -213,7 +207,6 @@ function Partnerships() {
               containScroll: "trimSnaps",
               align: "start",
               dragFree: false,
-              draggable: false,
               loop: true,
               slidesToScroll: 1,
               skipSnaps: false,
@@ -230,7 +223,7 @@ function Partnerships() {
             />
             <CarouselContent className="flex gap-2 pb-6 w-full">
               {carouselPartnerships.map((item, index) => {
-                const Icon = item.icon ?? Star;
+                const Icon = (item as { icon?: typeof Star }).icon ?? Star;
 
                 return (
                   <CarouselItem
@@ -288,119 +281,167 @@ function Partnerships() {
   );
 }
 
-function Header() {
-  const [open, setOpen] = useState(false);
+function Hero() {
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-brand-white border-b border-brand-blue/10">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 h-24 lg:h-28 grid grid-cols-[auto_1fr_auto] items-center gap-6">
-        <a href="#home" className="flex items-center gap-2 group">
-          <Logo className="w-14 h-14 lg:w-16 lg:h-16 transition-transform duration-300 group-hover:scale-110" />
-        </a>
+    <>
+      <section id="home" className="relative pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden bg-gradient-hero">
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-8 items-center">
+          <div className="max-w-2xl">
+            <h1 className="font-montserrat font-extrabold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl leading-[1.15] text-brand-blue tracking-tight">
+              Engenharia e tecnologia para transformar desafios em resultados.
+            </h1>
 
-        <nav className="hidden lg:flex items-center justify-center gap-12">
-          {navLinks.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="relative font-opensans text-base lg:text-lg font-semibold uppercase tracking-wider text-brand-blue transition-opacity duration-300 hover:opacity-70 after:content-[''] after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-brand-blue after:transition-all after:duration-300 hover:after:w-full"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
+            <p className="mt-6 text-base sm:text-lg text-brand-blue/80 max-w-xl leading-relaxed font-opensans">
+              Desenvolvemos websites, sistemas, automações e projetos elétricos sob medida para gerar mais eficiência, segurança, controle e oportunidades.
+            </p>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="lg:hidden col-start-3 justify-self-end p-2 rounded-lg text-brand-blue hover:bg-brand-blue/5 transition-colors"
-          aria-label="Menu"
-        >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-        <div className="hidden lg:block" />
-      </div>
-
-      {open && (
-        <div className="lg:hidden border-t border-brand-blue/10 bg-brand-white">
-          <nav className="flex flex-col p-6 gap-4">
-            {navLinks.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="font-opensans text-base font-semibold uppercase tracking-wider text-brand-blue hover:opacity-70 transition-opacity"
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Link
+                to="/contato"
+                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-opensans text-sm sm:text-base font-bold bg-[#2270A1] text-[#FFFFFF] shadow-lg hover:opacity-90 hover:scale-105 active:scale-95 transition-all duration-300"
               >
-                {l.label}
-              </a>
-            ))}
-          </nav>
+                Solicitar um diagnóstico
+              </Link>
+
+              <Link
+                to="/cases"
+                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 sm:py-4 rounded-full font-opensans text-sm sm:text-base font-bold bg-[#FFFFFF] text-[#093565] border-2 border-[#093565] shadow-md hover:bg-[#093565]/5 hover:scale-105 active:scale-95 transition-all duration-300"
+              >
+                Conhecer nossos cases
+              </Link>
+            </div>
+          </div>
+
+          {/* Reimagined diamond composition */}
+          <div className="relative flex items-center justify-center min-h-[400px] lg:min-h-[560px]">
+            <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl rounded-full" />
+            <div className="relative w-full max-w-[520px] aspect-square">
+              <img
+                src={heroDiamond}
+                alt="Diamante Conselt — símbolo de precisão e energia"
+                width={490}
+                height={490}
+                className="w-full h-full object-contain animate-[float_6s_ease-in-out_infinite]"
+                style={{
+                  filter: "drop-shadow(0 30px 60px oklch(0.55 0.22 255 / 0.25))",
+                }}
+              />
+              {/* Floating accents */}
+              <div className="absolute top-6 -right-2 w-16 h-16 rounded-2xl bg-white/80 backdrop-blur border border-brand-blue/10 shadow-card grid place-items-center animate-[float_5s_ease-in-out_infinite_reverse]">
+                <Logo className="w-8 h-8" />
+              </div>
+              <div className="absolute bottom-10 -left-4 px-4 py-3 rounded-2xl bg-white/90 backdrop-blur border border-brand-blue/10 shadow-card">
+                <div className="text-[10px] uppercase tracking-widest text-brand-blue/60">Projetos</div>
+                <div className="font-display font-extrabold text-xl text-brand-blue">+120</div>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
-    </header>
+
+        <style>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+          }
+        `}</style>
+      </section>
+
+    {/* Faixa informativa imediatamente abaixo da primeira seção */}
+      <div className="w-full bg-[#162638] py-4 lg:py-5 px-6 shadow-sm border-y border-[#162638]/40 relative z-20">
+        <div className="mx-auto max-w-7xl text-center font-opensans font-bold text-xs sm:text-sm lg:text-base text-[#B1D3E1] tracking-wide leading-relaxed">
+          Vinculada à FEELT/UFU | Projetos sob supervisão | Soluções personalizadas | Atendimento em Uberlândia e região
+        </div>
+      </div>
+    </>
   );
 }
 
-function Hero() {
+const challenges = [
+  {
+    icon: Globe,
+    title: "Presença digital",
+    text: "Seu negócio recebe visitas, mas não transforma atenção em confiança e pedidos de orçamento?",
+    cta: "Melhorar minha presença digital",
+    href: "/solucoes-digitais" as const,
+  },
+  {
+    icon: Smartphone,
+    title: "Operação manual",
+    text: "Sua equipe ainda depende de planilhas, retrabalho e processos difíceis de acompanhar?",
+    cta: "Automatizar meus processos",
+    href: "/solucoes-digitais" as const,
+  },
+  {
+    icon: Building,
+    title: "Obra e instalações",
+    text: "Seu projeto corre risco de incompatibilidade, desperdício ou improviso na execução?",
+    cta: "Planejar meu projeto",
+    href: "/engenharia-automacao" as const,
+  },
+  {
+    icon: Lightbulb,
+    title: "Ambiente e automação",
+    text: "Seu espaço poderia oferecer mais conforto, eficiência, segurança e controle?",
+    cta: "Conhecer automação e iluminação",
+    href: "/engenharia-automacao" as const,
+  },
+];
+
+function ChallengesSection() {
   return (
-    <section id="home" className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-gradient-hero">
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-8 items-center">
-        <div className="max-w-2xl">
-          <p className="text-xl font-semibold tracking-[0.3em] uppercase text-brand-blue/70 font-montserrat">
-            Transforme o seu
-          </p>
-          <h1 className="mt-3 font-montserrat font-black uppercase leading-[0.95] text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-brand-blue">
-            Sonho em
-            <br />
-            <span className="text-gradient-primary">Realidade</span>
-          </h1>
-
-          <p className="mt-8 text-lg text-brand-blue/70 max-w-lg leading-relaxed font-montserrat">
-            Somos apaixonados por tecnologia e pela forma como ela pode impactar pessoas e ideias.
-            Criamos produtos digitais que unem design, performance e propósito.
-          </p>
-
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href="#portfolio"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue/80 hover:text-primary transition-colors"
-            >
-              Ver portfólio
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
+    <section className="py-20 lg:py-28 bg-[#FFFFFF] relative z-10 text-[#073A7D]">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="text-center max-w-4xl mx-auto mb-14 lg:mb-18">
+          <h2 className="font-montserrat font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight text-[#073A7D] text-center">
+            Qual desafio está impedindo seu próximo resultado?
+          </h2>
         </div>
 
-        {/* Reimagined diamond composition */}
-        <div className="relative flex items-center justify-center min-h-[400px] lg:min-h-[560px]">
-          <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl rounded-full" />
-          <div className="relative w-full max-w-[520px] aspect-square">
-            <img
-              src={heroDiamond.url}
-              alt="Diamante Conselt — símbolo de precisão e energia"
-              width={490}
-              height={490}
-              className="w-full h-full object-contain animate-[float_6s_ease-in-out_infinite]"
-              style={{
-                filter: "drop-shadow(0 30px 60px oklch(0.55 0.22 255 / 0.25))",
-              }}
-            />
-            {/* Floating accents */}
-            <div className="absolute top-6 -right-2 w-16 h-16 rounded-2xl bg-white/80 backdrop-blur border border-brand-blue/10 shadow-card grid place-items-center animate-[float_5s_ease-in-out_infinite_reverse]">
-              <Logo className="w-8 h-8" />
-            </div>
-            <div className="absolute bottom-10 -left-4 px-4 py-3 rounded-2xl bg-white/90 backdrop-blur border border-brand-blue/10 shadow-card">
-              <div className="text-[10px] uppercase tracking-widest text-brand-blue/60">Projetos</div>
-              <div className="font-display font-extrabold text-xl text-brand-blue">+120</div>
-            </div>
-          </div>
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {challenges.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className="group relative p-6 sm:p-8 rounded-3xl bg-white border border-[#073A7D]/15 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col sm:flex-row items-start gap-6 overflow-hidden"
+              >
+                {/* Ícone posicionado no lado esquerdo em layout horizontal */}
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#073A7D]/10 grid place-items-center text-[#073A7D] group-hover:bg-[#073A7D] group-hover:text-white shrink-0 transition-colors duration-300">
+                  <Icon className="w-7 h-7" strokeWidth={1.75} />
+                </div>
+
+                {/* Conteúdo à direita do ícone */}
+                <div className="flex-1 flex flex-col justify-between h-full w-full">
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <h3 className="font-montserrat font-bold text-lg sm:text-xl uppercase tracking-tight text-[#073A7D]">
+                        {item.title}
+                      </h3>
+                      <span className="text-xs font-mono text-[#073A7D]/40 font-bold shrink-0">
+                        0{index + 1}
+                      </span>
+                    </div>
+
+                    <p className="text-sm sm:text-base text-[#073A7D]/80 leading-relaxed font-opensans">
+                      {item.text}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 pt-3 border-t border-[#073A7D]/15">
+                    <Link
+                      to={item.href}
+                      className="inline-flex items-center gap-2 text-sm font-bold text-[#2270A1] group/cta hover:text-[#073A7D] transition-colors font-opensans"
+                    >
+                      <span>{item.cta}</span>
+                      <ArrowRight className="w-4 h-4 text-[#2270A1] group-hover/cta:text-[#073A7D] shrink-0 transition-transform duration-300 group-hover/cta:translate-x-1.5" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
-
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-14px); }
-        }
-      `}</style>
     </section>
   );
 }
@@ -428,7 +469,6 @@ function Services() {
               key={title}
               className="group relative p-8 lg:p-10 rounded-3xl bg-card border border-border/70 shadow-card hover:-translate-y-2 hover:shadow-glow transition-all duration-500 overflow-hidden"
             >
-              {/* Gradient border on hover */}
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
@@ -458,13 +498,13 @@ function Services() {
                 </h3>
                 <p className="mt-3 text-muted-foreground leading-relaxed">{desc}</p>
 
-                <a
-                  href="#"
+                <Link
+                  to="/solucoes-digitais"
                   className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary group/link"
                 >
                   Saber mais
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
-                </a>
+                </Link>
               </div>
             </div>
           ))}
@@ -537,13 +577,13 @@ function Blog() {
                 </h3>
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.excerpt}</p>
 
-                <a
-                  href="#"
+                <Link
+                  to="/blog"
                   className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-foreground group/l"
                 >
                   Ler mais
                   <ArrowRight className="w-4 h-4 text-primary transition-transform duration-300 group-hover/l:translate-x-1.5" />
-                </a>
+                </Link>
               </div>
             </article>
           ))}
@@ -553,82 +593,12 @@ function Blog() {
   );
 }
 
-function Footer() {
-  return (
-    <footer id="contatos" className="relative bg-brand-white border-t border-brand-blue/10 font-opensans text-brand-blue">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-8 lg:gap-10 items-center lg:grid-cols-[auto_1fr_1fr_1.6fr]">
-        {/* Diamante — o mais à esquerda possível, proporcional à altura do mapa */}
-        <Logo className="w-28 h-28 lg:w-40 lg:h-40 xl:w-48 xl:h-48 shrink-0 justify-self-start" />
-
-        {/* Páginas empilhadas e centralizadas */}
-        <nav className="flex flex-col items-center gap-4 justify-self-center">
-          {navLinks.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="font-opensans text-base lg:text-lg font-semibold uppercase tracking-widest text-brand-blue hover:opacity-70 transition-opacity"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Siga-nos centralizado, ícones centralizados abaixo */}
-        <div className="flex flex-col items-center gap-4 justify-self-center">
-          <div className="font-opensans text-base lg:text-lg font-bold uppercase tracking-widest text-brand-blue">
-            Siga-nos
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            {[
-              { Icon: MessageCircle, label: "WhatsApp" },
-              { Icon: Instagram, label: "Instagram" },
-              { Icon: Linkedin, label: "LinkedIn" },
-            ].map(({ Icon, label }) => (
-              <a
-                key={label}
-                href="#"
-                aria-label={label}
-                className="text-brand-blue hover:opacity-70 transition-opacity"
-              >
-                <Icon className="w-7 h-7 lg:w-8 lg:h-8" strokeWidth={1.75} />
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* Mapa ocupando o lado direito */}
-        <div className="w-full justify-self-stretch">
-          <div className="overflow-hidden rounded-2xl border border-brand-blue/15">
-            <iframe
-              title="Mapa CONSELT — Universidade Federal de Uberlândia"
-              src="https://maps.google.com/maps?q=Universidade%20Federal%20de%20Uberl%C3%A2ndia%2C%20Av%20Jo%C3%A3o%20Naves%20de%20%C3%81vila%2C%202121%2C%20Bloco%201N%2C%20Santa%20M%C3%B4nica%2C%20Uberl%C3%A2ndia%20-%20MG%2C%2038408-144&z=16&output=embed"
-              className="w-full h-64 lg:h-96 border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-          <p className="mt-4 text-sm lg:text-base leading-relaxed text-brand-blue/80">
-            Universidade Federal de Uberlândia — Av. João Naves de Ávila, Bloco 1N, 2121 — Sala 06,
-            Saraiva, Uberlândia - MG, 38408-144
-          </p>
-        </div>
-      </div>
-
-      <div className="border-t border-brand-blue/10">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-brand-blue/70">
-          <div>© 2026 Conselt Digital. Todos os direitos reservados.</div>
-          <div>Feito com precisão em São Paulo.</div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 function Index() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Header />
       <Hero />
+      <ChallengesSection />
       <div className="bg-gradient-to-b from-[#07090e] via-[#0b0f19] to-[#07090e]">
         <Services />
         <Blog />
