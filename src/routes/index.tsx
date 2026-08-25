@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, ArrowUpRight, Globe, Smartphone, ShoppingBag, Star, Handshake, Lightbulb, Building } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Globe, Smartphone, ShoppingBag, Star, Handshake, Lightbulb, Building, GraduationCap, ShieldCheck, Sliders, Eye, Layers, ChevronDown } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -446,6 +446,693 @@ function ChallengesSection() {
   );
 }
 
+function ServicesIntro() {
+  return (
+    <section className="bg-[#B1D3E1] py-16 sm:py-20 lg:py-24 px-6 lg:px-10 text-center relative z-10">
+      <div className="max-w-4xl mx-auto flex flex-col items-center">
+        <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#093565]">
+          Soluções que conectam engenharia, tecnologia e resultado.
+        </h2>
+        <p className="mt-4 sm:mt-6 font-opensans text-base sm:text-lg leading-relaxed text-[#162638] max-w-3xl">
+          Escolha a frente que mais se conecta ao seu desafio. Cada solução é estruturada a partir de diagnóstico, escopo e validação.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+const digitalSolutionsCards = [
+  {
+    title: "WEBSITES E LANDING PAGES",
+    description:
+      "Transforme visitas em confiança e pedidos de orçamento com uma estrutura clara, responsiva, otimizada para busca e preparada para medir conversões.",
+  },
+  {
+    title: "E-COMMERCE",
+    description:
+      "Crie uma operação de vendas própria, organizada e mensurável, com experiência de compra simples, gestão de produtos e integração aos canais do negócio.",
+  },
+  {
+    title: "APLICATIVOS",
+    description:
+      "Leve processos, serviços e experiências para o celular com um aplicativo pensado para o usuário e para a operação da empresa.",
+  },
+  {
+    title: "SOFTWARE SOB MEDIDA",
+    description:
+      "Substitua controles fragmentados por um sistema que centraliza dados, reduz tarefas manuais e dá mais visibilidade à operação.",
+  },
+];
+
+const engineeringAutomationCards = [
+  {
+    title: "PROJETOS ELÉTRICOS",
+    description:
+      "Planeje instalações seguras, dimensionadas e compatibilizadas para reduzir improvisos, desperdícios e retrabalho na execução.",
+  },
+  {
+    title: "PROJETOS LUMINOTÉCNICOS",
+    description:
+      "Use a luz para melhorar conforto, funcionalidade, eficiência e percepção do ambiente, com simulações e especificações adequadas ao uso.",
+  },
+  {
+    title: "AUTOMAÇÃO RESIDENCIAL",
+    description:
+      "Integre iluminação, climatização, segurança e rotinas para controlar a casa com mais conforto, eficiência e tranquilidade.",
+  },
+  {
+    title: "AUTOMAÇÃO INDUSTRIAL",
+    description:
+      "Automatize controles e rotinas para ganhar repetibilidade, visibilidade e eficiência operacional.",
+  },
+];
+
+function ServiceCardsSection() {
+  return (
+    <section className="bg-[#FFFFFF] py-16 sm:py-20 lg:py-24 px-6 lg:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-16 lg:space-y-20">
+        {/* Grupo 1: Soluções Digitais */}
+        <div>
+          <div className="mb-8 lg:mb-10 pb-4 border-b border-[#093565]/15 flex items-center gap-3">
+            <span className="w-3 h-3 rounded-full bg-[#093565]" />
+            <h2 className="font-opensans font-bold text-xl sm:text-2xl lg:text-3xl text-[#093565] uppercase tracking-wide">
+              Soluções Digitais
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {digitalSolutionsCards.map((card) => (
+              <div
+                key={card.title}
+                className="bg-[#FFFFFF] border border-[#093565]/15 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#093565]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-3 sm:mt-4 font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#162638]">
+                    {card.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Grupo 2: Engenharia e Automação */}
+        <div>
+          <div className="mb-8 lg:mb-10 pb-4 border-b border-[#093565]/15 flex items-center gap-3">
+            <span className="w-3 h-3 rounded-full bg-[#093565]" />
+            <h2 className="font-opensans font-bold text-xl sm:text-2xl lg:text-3xl text-[#093565] uppercase tracking-wide">
+              Engenharia e Automação
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {engineeringAutomationCards.map((card) => (
+              <div
+                key={card.title}
+                className="bg-[#FFFFFF] border border-[#093565]/15 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#093565]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-3 sm:mt-4 font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#162638]">
+                    {card.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const differentials = [
+  {
+    icon: GraduationCap,
+    title: "Conhecimento aplicado",
+    description:
+      "Conectamos formação acadêmica, pesquisa e prática para transformar conhecimento em solução.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Supervisão e responsabilidade",
+    description:
+      "Os projetos são desenvolvidos com acompanhamento e validação compatíveis com sua natureza técnica.",
+  },
+  {
+    icon: Sliders,
+    title: "Solução sob medida",
+    description:
+      "O escopo parte do seu problema, e não de um pacote genérico.",
+  },
+  {
+    icon: Eye,
+    title: "Processo transparente",
+    description:
+      "Você acompanha etapas, entregas, responsáveis e critérios de validação.",
+  },
+  {
+    icon: Layers,
+    title: "Visão multidisciplinar",
+    description:
+      "Integramos engenharia, tecnologia e comunicação quando o desafio exige mais de uma competência.",
+  },
+];
+
+function DifferentialsSection() {
+  return (
+    <section className="bg-[#051D3E] py-16 sm:py-20 lg:py-28 px-6 lg:px-10 relative z-10 overflow-hidden">
+      {/* Elementos de Marca: Linhas técnicas / Grid de engenharia em marca d'água */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: `
+            radial-gradient(rgba(66, 165, 211, 0.4) 1px, transparent 1px),
+            linear-gradient(to right, rgba(66, 165, 211, 0.12) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(66, 165, 211, 0.12) 1px, transparent 1px)
+          `,
+          backgroundSize: "24px 24px, 48px 48px, 48px 48px",
+        }}
+      />
+
+      <div className="relative max-w-7xl mx-auto">
+        {/* Título Principal H2 e Acento Visual Ciano (#42A5D3) */}
+        <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#42A5D3]/10 border border-[#42A5D3]/30 text-[#42A5D3] text-xs font-semibold tracking-widest uppercase mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#42A5D3]" />
+            Diferenciais CONSELT
+          </div>
+
+          <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#FFFFFF]">
+            Por que desenvolver seu projeto com a CONSELT?
+          </h2>
+
+          <div className="w-16 h-1 bg-[#42A5D3] rounded-full mt-5 mx-auto" />
+        </div>
+
+        {/* 5 Blocos de Diferenciais em Grid Responsivo */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {differentials.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className={`bg-[#051D3E]/80 backdrop-blur border border-[#42A5D3]/20 hover:border-[#42A5D3]/60 rounded-2xl p-6 sm:p-8 shadow-xl shadow-black/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group ${
+                  index === 4 ? "md:col-span-2 lg:col-span-1" : ""
+                }`}
+              >
+                <div>
+                  {/* Ícone e acento visual ciano */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-[#42A5D3]/10 border border-[#42A5D3]/30 grid place-items-center text-[#42A5D3] group-hover:bg-[#42A5D3] group-hover:text-[#051D3E] transition-colors duration-300">
+                      <Icon className="w-6 h-6" strokeWidth={1.75} />
+                    </div>
+                    <span className="text-xs font-mono font-bold text-[#42A5D3]/60">
+                      0{index + 1}
+                    </span>
+                  </div>
+
+                  {/* Título H3 com acento de traço ciano */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-2 h-2 rounded-full bg-[#42A5D3] shrink-0" />
+                    <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#FFFFFF]">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  {/* Descrição em tag p em branco */}
+                  <p className="font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#FFFFFF]">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Traço separador inferior */}
+                <div className="mt-6 pt-4 border-t border-[#42A5D3]/15 flex items-center justify-between">
+                  <div className="w-8 h-0.5 bg-[#42A5D3] group-hover:w-14 transition-all duration-300" />
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[#42A5D3]/80">
+                    CONSELT
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const featuredCases = [
+  {
+    image: blog1,
+    category: "Website Institucional",
+    title: "LAPEG | Website institucional",
+    challenge: "Desafio: organizar um volume técnico complexo sem perder clareza.",
+    solution: "Solução: arquitetura de informação, páginas de pesquisa e navegação orientada aos públicos.",
+    result: "Resultado: Presença digital reestruturada com navegação clara e rápida para os usuários.",
+    cta: "Ver como o projeto foi desenvolvido.",
+    link: "/cases" as const,
+  },
+  {
+    image: blog2,
+    category: "E-Commerce",
+    title: "Constru EJ | Plataforma Digital",
+    challenge: "Desafio: integrar canais de atendimento e otimizar solicitações de orçamento.",
+    solution: "Solução: interface fluida com catálogo de serviços e integração direta para vendas.",
+    result: "Resultado: Aumento significativo de orçamentos qualificados e melhoria de experiência.",
+    cta: "Ver case completo.",
+    link: "/cases" as const,
+  },
+  {
+    image: blog3,
+    category: "Software Sob Medida",
+    title: "La Biblioteca | Sistema de Gestão",
+    challenge: "Desafio: centralizar o acervo técnico e facilitar a gestão operacional interna.",
+    solution: "Solução: aplicação web sob medida com controle de acessos e buscas otimizadas.",
+    result: "Resultado: Processos operacionais 100% digitalizados com ganho de eficiência.",
+    cta: "Ver como o projeto foi desenvolvido.",
+    link: "/cases" as const,
+  },
+];
+
+function FeaturedCasesSection() {
+  return (
+    <section className="bg-[#FFFFFF] py-16 sm:py-20 lg:py-28 px-6 lg:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto">
+        {/* Cabeçalho H2 da Seção */}
+        <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-18">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#093565]/5 border border-[#093565]/15 text-[#093565] text-xs font-semibold tracking-widest uppercase mb-4 font-opensans">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2270A1]" />
+            Cases em Destaque
+          </div>
+
+          <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#093565]">
+            Veja como desafios reais foram transformados em soluções claras, funcionais e mensuráveis.
+          </h2>
+
+          <div className="w-16 h-1 bg-[#2270A1] rounded-full mt-5 mx-auto" />
+        </div>
+
+        {/* Grid de Cards de Cases */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {featuredCases.map((item) => (
+            <div
+              key={item.title}
+              className="bg-[#F4F9FC] border border-[#093565]/15 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+            >
+              {/* Espaço de Imagem no topo reservado para Screenshots e Fotos reais */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-200 border-b border-[#093565]/10">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-[11px] font-opensans font-semibold uppercase tracking-wider bg-[#093565] text-white shadow-sm">
+                  {item.category}
+                </span>
+              </div>
+
+              {/* Conteúdo do Card */}
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#093565] mb-4">
+                    {item.title}
+                  </h3>
+
+                  <div className="space-y-2.5 font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#162638]">
+                    <p className="font-medium text-[#093565]/90">
+                      {item.challenge}
+                    </p>
+                    <p className="text-[#162638]">
+                      {item.solution}
+                    </p>
+                    <p className="font-semibold text-[#2270A1]">
+                      {item.result}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Botão/CTA do Card */}
+                <div className="mt-8 pt-5 border-t border-[#093565]/10">
+                  <Link
+                    to={item.link}
+                    className="inline-flex items-center justify-center w-full px-5 py-3.5 rounded-full font-opensans text-sm font-bold bg-[#2270A1] text-white shadow-sm hover:bg-[#093565] hover:scale-[1.02] active:scale-95 transition-all duration-300 gap-2 group/btn"
+                  >
+                    <span>{item.cta}</span>
+                    <ArrowRight className="w-4 h-4 text-white group-hover/btn:translate-x-1 transition-transform duration-300" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const processSteps = [
+  {
+    number: "01",
+    title: "Diagnóstico",
+    description:
+      "Entendemos o contexto, o problema, o público e o resultado esperado.",
+  },
+  {
+    number: "02",
+    title: "Proposta e escopo",
+    description:
+      "Definimos entregas, responsabilidades, prazo e critérios de validação.",
+  },
+  {
+    number: "03",
+    title: "Desenvolvimento",
+    description:
+      "Executamos o projeto com acompanhamento e registros de evolução.",
+  },
+  {
+    number: "04",
+    title: "Validação",
+    description:
+      "Testamos, revisamos e ajustamos com base no escopo aprovado.",
+  },
+  {
+    number: "05",
+    title: "Entrega e orientação",
+    description:
+      "Entregamos a solução, documentação necessária e próximos passos.",
+  },
+];
+
+function ProcessSection() {
+  return (
+    <section className="bg-[#FFFFFF] py-16 sm:py-20 lg:py-28 px-6 lg:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto">
+        {/* Cabeçalho H2 da Seção */}
+        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-20">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#184C77]/5 border border-[#184C77]/15 text-[#184C77] text-xs font-semibold tracking-widest uppercase mb-4 font-opensans">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#184C77]" />
+            Metodologia de Engenharia
+          </div>
+
+          <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#093565]">
+            Do diagnóstico à entrega: um processo claro em cada etapa.
+          </h2>
+
+          <div className="w-16 h-1 bg-[#184C77] rounded-full mt-5 mx-auto" />
+        </div>
+
+        {/* Timeline Layout Responsivo */}
+        {/* Desktop View: Fluxo Horizontal Conectado (5 Colunas) */}
+        <div className="hidden lg:block relative">
+          {/* Linha Contínua de Conexão no Desktop (#184C77 / #42A5D3) */}
+          <div className="absolute top-[34px] left-[10%] right-[10%] h-[3px] bg-gradient-to-r from-[#184C77] via-[#42A5D3] to-[#184C77] z-0" />
+
+          <div className="grid grid-cols-5 gap-6 relative z-10">
+            {processSteps.map((step) => (
+              <div
+                key={step.number}
+                className="flex flex-col items-center text-center group"
+              >
+                {/* Node da Timeline */}
+                <div className="w-16 h-16 rounded-full bg-[#FFFFFF] border-4 border-[#184C77] text-[#093565] group-hover:border-[#42A5D3] group-hover:bg-[#093565] group-hover:text-white transition-all duration-300 grid place-items-center shadow-md font-opensans font-bold text-lg mb-6">
+                  {step.number}
+                </div>
+
+                {/* Card da Etapa */}
+                <div className="bg-[#F4F9FC] border border-[#093565]/10 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 w-full h-full flex flex-col justify-start">
+                  <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#093565] mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="font-opensans font-normal text-base leading-relaxed text-[#162638]">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile / Tablet View: Linha do Tempo Vertical Conectada */}
+        <div className="block lg:hidden relative pl-6 sm:pl-8 ml-2 border-l-2 border-[#184C77]/40 space-y-10">
+          {processSteps.map((step) => (
+            <div key={step.number} className="relative group">
+              {/* Node da Timeline à Esquerda */}
+              <div className="absolute -left-[35px] sm:-left-[43px] top-1 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#FFFFFF] border-3 border-[#184C77] text-[#093565] font-opensans font-bold text-sm sm:text-base grid place-items-center shadow-md">
+                {step.number}
+              </div>
+
+              {/* Card da Etapa */}
+              <div className="bg-[#F4F9FC] border border-[#093565]/10 rounded-2xl p-6 shadow-sm">
+                <h3 className="font-opensans font-bold text-[20px] leading-snug text-[#093565] mb-2">
+                  {step.title}
+                </h3>
+                <p className="font-opensans font-normal text-base leading-relaxed text-[#162638]">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const partnerLogos = [
+  {
+    name: "Constru EJ",
+    image: "/parceiros/parceiros1.png",
+    relation: "Parceiro institucional",
+  },
+  {
+    name: "La Biblioteca",
+    image: "/parceiros/parceiros2.png",
+    relation: "Cliente de software",
+  },
+  {
+    name: "ARCHÉJR",
+    image: "/parceiros/parceiros4.png",
+    relation: "Parceiro de engenharia",
+  },
+  {
+    name: "LOL",
+    image: "/parceiros/parceiros3.png",
+    relation: "Cliente de plataforma",
+  },
+  {
+    name: "Atuar Cursos",
+    image: "/parceiros/parceiros5.png",
+    relation: "Cliente de e-commerce",
+  },
+];
+
+function PartnersSocialProofSection() {
+  return (
+    <section className="bg-[#B1D3E1] py-16 sm:py-20 lg:py-28 px-6 lg:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto">
+        {/* Cabeçalho H2 da Seção */}
+        <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-18">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#093565]/10 border border-[#093565]/20 text-[#093565] text-xs font-semibold tracking-widest uppercase mb-4 font-opensans">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#093565]" />
+            Prova Social & Parcerias
+          </div>
+
+          <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#093565]">
+            Organizações que já confiaram em nossas soluções e parcerias.
+          </h2>
+
+          <div className="w-16 h-1 bg-[#093565] rounded-full mt-5 mx-auto" />
+        </div>
+
+        {/* Bloco de Logos (Grid Horizontal Responsivo) */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 items-center justify-center mb-16 lg:mb-20">
+          {partnerLogos.map((partner) => (
+            <div
+              key={partner.name}
+              className="bg-[#FFFFFF] border border-[#093565]/15 rounded-2xl p-5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-between text-center aspect-[4/3]"
+            >
+              <div className="flex-1 flex items-center justify-center w-full p-2">
+                <img
+                  src={partner.image}
+                  alt={partner.name}
+                  loading="lazy"
+                  className="max-h-16 w-auto max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
+
+              <div className="mt-2 pt-2 border-t border-[#093565]/10 w-full">
+                <p className="font-opensans font-bold text-xs text-[#093565] uppercase tracking-wide truncate">
+                  {partner.name}
+                </p>
+                <p className="font-opensans font-normal text-[12px] text-[#162638]/80 mt-0.5 truncate">
+                  {partner.relation}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bloco de Depoimento (Card Centralizado Branco) */}
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-[#FFFFFF] border border-[#093565]/15 rounded-3xl p-8 sm:p-12 shadow-xl relative overflow-hidden text-center">
+            {/* Ícone de aspas decorativo */}
+            <div className="absolute -top-4 -left-2 text-[120px] font-serif text-[#093565]/5 pointer-events-none select-none">
+              “
+            </div>
+
+            <div className="relative z-10">
+              <blockquote className="font-opensans italic text-lg sm:text-xl lg:text-[20px] leading-relaxed text-[#162638] max-w-3xl mx-auto">
+                "A CONSELT organizou nossa estrutura técnica de dados, conduziu uma arquitetura de navegação intuitiva e entregou uma solução completa e dentro do prazo. O principal diferencial foi a transparência constante, a supervisão dedicada e o alinhamento em cada etapa."
+              </blockquote>
+
+              <div className="w-12 h-1 bg-[#2270A1] rounded-full my-6 mx-auto" />
+
+              <p className="font-opensans font-bold text-base sm:text-lg text-[#093565]">
+                Eng. Roberto Mendes <span className="font-normal text-[#162638]/80">| Diretor de Operações | LAPEG</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const faqData = [
+  {
+    question: "Como funciona o orçamento?",
+    answer:
+      "Após o diagnóstico inicial, estruturamos escopo, entregas, prazo e investimento de acordo com a complexidade do seu projeto.",
+  },
+  {
+    question: "Os projetos são supervisionados?",
+    answer:
+      "A forma de acompanhamento depende da natureza do projeto. A CONSELT é vinculada à FEELT/UFU e atua sob supervisão de professores, conforme sua estrutura institucional.",
+  },
+  {
+    question: "Vocês atendem quais cidades?",
+    answer:
+      "Atendemos Uberlândia, região e todo o Brasil. Soluções digitais permitem atendimento 100% remoto com acompanhamento próximo e constante.",
+  },
+  {
+    question: "Qual é o prazo?",
+    answer:
+      "O prazo é definido após o diagnóstico e varia conforme escopo, integrações e ciclos de validação necessários para garantir a qualidade técnica.",
+  },
+  {
+    question: "Existe suporte após a entrega?",
+    answer:
+      "O suporte e o período de acompanhamento são descritos na proposta de cada projeto para garantir total tranquilidade na operação.",
+  },
+];
+
+function FaqSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section className="bg-[#FFFFFF] py-16 sm:py-20 lg:py-28 px-6 lg:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto">
+        {/* Cabeçalho H2 da Seção */}
+        <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-18">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#093565]/5 border border-[#093565]/15 text-[#093565] text-xs font-semibold tracking-widest uppercase mb-4 font-opensans">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2270A1]" />
+            Dúvidas Frequentes
+          </div>
+
+          <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#093565]">
+            Perguntas Frequentes
+          </h2>
+
+          <div className="w-16 h-1 bg-[#2270A1] rounded-full mt-5 mx-auto" />
+        </div>
+
+        {/* Accordion Container com largura restrita max-w-[800px] */}
+        <div className="max-w-[800px] mx-auto space-y-4">
+          {faqData.map((item, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={item.question}
+                className="bg-[#FFFFFF] border-b border-[#B1D3E1] transition-all duration-300 overflow-hidden"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleFaq(index)}
+                  className="w-full py-5 px-2 flex items-center justify-between text-left gap-4 group focus:outline-none cursor-pointer"
+                  aria-expanded={isOpen}
+                >
+                  <span className="font-opensans font-bold text-[18px] sm:text-[20px] text-[#093565] group-hover:text-[#2270A1] transition-colors leading-snug">
+                    {item.question}
+                  </span>
+                  <div
+                    className={`w-9 h-9 rounded-full bg-[#B1D3E1]/20 border border-[#B1D3E1] grid place-items-center shrink-0 transition-transform duration-300 ${
+                      isOpen ? "rotate-180 bg-[#2270A1] text-white border-[#2270A1]" : "text-[#2270A1]"
+                    }`}
+                  >
+                    <ChevronDown className="w-5 h-5" />
+                  </div>
+                </button>
+
+                {isOpen && (
+                  <div className="pb-6 px-2 pr-10 font-opensans font-normal text-base text-[#162638] leading-relaxed animate-in fade-in slide-in-from-top-2 duration-300">
+                    {item.answer}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCtaSection() {
+  return (
+    <section className="bg-[#093565] py-16 sm:py-20 lg:py-24 px-6 lg:px-10 text-center relative z-10 overflow-hidden">
+      {/* Elemento gráfico decorativo sutil no fundo */}
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#42A5D3] blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#2270A1] blur-3xl" />
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
+        {/* Título H2 em Branco (#FFFFFF) */}
+        <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#FFFFFF]">
+          Seu desafio já está custando tempo, segurança ou oportunidades?
+        </h2>
+
+        {/* Texto de Apoio em Branco (#FFFFFF) */}
+        <p className="mt-4 sm:mt-6 font-opensans font-normal text-base sm:text-lg leading-relaxed text-[#FFFFFF] opacity-95 max-w-2xl">
+          Conte o que precisa resolver. Nossa equipe analisará o contexto e indicará o próximo passo.
+        </p>
+
+        {/* Botão CTA Principal em Ciano Elétrico (#42A5D3) */}
+        <div className="mt-8 sm:mt-10">
+          <Link
+            to="/contato"
+            className="inline-flex items-center justify-center px-8 sm:px-10 h-12 sm:h-14 rounded-2xl font-opensans font-bold text-base sm:text-lg bg-[#42A5D3] text-[#093565] shadow-lg hover:bg-[#3492be] hover:scale-105 active:scale-95 transition-all duration-300 gap-3 group"
+          >
+            <span>Solicitar avaliação inicial</span>
+            <ArrowRight className="w-5 h-5 text-[#093565] group-hover:translate-x-1 transition-transform duration-300" />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Services() {
   return (
     <section id="quem-somos" className="py-24 lg:py-36 bg-transparent">
@@ -599,11 +1286,14 @@ function Index() {
       <Header />
       <Hero />
       <ChallengesSection />
-      <div className="bg-gradient-to-b from-[#07090e] via-[#0b0f19] to-[#07090e]">
-        <Services />
-        <Blog />
-        <Partnerships />
-      </div>
+      <ServicesIntro />
+      <ServiceCardsSection />
+      <DifferentialsSection />
+      <FeaturedCasesSection />
+      <ProcessSection />
+      <PartnersSocialProofSection />
+      <FaqSection />
+      <FinalCtaSection />
       <Footer />
     </main>
   );

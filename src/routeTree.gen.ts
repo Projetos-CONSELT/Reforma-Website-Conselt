@@ -9,43 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SolucoesDigitaisRouteImport } from './routes/solucoes-digitais'
-import { Route as SobreRouteImport } from './routes/sobre'
-import { Route as EngenhariaAutomacaoRouteImport } from './routes/engenharia-automacao'
-import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as ComoTrabalhamosRouteImport } from './routes/como-trabalhamos'
-import { Route as CasesRouteImport } from './routes/cases'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as CasesRouteImport } from './routes/cases'
+import { Route as ComoTrabalhamosRouteImport } from './routes/como-trabalhamos'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as EngenhariaAutomacaoRouteImport } from './routes/engenharia-automacao'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as SolucoesDigitaisRouteImport } from './routes/solucoes-digitais'
 
-const SolucoesDigitaisRoute = SolucoesDigitaisRouteImport.update({
-  id: '/solucoes-digitais',
-  path: '/solucoes-digitais',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SobreRoute = SobreRouteImport.update({
-  id: '/sobre',
-  path: '/sobre',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EngenhariaAutomacaoRoute = EngenhariaAutomacaoRouteImport.update({
-  id: '/engenharia-automacao',
-  path: '/engenharia-automacao',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContatoRoute = ContatoRouteImport.update({
-  id: '/contato',
-  path: '/contato',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComoTrabalhamosRoute = ComoTrabalhamosRouteImport.update({
-  id: '/como-trabalhamos',
-  path: '/como-trabalhamos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CasesRoute = CasesRouteImport.update({
-  id: '/cases',
-  path: '/cases',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -53,9 +28,34 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const CasesRoute = CasesRouteImport.update({
+  id: '/cases',
+  path: '/cases',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComoTrabalhamosRoute = ComoTrabalhamosRouteImport.update({
+  id: '/como-trabalhamos',
+  path: '/como-trabalhamos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EngenhariaAutomacaoRoute = EngenhariaAutomacaoRouteImport.update({
+  id: '/engenharia-automacao',
+  path: '/engenharia-automacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolucoesDigitaisRoute = SolucoesDigitaisRouteImport.update({
+  id: '/solucoes-digitais',
+  path: '/solucoes-digitais',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -136,46 +136,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/solucoes-digitais': {
-      id: '/solucoes-digitais'
-      path: '/solucoes-digitais'
-      fullPath: '/solucoes-digitais'
-      preLoaderRoute: typeof SolucoesDigitaisRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sobre': {
-      id: '/sobre'
-      path: '/sobre'
-      fullPath: '/sobre'
-      preLoaderRoute: typeof SobreRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/engenharia-automacao': {
-      id: '/engenharia-automacao'
-      path: '/engenharia-automacao'
-      fullPath: '/engenharia-automacao'
-      preLoaderRoute: typeof EngenhariaAutomacaoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contato': {
-      id: '/contato'
-      path: '/contato'
-      fullPath: '/contato'
-      preLoaderRoute: typeof ContatoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/como-trabalhamos': {
-      id: '/como-trabalhamos'
-      path: '/como-trabalhamos'
-      fullPath: '/como-trabalhamos'
-      preLoaderRoute: typeof ComoTrabalhamosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cases': {
-      id: '/cases'
-      path: '/cases'
-      fullPath: '/cases'
-      preLoaderRoute: typeof CasesRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog': {
@@ -185,11 +150,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/cases': {
+      id: '/cases'
+      path: '/cases'
+      fullPath: '/cases'
+      preLoaderRoute: typeof CasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/como-trabalhamos': {
+      id: '/como-trabalhamos'
+      path: '/como-trabalhamos'
+      fullPath: '/como-trabalhamos'
+      preLoaderRoute: typeof ComoTrabalhamosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engenharia-automacao': {
+      id: '/engenharia-automacao'
+      path: '/engenharia-automacao'
+      fullPath: '/engenharia-automacao'
+      preLoaderRoute: typeof EngenhariaAutomacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solucoes-digitais': {
+      id: '/solucoes-digitais'
+      path: '/solucoes-digitais'
+      fullPath: '/solucoes-digitais'
+      preLoaderRoute: typeof SolucoesDigitaisRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
