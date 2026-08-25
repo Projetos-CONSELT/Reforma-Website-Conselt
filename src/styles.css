@@ -43,6 +43,13 @@
 
   --color-brand-white: #ffffff;
   --color-brand-blue: #073a7d;
+  --color-night: #051d3e;
+  --color-deep: #093565;
+  --color-mid: #184c77;
+  --color-main: #2270a1;
+  --color-cyan: #42a5d3;
+  --color-ice: #b1d3e1;
+  --color-ink: #162638;
 }
 
 :root {
