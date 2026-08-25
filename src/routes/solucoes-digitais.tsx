@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Logo } from "@/components/Logo";
 import {
   Globe,
   ShoppingCart,
@@ -96,10 +97,10 @@ function SolucoesDigitaisPage() {
       <Header />
 
       <main className="flex-1 pt-24 lg:pt-28">
-        {/* Hero */}
-        <section className="relative overflow-hidden bg-brand-white">
+        {/* Hero com o Diamante à direita e espaçamento otimizado */}
+        <section className="relative overflow-hidden bg-brand-white py-12 lg:py-16">
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(900px_500px_at_85%_-10%,#B1D3E1_0%,transparent_60%)]" />
-          <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 lg:py-28 grid lg:grid-cols-[1.15fr_1fr] gap-14 items-center">
+          <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-mid/30 bg-ice/40 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-deep">
                 Soluções Digitais
@@ -113,39 +114,17 @@ function SolucoesDigitaisPage() {
                 conversão, velocidade e crescimento sustentável — do diagnóstico
                 à evolução contínua.
               </p>
-              <div className="mt-9 flex flex-wrap gap-4">
-                <Link
-                  to="/contato"
-                  className="inline-flex items-center gap-2 rounded-full bg-cyan px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-night shadow-lg transition-all duration-300 hover:scale-105 hover:opacity-95"
-                >
-                  Solicitar diagnóstico <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  to="/cases"
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-deep px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-deep transition-colors hover:bg-deep hover:text-brand-white"
-                >
-                  Ver cases
-                </Link>
-              </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              {["+90 pontos de performance", "Entregas em ciclos de 2 semanas", "Integrações sob medida", "Suporte e evolução contínua"].map(
-                (item) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-mid/20 bg-ice/30 p-6 text-sm font-semibold leading-snug text-deep"
-                  >
-                    {item}
-                  </div>
-                ),
-              )}
+            {/* Diamante ocupando o espaço em branco à direita */}
+            <div className="flex items-center justify-center lg:justify-end">
+              <Logo className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-contain filter drop-shadow-md transition-transform duration-500 hover:scale-105" />
             </div>
           </div>
         </section>
 
-        {/* Grid de serviços */}
-        <section className="bg-brand-white py-20 lg:py-28">
+        {/* Grid de serviços com espaço reduzido em relação ao Hero */}
+        <section className="bg-brand-white pt-6 pb-20 lg:pt-8 lg:pb-28">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="max-w-2xl">
               <h2 className="font-montserrat text-3xl lg:text-4xl font-extrabold text-deep">
