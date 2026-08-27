@@ -105,7 +105,7 @@ function CasesPage() {
         {/* Cards Grid */}
         <section className="px-6 lg:px-10 pb-24">
           <div className="max-w-7xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {visible.map((c) => (
+            {CASES.map((c) => (
               <article
                 key={c.title}
                 className="group relative h-64 overflow-hidden rounded-xl bg-cyan shadow-card transition-transform duration-300 hover:-translate-y-1"
