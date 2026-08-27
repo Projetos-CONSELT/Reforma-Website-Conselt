@@ -108,28 +108,14 @@ function CasesPage() {
             {CASES.map((c) => (
               <article
                 key={c.title}
-                className="group relative h-64 overflow-hidden rounded-xl bg-cyan shadow-card transition-transform duration-300 hover:-translate-y-1"
+                className="group flex h-44 items-center justify-center rounded-xl shadow-card transition-transform duration-300 hover:-translate-y-1"
+                style={{
+                  background: "linear-gradient(135deg, #42A5D3 0%, #2270A1 100%)",
+                }}
               >
-                {/* Base content */}
-                <div className="absolute inset-0 flex flex-col justify-between p-6">
-                  <span className="text-xs font-bold uppercase tracking-widest text-brand-white/80">
-                    {c.service} · {c.segment}
-                  </span>
-                  <div>
-                    <h3 className="font-montserrat text-2xl font-extrabold text-brand-white">
-                      {c.title}
-                    </h3>
-                    <p className="mt-1 text-sm font-semibold text-brand-white/85">
-                      {c.challenge}
-                    </p>
-                  </div>
-                </div>
-                {/* Hover overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-deep/90 p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <p className="text-center text-base font-semibold leading-relaxed text-brand-white">
-                    {c.description}
-                  </p>
-                </div>
+                <h3 className="font-montserrat text-xl sm:text-2xl font-extrabold text-center text-brand-white px-4">
+                  {c.title}
+                </h3>
               </article>
             ))}
           </div>
