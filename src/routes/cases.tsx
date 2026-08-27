@@ -104,18 +104,26 @@ function CasesPage() {
 
         {/* Cards Grid */}
         <section className="px-6 lg:px-10 pb-24">
-          <div className="max-w-7xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="max-w-7xl mx-auto grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {CASES.map((c) => (
               <article
                 key={c.title}
-                className="group flex h-44 items-center justify-center rounded-xl shadow-card transition-transform duration-300 hover:-translate-y-1"
+                className="group flex min-h-[280px] items-center justify-center rounded-xl p-7 shadow-card transition-transform duration-300 hover:-translate-y-1"
                 style={{
                   background: "linear-gradient(135deg, #42A5D3 0%, #2270A1 100%)",
                 }}
               >
-                <h3 className="font-montserrat text-xl sm:text-2xl font-extrabold text-center text-brand-white px-4">
-                  {c.title}
-                </h3>
+                <div
+                  className="text-center"
+                  style={{ textShadow: "0 1px 3px rgba(0,0,0,0.25)" }}
+                >
+                  <h3 className="font-montserrat text-2xl sm:text-3xl font-extrabold text-brand-white">
+                    {c.title}
+                  </h3>
+                  <p className="mt-4 text-base sm:text-lg leading-relaxed text-brand-white/95">
+                    {c.description}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
