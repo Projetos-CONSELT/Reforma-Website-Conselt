@@ -16,8 +16,24 @@ function ComoTrabalhamosPage() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Header />
-      <main className="flex-1 pt-32 pb-20 lg:pt-40 lg:pb-32 px-6 lg:px-10 max-w-7xl mx-auto w-full">
-        {/* Página Como Trabalhamos - inicialmente vazia */}
+      <main className="flex-1">
+        <section
+          className="relative bg-brand-white py-24 lg:py-32 px-6 lg:px-10"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(9,53,101,0.07) 1px, transparent 0)",
+            backgroundSize: "26px 26px",
+          }}
+        >
+          <div className="max-w-5xl mx-auto w-full text-center">
+            <h1
+              className="font-montserrat text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight"
+              style={{ color: "#093565" }}
+            >
+              Do diagnóstico à entrega: um processo claro em cada etapa
+            </h1>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
