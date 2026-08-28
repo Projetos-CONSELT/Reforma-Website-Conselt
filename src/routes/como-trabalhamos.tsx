@@ -9,6 +9,39 @@ import {
   Rocket,
 } from "lucide-react";
 
+const STEPS = [
+  {
+    icon: Search,
+    title: "Diagnóstico",
+    description:
+      "Entendemos o contexto, o problema, o público e o resultado esperado.",
+  },
+  {
+    icon: FileText,
+    title: "Proposta e escopo",
+    description:
+      "Definimos entregas, responsabilidades, prazo e critérios de validação.",
+  },
+  {
+    icon: Code2,
+    title: "Desenvolvimento",
+    description:
+      "Executamos o projeto com acompanhamento e registros de evolução.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Validação",
+    description:
+      "Testamos, revisamos e ajustamos com base no escopo aprovado.",
+  },
+  {
+    icon: Rocket,
+    title: "Entrega e orientação",
+    description:
+      "Entregamos a solução, a documentação necessária e os próximos passos.",
+  },
+];
+
 export const Route = createFileRoute("/como-trabalhamos")({
   head: () => ({
     meta: [
