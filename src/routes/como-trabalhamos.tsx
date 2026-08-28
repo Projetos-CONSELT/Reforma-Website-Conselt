@@ -30,7 +30,9 @@ function ComoTrabalhamosPage() {
               className="font-montserrat text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight"
               style={{ color: "#093565" }}
             >
-              Do diagnóstico à entrega: um processo claro em cada etapa
+              {"Do diagnóstico à entrega:\u00a0"}
+              <br />
+              um processo claro em cada etapa
             </h1>
           </div>
         </section>
