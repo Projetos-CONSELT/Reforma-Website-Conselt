@@ -54,7 +54,7 @@ export const Route = createFileRoute("/como-trabalhamos")({
 
 function ComoTrabalhamosPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
+    <div className="min-h-screen flex flex-col bg-white text-foreground">
       <Header />
       <main className="flex-1">
         <section
