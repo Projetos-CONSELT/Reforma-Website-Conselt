@@ -58,7 +58,7 @@ function ComoTrabalhamosPage() {
       <Header />
       <main className="flex-1">
         <section
-          className="relative bg-brand-white py-24 lg:py-32 px-6 lg:px-10"
+          className="relative bg-brand-white pt-16 lg:pt-20 pb-10 lg:pb-12 px-6 lg:px-10"
           style={{
             backgroundImage:
               "radial-gradient(circle at 1px 1px, rgba(9,53,101,0.07) 1px, transparent 0)",
@@ -103,7 +103,7 @@ function ComoTrabalhamosPage() {
                         className="absolute -top-2 -right-2 flex items-center justify-center w-8 h-8 rounded-full font-montserrat text-sm font-bold"
                         style={{ background: "#42A5D3", color: "#FFFFFF" }}
                       >
-                        {i + 1}
+                        {i + 1}°
                       </span>
                       <step.icon
                         className="w-11 h-11 transition-transform duration-300 group-hover:scale-110"
