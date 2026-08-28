@@ -34,7 +34,7 @@ function ComoTrabalhamosPage() {
         >
           <div className="max-w-5xl mx-auto w-full text-center">
             <h1
-              className="font-montserrat text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight"
+              className="font-montserrat text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
               style={{ color: "#093565" }}
             >
               {"Do diagnóstico à entrega:\u00a0"}
