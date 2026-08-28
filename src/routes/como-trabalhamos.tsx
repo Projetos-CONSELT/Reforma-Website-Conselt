@@ -107,8 +107,8 @@ function ComoTrabalhamosPage() {
                       </span>
                       <step.icon
                         className="w-11 h-11 transition-transform duration-300 group-hover:scale-110"
-                        style={{ color: "#B1D3E1" }}
-                        strokeWidth={1.8}
+                        style={{ color: "#FFFFFF" }}
+                        strokeWidth={3}
                       />
                       <span
                         className="step-ring absolute inset-0 rounded-3xl pointer-events-none"
