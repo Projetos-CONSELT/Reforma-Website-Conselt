@@ -12,7 +12,7 @@ const TeamSection: React.FC = () => {
       {/* Header */}
       <div className="text-center mb-16 lg:mb-20">
         <h2 id="team-title" className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-          {INSTITUTIONAL_TEXTS.teamTitle}
+          Conheça nossas diretorias
         </h2>
         <p className="text-xl text-slate-600 max-w-2xl mx-auto">
           {INSTITUTIONAL_TEXTS.teamDescription}

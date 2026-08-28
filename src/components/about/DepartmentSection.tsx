@@ -14,21 +14,21 @@ const DepartmentSection = React.memo(({ department }: DepartmentSectionProps) =>
   return (
     <article className="mb-16 lg:mb-20" aria-labelledby={`dept-${department.id}`}>
       {/* Header da Diretoria */}
-      <div className="mb-8 pb-6 border-b-2 border-blue-600">
+      <div className="mb-10 border-b border-[#0A4591]/20 pb-6 text-center">
         <h3
           id={`dept-${department.id}`}
-          className="text-3xl font-bold text-slate-900 mb-2"
+          className="mb-2 text-2xl font-bold text-[#073A7D]"
         >
           {department.name}
         </h3>
         {department.description && (
-          <p className="text-slate-600 text-lg">{department.description}</p>
+          <p className="text-lg text-[#162436]/70">{department.description}</p>
         )}
       </div>
 
       {/* Grid de Membros */}
       <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+        className="mx-auto flex max-w-6xl flex-wrap justify-center gap-x-10 gap-y-12"
         role="group"
         aria-labelledby={`dept-${department.id}`}
       >

@@ -6,12 +6,12 @@
 export interface TeamMember {
   id: string;
   name: string;
-  position: string;
+  role: string;
   department: string;
-  image?: string;
+  image: string;
   bio?: string;
   email?: string;
-  linkedin?: string;
+  linkedinUrl: string | null;
 }
 
 export interface Department {
@@ -21,22 +21,21 @@ export interface Department {
   members: TeamMember[];
 }
 
-// Mock de dados da equipe - substituir com dados reais
+export const TEAM_MEDIA = {
+  members: "/images/membros",
+  team: "/images/equipe/equipe-conselt.jpg",
+} as const;
+
 export const teamDepartments: Department[] = [
   {
     id: "presidencia",
     name: "Presidência",
     description: "Liderança estratégica da empresa",
     members: [
-      {
-        id: "pres-1",
-        name: "João Silva",
-        position: "Presidente",
-        department: "Presidência",
-        bio: "Engenheiro Elétrico com foco em gestão de projetos e inovação",
-        email: "joao@conselt.com",
-        linkedin: "https://linkedin.com/in/joaosilva",
-      },
+      { id: "pr1", name: "Bernardo Medici", role: "Diretor Presidente", department: "Presidência", image: `${TEAM_MEDIA.members}/Pr1.jpg`, linkedinUrl: "https://www.linkedin.com/in/bernardo-estanislau-chaves-medici-534148259/" },
+      { id: "pr2", name: "Ariel Lopes", role: "Coordenador de Jurídico-Financeiro", department: "Presidência", image: `${TEAM_MEDIA.members}/Pr2.jpg`, linkedinUrl: "https://www.linkedin.com/in/arl-lps/" },
+      { id: "pr3", name: "Bernardo Almeida", role: "Assessor de Jurídico-Financeiro", department: "Presidência", image: `${TEAM_MEDIA.members}/Pr3.jpg`, linkedinUrl: "https://www.linkedin.com/in/bernardo-almeida-68278a429/" },
+      { id: "pr4", name: "Ana Vitória", role: "Assessora de Parcerias", department: "Presidência", image: `${TEAM_MEDIA.members}/Pr4.jpg`, linkedinUrl: "https://www.linkedin.com/in/ana-vit%C3%B3ria-braz-a72167187/" },
     ],
   },
   {
@@ -44,124 +43,41 @@ export const teamDepartments: Department[] = [
     name: "Vice-Presidência",
     description: "Suporte à liderança estratégica",
     members: [
-      {
-        id: "vp-1",
-        name: "Maria Santos",
-        position: "Vice-Presidente",
-        department: "Vice-Presidência",
-        bio: "Especialista em relacionamento comercial e parcerias estratégicas",
-        email: "maria@conselt.com",
-        linkedin: "https://linkedin.com/in/mariasantos",
-      },
+      { id: "vp1", name: "Fernanda Soares", role: "Diretora Vice-Presidente", department: "Vice-Presidência", image: `${TEAM_MEDIA.members}/VP1.jpg`, linkedinUrl: "https://www.linkedin.com/in/fernanda-soares-62341a275/" },
+      { id: "vp2", name: "Giovana Pinheiro", role: "Assessora de Vice-Presidência", department: "Vice-Presidência", image: `${TEAM_MEDIA.members}/VP2.jpg`, linkedinUrl: "https://www.linkedin.com/in/giovana-carvalho-7363193b6/" },
+      { id: "vp3", name: "Rafaela de Paula", role: "Assessora de Vice-Presidência", department: "Vice-Presidência", image: `${TEAM_MEDIA.members}/VP3.jpg`, linkedinUrl: "https://www.linkedin.com/in/rafaela-de-paula-3a2446226/" },
+      { id: "vp4", name: "Gabrielly Borges", role: "Assessora de Vice-Presidência", department: "Vice-Presidência", image: `${TEAM_MEDIA.members}/VP4.jpg`, linkedinUrl: "https://www.linkedin.com/in/gabrielly-borges/" },
+      { id: "vp5", name: "Julia Corrêa", role: "Assessora de Vice-Presidência", department: "Vice-Presidência", image: `${TEAM_MEDIA.members}/VP5.jpg`, linkedinUrl: "https://www.linkedin.com/in/julia-arcari-335a0b401/" },
     ],
   },
   {
-    id: "diretoria-comercial",
-    name: "Diretoria Comercial",
+    id: "comercial",
+    name: "Comercial",
     description: "Responsável por vendas e desenvolvimento de negócios",
     members: [
-      {
-        id: "dc-1",
-        name: "Carlos Oliveira",
-        position: "Diretor Comercial",
-        department: "Diretoria Comercial",
-        bio: "Gestor de vendas com experiência em empresas juniores",
-        email: "carlos@conselt.com",
-        linkedin: "https://linkedin.com/in/carlosoliveira",
-      },
-      {
-        id: "dc-2",
-        name: "Ana Costa",
-        position: "Coordenadora de Vendas",
-        department: "Diretoria Comercial",
-        bio: "Especialista em prospecção de clientes e negociação",
-        email: "ana@conselt.com",
-        linkedin: "https://linkedin.com/in/anacosta",
-      },
+      { id: "c1", name: "Leonardo Silva", role: "Diretor Comercial", department: "Comercial", image: `${TEAM_MEDIA.members}/C1.jpg`, linkedinUrl: "https://www.linkedin.com/in/leonardo-parreira-tomaz-82a442368/" },
+      { id: "c2", name: "Maria Fernanda", role: "Coordenadora de Marketing", department: "Comercial", image: `${TEAM_MEDIA.members}/C2.jpg`, linkedinUrl: null },
+      { id: "c3", name: "Allyson de Souza", role: "Coordenador de Negócios", department: "Comercial", image: `${TEAM_MEDIA.members}/C3.jpg`, linkedinUrl: null },
+      { id: "c4", name: "Henrique Akira", role: "Assessor de Negócios", department: "Comercial", image: `${TEAM_MEDIA.members}/C4.jpg`, linkedinUrl: null },
+      { id: "c5", name: "Filipe Rodrigues", role: "Assessor de Negócios", department: "Comercial", image: `${TEAM_MEDIA.members}/C5.jpg`, linkedinUrl: "https://www.linkedin.com/in/filipe-rodrigues-a1aa41334/" },
+      { id: "c6", name: "Arthur Fulgoni", role: "Assessor de Negócios", department: "Comercial", image: `${TEAM_MEDIA.members}/C6.jpg`, linkedinUrl: "https://www.linkedin.com/in/artur-fulgoni-403513391/" },
+      { id: "c7", name: "Julia Amorim", role: "Assessora de Marketing", department: "Comercial", image: `${TEAM_MEDIA.members}/C7.jpg`, linkedinUrl: null },
+      { id: "c8", name: "Guilherme Henrique", role: "Assessor de Marketing", department: "Comercial", image: `${TEAM_MEDIA.members}/C8.jpg`, linkedinUrl: "https://www.linkedin.com/in/guilherme-martins-558433429/" },
+      { id: "c9", name: "Pedro Pansani", role: "Assessor de Negócios", department: "Comercial", image: `${TEAM_MEDIA.members}/C9.jpg`, linkedinUrl: "https://www.linkedin.com/in/pedroppansani/" },
     ],
   },
   {
-    id: "diretoria-projetos",
-    name: "Diretoria de Projetos",
+    id: "projetos",
+    name: "Projetos",
     description: "Execução e gerenciamento de todos os projetos",
     members: [
-      {
-        id: "dp-1",
-        name: "Roberto Ferreira",
-        position: "Diretor de Projetos",
-        department: "Diretoria de Projetos",
-        bio: "Engenheiro experiente em automação industrial e controle",
-        email: "roberto@conselt.com",
-        linkedin: "https://linkedin.com/in/robertoferreira",
-      },
-      {
-        id: "dp-2",
-        name: "Patricia Lima",
-        position: "Gerente de Projetos",
-        department: "Diretoria de Projetos",
-        bio: "Especialista em desenvolvimento digital e soluções web",
-        email: "patricia@conselt.com",
-        linkedin: "https://linkedin.com/in/patrialima",
-      },
-      {
-        id: "dp-3",
-        name: "Lucas Martins",
-        position: "Engenheiro de Projetos",
-        department: "Diretoria de Projetos",
-        bio: "Desenvolvedor full-stack com foco em IoT",
-        email: "lucas@conselt.com",
-        linkedin: "https://linkedin.com/in/lucasmartins",
-      },
-    ],
-  },
-  {
-    id: "diretoria-marketing",
-    name: "Diretoria de Marketing",
-    description: "Estratégia de marca e comunicação",
-    members: [
-      {
-        id: "dm-1",
-        name: "Fernanda Rodrigues",
-        position: "Diretora de Marketing",
-        department: "Diretoria de Marketing",
-        bio: "Especialista em branding e estratégia digital",
-        email: "fernanda@conselt.com",
-        linkedin: "https://linkedin.com/in/fernandar",
-      },
-      {
-        id: "dm-2",
-        name: "Gabriel Teixeira",
-        position: "Coordenador de Conteúdo",
-        department: "Diretoria de Marketing",
-        bio: "Criador de conteúdo e social media specialist",
-        email: "gabriel@conselt.com",
-        linkedin: "https://linkedin.com/in/gabrielteixeira",
-      },
-    ],
-  },
-  {
-    id: "diretoria-operacoes",
-    name: "Diretoria de Operações",
-    description: "Gestão administrativa e operacional",
-    members: [
-      {
-        id: "do-1",
-        name: "Juliana Souza",
-        position: "Diretora de Operações",
-        department: "Diretoria de Operações",
-        bio: "Administradora com experiência em gestão de processos",
-        email: "juliana@conselt.com",
-        linkedin: "https://linkedin.com/in/julianasouza",
-      },
-      {
-        id: "do-2",
-        name: "Marcos Junior",
-        position: "Coordenador de Recursos Humanos",
-        department: "Diretoria de Operações",
-        bio: "Especialista em desenvolvimento de talentos",
-        email: "marcos@conselt.com",
-        linkedin: "https://linkedin.com/in/marcosjunior",
-      },
+      { id: "proj1", name: "Arthur Montes", role: "Diretor de Projetos", department: "Projetos", image: `${TEAM_MEDIA.members}/P1.jpg`, linkedinUrl: "https://www.linkedin.com/in/arthur-montes-cuoco-14b004312/" },
+      { id: "proj2", name: "João Pedro", role: "Coordenador de Projetos", department: "Projetos", image: `${TEAM_MEDIA.members}/P2.jpg`, linkedinUrl: "https://www.linkedin.com/in/joao-pedro-franco-barbosa/" },
+      { id: "proj3", name: "Matheus Peres", role: "Coordenador de Projetos", department: "Projetos", image: `${TEAM_MEDIA.members}/P3.jpg`, linkedinUrl: "https://www.linkedin.com/in/mateuspereslima/" },
+      { id: "proj4", name: "Cecília Senerrino", role: "Assessora de Projetos", department: "Projetos", image: `${TEAM_MEDIA.members}/P4.jpg`, linkedinUrl: "https://www.linkedin.com/in/cecilia-senerrino-595499360/" },
+      { id: "proj5", name: "Marcos Aurélio", role: "Assessor de Projetos", department: "Projetos", image: `${TEAM_MEDIA.members}/P5.jpg`, linkedinUrl: "https://www.linkedin.com/in/marcos-aurelio-eng" },
+      { id: "proj6", name: "Felipe Sobral", role: "Assessor de Projetos", department: "Projetos", image: `${TEAM_MEDIA.members}/P6.jpg`, linkedinUrl: "https://www.linkedin.com/in/felipe-sobral-a8b366258/" },
+      { id: "proj7", name: "Gabriel Godoi", role: "Assessor de Projetos", department: "Projetos", image: `${TEAM_MEDIA.members}/P7.jpg`, linkedinUrl: "https://www.linkedin.com/in/gabriel-godoi-174231412/" },
     ],
   },
 ];

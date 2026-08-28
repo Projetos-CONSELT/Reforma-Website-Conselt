@@ -8,16 +8,16 @@ import { essenceItems } from "@/lib/teamData";
  */
 const EssenceSection: React.FC = () => {
   return (
-    <section className="mb-20 lg:mb-32 py-16 lg:py-24" aria-labelledby="essence-title">
+    <section className="-mx-6 mb-20 bg-[#F4F6F8] px-6 py-20 lg:-mx-10 lg:mb-32 lg:px-10 lg:py-24" aria-labelledby="essence-title">
       {/* Header */}
       <div className="text-center mb-12 lg:mb-16">
         <h2
           id="essence-title"
-          className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
+          className="mb-4 text-3xl font-bold text-[#073A7D]"
         >
           Nossa Essência
         </h2>
-        <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+        <p className="mx-auto max-w-2xl text-xl text-[#162436]">
           Missão, Visão e Valores que guiam cada projeto
         </p>
       </div>

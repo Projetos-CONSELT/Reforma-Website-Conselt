@@ -1,23 +1,32 @@
-import React from "react";
-import { INSTITUTIONAL_TEXTS, CONSELT_COLORS } from "@/lib/teamData";
+import React, { useState } from "react";
+import { INSTITUTIONAL_TEXTS, CONSELT_COLORS, TEAM_MEDIA } from "@/lib/teamData";
 
 /**
  * HeroSection - Apresentação institucional da CONSELT
  * Layout em duas colunas com imagem institucional e texto descritivo
  */
 const HeroSection: React.FC = () => {
+  const [hasTeamImage, setHasTeamImage] = useState(true);
+
   return (
-    <section className="mb-20 lg:mb-32" aria-labelledby="hero-title">
+    <>
+    <section className="-mx-6 mb-0 bg-[#101A26] px-6 py-20 lg:-mx-10 lg:px-10 lg:py-28" aria-labelledby="hero-title">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         {/* Esquerda - Imagem/Frame */}
         <div className="order-2 lg:order-1">
           <div className="relative">
             <div
-              className="aspect-square rounded-3xl overflow-hidden shadow-2xl border-8"
-              style={{ borderColor: CONSELT_COLORS.primary.medium }}
+              className="aspect-square overflow-hidden rounded-2xl border border-[#162436] shadow-2xl"
             >
-              {/* Placeholder para imagem da equipe */}
-              <div className="w-full h-full bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 flex items-center justify-center">
+              {hasTeamImage ? (
+                <img
+                  src={TEAM_MEDIA.team}
+                  alt="Equipe CONSELT"
+                  className="w-full h-full object-cover"
+                  onError={() => setHasTeamImage(false)}
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-[#162436]">
                 <div className="text-center text-white">
                   <svg
                     className="w-24 h-24 mx-auto mb-4 opacity-80"
@@ -35,7 +44,8 @@ const HeroSection: React.FC = () => {
                   </svg>
                   <p className="text-lg font-semibold">Equipe CONSELT</p>
                 </div>
-              </div>
+                </div>
+              )}
             </div>
 
             {/* Elemento decorativo */}
@@ -50,37 +60,37 @@ const HeroSection: React.FC = () => {
         <div className="order-1 lg:order-2">
           <h1
             id="hero-title"
-            className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
-            style={{ color: CONSELT_COLORS.primary.darkest }}
+            className="mb-4 text-3xl font-extrabold text-white md:text-5xl"
           >
             {INSTITUTIONAL_TEXTS.heroTitle}
           </h1>
 
           <p
-            className="text-lg font-semibold mb-6"
-            style={{ color: CONSELT_COLORS.primary.medium }}
+            className="mb-6 text-lg font-semibold text-[#0C4E9E]"
           >
             {INSTITUTIONAL_TEXTS.heroSubtitle}
           </p>
 
-          <p className="text-slate-700 leading-relaxed text-lg mb-8">
+          <p className="mb-8 text-lg leading-relaxed text-[#E0E0E0]">
             {INSTITUTIONAL_TEXTS.heroDescription}
           </p>
 
           {/* Destaques */}
-          <div className="grid grid-cols-2 gap-4 pt-8 border-t border-slate-200">
+          <div className="grid grid-cols-2 gap-4 border-t border-[#162436] pt-8">
             <div>
-              <div className="text-2xl font-bold text-blue-600">6+</div>
-              <p className="text-sm text-slate-600">Diretorias</p>
+              <div className="text-4xl font-extrabold text-[#0C4E9E]">4</div>
+              <p className="text-sm text-[#CCCCCC]">Diretorias</p>
             </div>
             <div>
-              <div className="text-2xl font-bold text-blue-600">50+</div>
-              <p className="text-sm text-slate-600">Profissionais</p>
+              <div className="text-4xl font-extrabold text-[#0C4E9E]">20+</div>
+              <p className="text-sm text-[#CCCCCC]">Profissionais</p>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <div className="-mx-6 h-4 bg-gradient-to-b from-[#101A26] to-transparent lg:-mx-10" aria-hidden="true" />
+    </>
   );
 };
 

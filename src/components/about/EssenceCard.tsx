@@ -17,7 +17,7 @@ const EssenceCard = React.memo(({ title, description, icon, color }: EssenceCard
 
   return (
     <article
-      className="group relative bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-1 border border-slate-100 cursor-pointer overflow-hidden"
+      className="group relative cursor-pointer overflow-hidden rounded-2xl border border-[#CCCCCC]/40 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
       tabIndex={0}
       role="complementary"
       aria-label={`Card de ${title}`}
@@ -28,31 +28,28 @@ const EssenceCard = React.memo(({ title, description, icon, color }: EssenceCard
       }}
     >
       {/* Fundo gradiente decorativo */}
-      <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-gradient-to-br ${color}`} />
-
       <div className="relative z-10">
         {/* Ícone */}
         <div className="mb-6 inline-flex">
           {IconComponent && (
-            <div className={`p-3 rounded-lg bg-gradient-to-br ${color} text-white`}>
-              <IconComponent size={28} className="text-white" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#073A7D]/10 text-[#073A7D]">
+              <IconComponent size={24} className="text-[#073A7D]" />
             </div>
           )}
         </div>
 
         {/* Título */}
-        <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
+        <h3 className="mb-4 text-2xl font-bold text-[#101A26]">
           {title}
         </h3>
 
         {/* Descrição */}
-        <p className="text-slate-600 leading-relaxed group-hover:text-slate-700 transition-colors duration-300">
+        <p className="leading-relaxed text-[#162436]">
           {description}
         </p>
       </div>
 
       {/* Linha decorativa no hover */}
-      <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-blue-600 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
     </article>
   );
 });

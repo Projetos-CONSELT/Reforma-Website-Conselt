@@ -34,21 +34,21 @@ const MemberCard = React.memo(({ member }: MemberCardProps) => {
   return (
     <>
       <article
-        className="group text-center cursor-pointer transition-all duration-300"
+        className="group w-full basis-full text-center cursor-pointer transition-transform duration-200 hover:scale-105 sm:basis-[calc(50%-1.25rem)] lg:basis-[calc(25%-1.875rem)]"
         onClick={handleCardInteraction}
         onKeyDown={handleKeyDown}
         tabIndex={0}
         role="button"
-        aria-label={`${member.name}, ${member.position}`}
+        aria-label={`${member.name}, ${member.role}`}
       >
         {/* Avatar */}
         <div className="mb-4 flex justify-center">
-          <div className="relative w-24 h-24 rounded-full border-4 border-blue-600 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center overflow-hidden group-hover:scale-110 transition-transform duration-300 shadow-lg">
+          <div className="relative mx-auto h-36 w-36 overflow-hidden rounded-full md:h-36 md:w-36">
             {member.image ? (
               <img
                 src={member.image}
-                alt={`Foto de ${member.name} - ${member.position}`}
-                className="w-full h-full object-cover"
+                alt={`Foto de ${member.name} - ${member.role}`}
+                className="w-36 h-36 rounded-full border-4 border-[#073A7D] object-cover shadow-sm"
               />
             ) : (
               <span className="text-white font-bold text-lg">{initials}</span>
@@ -57,13 +57,13 @@ const MemberCard = React.memo(({ member }: MemberCardProps) => {
         </div>
 
         {/* Nome */}
-        <h4 className="font-bold text-slate-900 text-lg mb-2 group-hover:text-blue-600 transition-colors duration-300">
+        <h4 className="mt-3 mb-2 text-base font-bold text-[#101A26] md:text-lg">
           {member.name}
         </h4>
 
         {/* Cargo */}
-        <p className="text-slate-600 text-sm mb-3 group-hover:text-slate-700 transition-colors duration-300">
-          {member.position}
+        <p className="mb-3 text-xs font-medium text-[#162436]/70 md:text-sm">
+          {member.role}
         </p>
 
         {/* Indicador de interatividade */}

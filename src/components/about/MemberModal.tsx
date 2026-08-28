@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { X, Mail, Linkedin } from "lucide-react";
+import type { TeamMember } from "@/lib/teamData";
 
 interface MemberModalProps {
   isOpen: boolean;
-  member: {
-    name: string;
-    position: string;
-    bio?: string;
-    email?: string;
-    linkedin?: string;
-    image?: string;
-  } | null;
+  member: TeamMember | null;
   onClose: () => void;
 }
 
@@ -39,7 +33,7 @@ const MemberModal: React.FC<MemberModalProps> = ({ isOpen, member, onClose }) =>
             <h2 id="modal-title" className="text-2xl font-bold text-slate-900">
               {member.name}
             </h2>
-            <p className="text-blue-600 font-semibold mt-1">{member.position}</p>
+            <p className="text-blue-600 font-semibold mt-1">{member.role}</p>
           </div>
           <button
             onClick={onClose}
@@ -52,6 +46,13 @@ const MemberModal: React.FC<MemberModalProps> = ({ isOpen, member, onClose }) =>
 
         {/* Conteúdo */}
         <div className="p-6">
+          <div className="mb-6 flex flex-col items-center text-center">
+            <div className="mb-4 h-40 w-40 overflow-hidden rounded-full border-2 border-blue-600">
+              <img src={member.image} alt={`Foto de ${member.name}`} className="h-full w-full object-cover" />
+            </div>
+            <p className="text-sm text-slate-500">{member.department}</p>
+          </div>
+
           {/* Biografia */}
           {member.bio && (
             <div className="mb-6">
@@ -75,9 +76,9 @@ const MemberModal: React.FC<MemberModalProps> = ({ isOpen, member, onClose }) =>
               </a>
             )}
 
-            {member.linkedin && (
+            {member.linkedinUrl && (
               <a
-                href={member.linkedin}
+                href={member.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 p-3 rounded-lg bg-slate-50 hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-600"
@@ -86,6 +87,12 @@ const MemberModal: React.FC<MemberModalProps> = ({ isOpen, member, onClose }) =>
                 <Linkedin size={18} className="text-blue-600 flex-shrink-0" />
                 <span className="text-sm">Ver no LinkedIn</span>
               </a>
+            )}
+
+            {!member.linkedinUrl && (
+              <p className="px-3 py-2 text-center text-sm text-slate-500">
+                Perfil do LinkedIn será adicionado em breve.
+              </p>
             )}
           </div>
         </div>
