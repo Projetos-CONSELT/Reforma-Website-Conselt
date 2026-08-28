@@ -143,3 +143,58 @@
 @utility shadow-card {
   box-shadow: var(--shadow-card);
 }
+
+@keyframes step-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes step-ring-pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+.step-icon {
+  animation: step-float 3.6s ease-in-out infinite;
+}
+.step-icon svg {
+  animation: step-float 2.8s ease-in-out infinite reverse;
+}
+.step-ring {
+  animation: step-ring-pulse 2.4s ease-out infinite;
+}
+li:nth-child(2) .step-icon,
+li:nth-child(2) .step-icon svg,
+li:nth-child(2) .step-ring {
+  animation-delay: 0.35s;
+}
+li:nth-child(3) .step-icon,
+li:nth-child(3) .step-icon svg,
+li:nth-child(3) .step-ring {
+  animation-delay: 0.7s;
+}
+li:nth-child(4) .step-icon,
+li:nth-child(4) .step-icon svg,
+li:nth-child(4) .step-ring {
+  animation-delay: 1.05s;
+}
+li:nth-child(5) .step-icon,
+li:nth-child(5) .step-icon svg,
+li:nth-child(5) .step-ring {
+  animation-delay: 1.4s;
+}
