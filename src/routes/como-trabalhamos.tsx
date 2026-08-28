@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import {
+  Search,
+  FileText,
+  Code2,
+  CheckCircle2,
+  Rocket,
+} from "lucide-react";
 
 export const Route = createFileRoute("/como-trabalhamos")({
   head: () => ({
