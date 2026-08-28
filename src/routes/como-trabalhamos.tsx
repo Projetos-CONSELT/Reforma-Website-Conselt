@@ -58,7 +58,7 @@ function ComoTrabalhamosPage() {
       <Header />
       <main className="flex-1">
         <section
-          className="relative bg-brand-white pt-16 lg:pt-20 pb-10 lg:pb-12 px-6 lg:px-10"
+          className="relative bg-brand-white pt-32 lg:pt-36 pb-10 lg:pb-12 px-6 lg:px-10"
           style={{
             backgroundImage:
               "radial-gradient(circle at 1px 1px, rgba(9,53,101,0.07) 1px, transparent 0)",
