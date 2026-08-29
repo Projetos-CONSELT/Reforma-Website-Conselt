@@ -70,7 +70,7 @@ function ComoTrabalhamosPage() {
               className="font-montserrat text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
               style={{
                 color: "#093565",
-                textShadow: "0 2px 10px rgba(9,53,101,0.12)",
+                textShadow: "0 3px 14px rgba(9,53,101,0.18)",
               }}
             >
               {"Do diagnóstico à entrega:\u00a0"}
