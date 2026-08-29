@@ -91,7 +91,7 @@ function ComoTrabalhamosPage() {
                 {STEPS.map((step, i) => (
                   <li key={step.title} className="group relative text-center">
                     <div
-                      className="step-icon relative mx-auto flex items-center justify-center w-[104px] h-[104px] rounded-3xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+                      className="step-icon relative mx-auto flex items-center justify-center w-[104px] h-[104px] rounded-3xl transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 group-hover:shadow-[0_22px_50px_-12px_rgba(9,53,101,0.55)]"
                       style={{
                         background:
                           "linear-gradient(135deg, #093565 0%, #184C77 55%, #2270A1 100%)",
@@ -100,18 +100,25 @@ function ComoTrabalhamosPage() {
                       }}
                     >
                       <span
-                        className="absolute -top-2 -right-2 flex items-center justify-center w-8 h-8 rounded-full font-montserrat text-sm font-bold"
+                        className="absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, #42A5D3 0%, #2270A1 55%, #184C77 100%)",
+                        }}
+                      />
+                      <span
+                        className="absolute -top-2 -right-2 flex items-center justify-center w-8 h-8 rounded-full font-montserrat text-sm font-bold z-10"
                         style={{ background: "#42A5D3", color: "#FFFFFF" }}
                       >
                         {i + 1}°
                       </span>
                       <step.icon
-                        className="w-11 h-11 transition-transform duration-300 group-hover:scale-110"
+                        className="relative z-10 w-11 h-11 transition-transform duration-300 group-hover:scale-110"
                         style={{ color: "#FFFFFF" }}
                         strokeWidth={3}
                       />
                       <span
-                        className="step-ring absolute inset-0 rounded-3xl pointer-events-none"
+                        className="step-ring absolute inset-0 rounded-3xl pointer-events-none z-10"
                         style={{ border: "1px solid rgba(66,165,211,0.55)" }}
                       />
                     </div>
