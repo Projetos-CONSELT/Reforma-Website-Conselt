@@ -122,7 +122,7 @@ function ComoTrabalhamosPage() {
                       {step.title}
                     </h3>
                     <p
-                      className="mt-2 text-sm leading-relaxed max-w-[240px] mx-auto"
+                      className="mt-2 text-sm leading-relaxed max-w-[240px] mx-auto transition-transform duration-300 group-hover:scale-105"
                       style={{ color: "#162638" }}
                     >
                       {step.description}
