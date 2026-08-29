@@ -116,7 +116,7 @@ function ComoTrabalhamosPage() {
                       />
                     </div>
                     <h3
-                      className="font-montserrat mt-6 text-lg font-bold"
+                      className="font-montserrat mt-6 text-lg font-bold transition-transform duration-300 group-hover:scale-105"
                       style={{ color: "#093565" }}
                     >
                       {step.title}
