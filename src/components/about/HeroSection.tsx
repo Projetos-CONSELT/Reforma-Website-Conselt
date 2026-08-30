@@ -17,13 +17,13 @@ const HeroSection: React.FC = () => {
           <div className="order-2 lg:order-1">
             <div className="relative">
               <div
-                className="aspect-square overflow-hidden rounded-2xl border border-[#162436] shadow-2xl"
+                className="aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#162436] shadow-2xl"
               >
                 {hasTeamImage ? (
                   <img
                     src={TEAM_MEDIA.team}
                     alt="Equipe CONSELT"
-                    className="w-full h-full object-cover"
+                    className="h-full w-full object-cover object-center"
                     onError={() => setHasTeamImage(false)}
                   />
                 ) : (

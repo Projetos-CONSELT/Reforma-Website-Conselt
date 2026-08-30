@@ -23,7 +23,7 @@ export interface Department {
 
 export const TEAM_MEDIA = {
   members: "/images/membros",
-  team: "/images/equipe/equipe-conselt.jpg",
+  team: "/images/equipe/EQUIPE_CONSELT_2026.png",
 } as const;
 
 export const teamDepartments: Department[] = [
