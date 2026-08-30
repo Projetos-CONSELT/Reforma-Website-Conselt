@@ -93,18 +93,24 @@ export const essenceItems = [
   },
   {
     id: "visao",
-    title: "Visão",
+    title: "Nossa Visão",
     icon: "Eye",
     description:
-      "Ser a empresa júnior de referência em soluções de engenharia elétrica e digital, reconhecida pela qualidade, inovação e impacto transformador no mercado.",
+      "Expandir a nossa linha de produtos/serviços, explorando as diversas aplicações e conhecimentos da nossa faculdade de Engenharia Elétrica.",
     color: "from-blue-500 to-cyan-400",
   },
   {
     id: "valores",
-    title: "Valores",
+    title: "Nossos Valores",
     icon: "Heart",
-    description:
-      "Excelência, integridade, inovação, trabalho em equipe, comprometimento com resultados e responsabilidade social são os pilares que guiam nossas ações.",
+    description: [
+      "Lapidar diamantes;",
+      "Escola de líderes;",
+      "Crescer com o cliente;",
+      "Paixão pela jornada;",
+      "Ser plural para ser autêntico;",
+      "Orgulho em ser CONSELT!",
+    ],
     color: "from-blue-400 to-blue-300",
   },
 ];

@@ -3,7 +3,7 @@ import * as LucideIcons from "lucide-react";
 
 interface EssenceCardProps {
   title: string;
-  description: string;
+  description: React.ReactNode;
   icon: string;
   color: string;
 }
@@ -14,6 +14,23 @@ interface EssenceCardProps {
  */
 const EssenceCard = React.memo(({ title, description, icon, color }: EssenceCardProps) => {
   const IconComponent = LucideIcons[icon as keyof typeof LucideIcons] as React.ComponentType<{ size: number; className: string }>;
+
+  const renderDescription = () => {
+    if (Array.isArray(description)) {
+      return (
+        <ul className="space-y-2 leading-relaxed text-[#162436]">
+          {description.map((item, index) => (
+            <li key={`${title}-${index}`} className="flex items-start gap-3">
+              <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#073A7D]" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      );
+    }
+
+    return <p className="leading-relaxed text-[#162436]">{description}</p>;
+  };
 
   return (
     <article
@@ -44,9 +61,7 @@ const EssenceCard = React.memo(({ title, description, icon, color }: EssenceCard
         </h3>
 
         {/* Descrição */}
-        <p className="leading-relaxed text-[#162436]">
-          {description}
-        </p>
+        {renderDescription()}
       </div>
 
       {/* Linha decorativa no hover */}
