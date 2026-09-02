@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -239,7 +239,7 @@ const diferenciais = [
   { icon: Rocket, title: "Entrega em ciclos curtos", desc: "Sprints com validação constante — você vê valor antes do fim." },
 ];
 
-export function EngenhariaAutomacaoPage() {
+function EngenhariaAutomacaoPage() {
   // Estado do Modal de Detalhes do Serviço
   const [selectedModalService, setSelectedModalService] =
     useState<ServiceItem | null>(null);
@@ -305,19 +305,6 @@ export function EngenhariaAutomacaoPage() {
                 Combinamos rigor normativo (NBR 5410, NBR 5419, NR-10 e NR-12) a soluções de eficiência 
                 energética e automação inteligente para indústrias, comércios e residências.
               </p>
-
-              {/* Selos de Garantia Rápida */}
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <div className="inline-flex items-center gap-1.5 rounded-lg border border-mid/20 bg-ice/30 px-3 py-1.5 text-xs font-semibold text-deep shadow-xs">
-                  <CheckCircle2 className="w-4 h-4 text-cyan" /> 100% ART Assinada no CREA
-                </div>
-                <div className="inline-flex items-center gap-1.5 rounded-lg border border-mid/20 bg-ice/30 px-3 py-1.5 text-xs font-semibold text-deep shadow-xs">
-                  <CheckCircle2 className="w-4 h-4 text-cyan" /> Conformidade NBR &amp; NR
-                </div>
-                <div className="inline-flex items-center gap-1.5 rounded-lg border border-mid/20 bg-ice/30 px-3 py-1.5 text-xs font-semibold text-deep shadow-xs">
-                  <CheckCircle2 className="w-4 h-4 text-cyan" /> Otimização sem Sobras
-                </div>
-              </div>
             </div>
 
             {/* Lado Direito: Diamante Conselt */}
@@ -327,17 +314,19 @@ export function EngenhariaAutomacaoPage() {
           </div>
         </section>
 
+        {/* Divisor de Transição Prominente */}
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 py-4">
+          <div className="h-[3px] w-full rounded-full bg-gradient-to-r from-transparent via-cyan via-main to-transparent shadow-[0_0_12px_rgba(66,165,211,0.4)]" />
+        </div>
+
         {/* ==========================================
             2. GRID DE SERVIÇOS TÉCNICOS (Tipografia Padronizada)
            ========================================== */}
-        <section id="servicos" className="bg-brand-white pt-6 pb-20 lg:pt-8 lg:pb-28">
+        <section id="servicos" className="bg-brand-white pt-10 pb-20 lg:pt-12 lg:pb-28">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             {/* Cabeçalho do Grid */}
             <div className="max-w-2xl">
-              <span className="inline-flex items-center gap-2 rounded-full border border-mid/30 bg-ice/40 px-3.5 py-1 text-xs font-bold uppercase tracking-widest text-deep">
-                Escopo de Projetos
-              </span>
-              <h2 className="mt-3 font-montserrat text-3xl lg:text-4xl font-extrabold text-deep">
+              <h2 className="font-montserrat text-3xl lg:text-4xl font-extrabold text-deep">
                 Serviços de Engenharia Especializada
               </h2>
               <p className="mt-4 text-lg text-ink/75">
@@ -375,10 +364,6 @@ export function EngenhariaAutomacaoPage() {
                     {/* Mini Tabela de Especificações */}
                     <div className="mt-6 rounded-2xl border border-mid/20 bg-ice/30 p-4 space-y-2.5 text-xs">
                       <div className="flex justify-between items-center pb-2 border-b border-mid/10">
-                        <span className="font-bold text-mid">Norma Principal:</span>
-                        <span className="font-extrabold text-deep">{servico.specs.norma}</span>
-                      </div>
-                      <div className="flex justify-between items-center pb-2 border-b border-mid/10">
                         <span className="font-bold text-mid">Aplicação Primária:</span>
                         <span className="font-semibold text-ink text-right truncate max-w-[200px]" title={servico.specs.aplicacao}>
                           {servico.specs.aplicacao}
@@ -403,14 +388,14 @@ export function EngenhariaAutomacaoPage() {
                       ))}
                     </div>
 
-                    {/* Botão Ver Detalhes */}
+                    {/* Botão Solicitar este serviço */}
                     <div className="mt-8 pt-6 border-t border-mid/20 flex items-center justify-between">
-                      <button
-                        onClick={() => setSelectedModalService(servico)}
-                        className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-main transition-colors hover:text-deep cursor-pointer"
+                      <Link
+                        to="/contato"
+                        className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-main transition-colors hover:text-deep"
                       >
-                        Ver Detalhes do Escopo <ChevronRight className="h-4 w-4" />
-                      </button>
+                        Solicitar este serviço <ArrowRight className="h-4 w-4" />
+                      </Link>
                     </div>
                   </article>
                 );
@@ -426,7 +411,7 @@ export function EngenhariaAutomacaoPage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="max-w-2xl">
               <h2 className="font-montserrat text-3xl lg:text-4xl font-extrabold">
-                Por que a CONSELT
+                Por que a CONSELT?
               </h2>
               <p className="mt-4 text-lg text-ice/80">
                 Método de engenharia aplicado a produtos digitais: previsível,
@@ -556,20 +541,6 @@ export function EngenhariaAutomacaoPage() {
                       <CheckCircle2 className="w-4 h-4 text-main shrink-0 mt-0.5" />
                       <span>{d}</span>
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Normas atendidas */}
-              <div className="mt-6">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-mid mb-2">
-                  Normas Técnicas Regulamentares Atendidas:
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedModalService.normativesDetail.map((n) => (
-                    <span key={n} className="rounded-lg bg-deep px-3 py-1 text-xs font-bold text-brand-white">
-                      {n}
-                    </span>
                   ))}
                 </div>
               </div>

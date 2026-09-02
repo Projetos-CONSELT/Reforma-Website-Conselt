@@ -103,7 +103,7 @@ function SolucoesDigitaisPage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-center">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-mid/30 bg-ice/40 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-deep">
-                Soluções Digitais
+                <Code2 className="w-4 h-4 text-main" /> Soluções Digitais
               </span>
               <h1 className="mt-6 font-montserrat text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight text-deep">
                 Tecnologia que vira{" "}
@@ -123,8 +123,13 @@ function SolucoesDigitaisPage() {
           </div>
         </section>
 
+        {/* Divisor de Transição Prominente */}
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 py-4">
+          <div className="h-[3px] w-full rounded-full bg-gradient-to-r from-transparent via-cyan via-main to-transparent shadow-[0_0_12px_rgba(66,165,211,0.4)]" />
+        </div>
+
         {/* Grid de serviços com espaço reduzido em relação ao Hero */}
-        <section className="bg-brand-white pt-6 pb-20 lg:pt-8 lg:pb-28">
+        <section className="bg-brand-white pt-10 pb-20 lg:pt-12 lg:pb-28">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="max-w-2xl">
               <h2 className="font-montserrat text-3xl lg:text-4xl font-extrabold text-deep">
@@ -161,7 +166,7 @@ function SolucoesDigitaisPage() {
                     to="/contato"
                     className="mt-7 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-main transition-colors hover:text-deep"
                   >
-                    Falar sobre este serviço <ArrowRight className="h-4 w-4" />
+                    Solicitar este serviço <ArrowRight className="h-4 w-4" />
                   </Link>
                 </article>
               ))}
@@ -174,7 +179,7 @@ function SolucoesDigitaisPage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
             <div className="max-w-2xl">
               <h2 className="font-montserrat text-3xl lg:text-4xl font-extrabold">
-                Por que a CONSELT
+                Por que a CONSELT?
               </h2>
               <p className="mt-4 text-lg text-ice/80">
                 Método de engenharia aplicado a produtos digitais: previsível,
