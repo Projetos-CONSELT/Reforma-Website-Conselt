@@ -43,6 +43,34 @@ const STEPS = [
   },
 ];
 
+const TESTIMONIALS = [
+  {
+    author: "Lary Pacheco",
+    quote:
+      "Gostaria de expressar minha satisfação com o trabalho realizado pela empresa Conselt na consultoria na criação do meu website. A equipe demonstrou profissionalismo, criatividade e atenção aos detalhes, resultando em um resultado que superou minhas expectativas. A comunicação foi clara e eficiente, e o prazo foi cumprido. Recomendo a marca para qualquer pessoa que busque uma solução de qualidade para sua presença on-line.",
+  },
+  {
+    author: "Sinomar",
+    quote:
+      "Gostei muito, equipe muito atenciosa, coerente e responsável no atendimento ao cliente.",
+  },
+  {
+    author: "Constru",
+    quote:
+      "Olá, equipe da Conselt! Estamos extremamente satisfeitos com todo o processo de reestruturação do nosso site. O atendimento de vocês foi maravilhoso do início ao fim, sempre com muita agilidade, profissionalismo e uma atenção genuína às nossas necessidades. O resultado final ficou ótimo! Sobre pontos de melhoria, sinceramente, não temos nada a acrescentar. Houve uma comunicação clara e constante durante todo o processo e os prazos foram cumpridos. Agradecemos imensamente pelo trabalho excepcional! Um grande abraço de toda a equipe Constru.",
+  },
+  {
+    author: "Marketeando",
+    quote:
+      "Equipe muito organizada e atenciosa. Foram muito solícitos em mostrar o andamento do projeto e em tirar nossas dúvidas. Buscaram se adequar ao máximo a nossa identidade visual e acataram os ajustes necessários muito bem. Agradecemos todo o empenho que tiveram para entregar o site que, a propósito, ficou do jeitinho que imaginávamos.",
+  },
+  {
+    author: "Ledoc",
+    quote:
+      "Olá, fizemos a contratação da Conselt para a criação do site do projeto que foi finalizado, porém o site ficou aquém do que esperávamos e não comporta todo o material que precisamos inserir. Acredito que não houve um dimensionamento correto por falta de conhecimento da demanda e estamos com alguns problemas. A equipe tinha boa vontade, mas acho que faltou compreensão da nossa demanda de disponibilizar um acervo fotográfico que acarretaria espaço e, um site um pouco mais moderno e dinâmico. Gostaria de sugerir que as reuniões não sejam somente on-line, que façam visitas aos contratantes a depender da demanda para a visualização e melhor compreensão do serviço a ser prestado. Sugiro, ainda, que tentem estabelecer uma comunicação mais clara e mais detida, buscando atender o público que pode não ter acesso ou conhecimento da linguagem técnica da área.",
+  },
+];
+
 export const Route = createFileRoute("/como-trabalhamos")({
   head: () => ({
     meta: [
