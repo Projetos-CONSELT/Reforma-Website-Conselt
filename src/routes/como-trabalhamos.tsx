@@ -200,21 +200,21 @@ function ComoTrabalhamosPage() {
               {TESTIMONIALS.map((t) => (
                 <article
                   key={t.author}
-                  className="group relative flex flex-col lg:flex-row items-stretch rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_-12px_rgba(9,53,101,0.55)]"
+                  className="group relative flex flex-col lg:flex-row items-stretch rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_-12px_rgba(9,53,101,0.25)]"
                   style={{
                     background:
-                      "linear-gradient(135deg, #093565 0%, #184C77 100%)",
+                      "linear-gradient(135deg, #FFFFFF 0%, #B1D3E1 100%)",
                     borderColor: "rgba(66,165,211,0.45)",
                   }}
                 >
                   <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
                     <Quote
                       className="w-8 h-8 mb-4 opacity-70"
-                      style={{ color: "#FFFFFF" }}
+                      style={{ color: "#162638" }}
                     />
                     <p
                       className="text-sm sm:text-base leading-relaxed"
-                      style={{ color: "#FFFFFF" }}
+                      style={{ color: "#162638" }}
                     >
                       {t.quote}
                     </p>
@@ -223,12 +223,12 @@ function ComoTrabalhamosPage() {
                   <div
                     className="lg:w-64 shrink-0 flex items-center justify-center p-6 sm:p-8 lg:p-10 lg:border-l border-t lg:border-t-0"
                     style={{
-                      borderColor: "rgba(66,165,211,0.35)",
+                      borderColor: "rgba(22,112,161,0.25)",
                     }}
                   >
                     <span
                       className="font-opensans text-sm sm:text-base font-bold tracking-wide text-center lg:text-left"
-                      style={{ color: "#B1D3E1" }}
+                      style={{ color: "#162638" }}
                     >
                       — {t.author}
                     </span>
