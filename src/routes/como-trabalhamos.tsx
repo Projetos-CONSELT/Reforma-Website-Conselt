@@ -202,18 +202,19 @@ function ComoTrabalhamosPage() {
                   key={t.author}
                   className="group relative flex flex-col lg:flex-row items-stretch rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_-12px_rgba(9,53,101,0.55)]"
                   style={{
-                    background: "#FFFFFF",
+                    background:
+                      "linear-gradient(135deg, #093565 0%, #184C77 100%)",
                     borderColor: "rgba(66,165,211,0.45)",
                   }}
                 >
                   <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
                     <Quote
                       className="w-8 h-8 mb-4 opacity-70"
-                      style={{ color: "#42A5D3" }}
+                      style={{ color: "#FFFFFF" }}
                     />
                     <p
                       className="text-sm sm:text-base leading-relaxed"
-                      style={{ color: "#093565" }}
+                      style={{ color: "#FFFFFF" }}
                     >
                       {t.quote}
                     </p>
@@ -227,7 +228,7 @@ function ComoTrabalhamosPage() {
                   >
                     <span
                       className="font-opensans text-sm sm:text-base font-bold tracking-wide text-center lg:text-left"
-                      style={{ color: "#2270A1" }}
+                      style={{ color: "#B1D3E1" }}
                     >
                       — {t.author}
                     </span>
