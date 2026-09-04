@@ -109,7 +109,7 @@ function ComoTrabalhamosPage() {
           </div>
         </section>
 
-        <section className="bg-brand-white px-6 lg:px-10 pb-24 lg:pb-32">
+        <section className="bg-brand-white px-6 lg:px-10 pb-10 lg:pb-14">
           <div className="max-w-6xl mx-auto">
             <div className="relative">
               <div
