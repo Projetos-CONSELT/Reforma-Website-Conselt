@@ -7,6 +7,7 @@ import {
   Code2,
   CheckCircle2,
   Rocket,
+  Quote,
 } from "lucide-react";
 
 const STEPS = [
