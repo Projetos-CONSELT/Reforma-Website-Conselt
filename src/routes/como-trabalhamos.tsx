@@ -7,6 +7,7 @@ import {
   Code2,
   CheckCircle2,
   Rocket,
+  Quote,
 } from "lucide-react";
 
 const STEPS = [
@@ -39,6 +40,34 @@ const STEPS = [
     title: "Entrega e orientação",
     description:
       "Entregamos a solução, a documentação necessária e os próximos passos.",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    author: "Lary Pacheco",
+    quote:
+      "Gostaria de expressar minha satisfação com o trabalho realizado pela empresa Conselt na consultoria na criação do meu website. A equipe demonstrou profissionalismo, criatividade e atenção aos detalhes, resultando em um resultado que superou minhas expectativas. A comunicação foi clara e eficiente, e o prazo foi cumprido. Recomendo a marca para qualquer pessoa que busque uma solução de qualidade para sua presença on-line.",
+  },
+  {
+    author: "Sinomar",
+    quote:
+      "Gostei muito, equipe muito atenciosa, coerente e responsável no atendimento ao cliente.",
+  },
+  {
+    author: "Constru",
+    quote:
+      "Olá, equipe da Conselt! Estamos extremamente satisfeitos com todo o processo de reestruturação do nosso site. O atendimento de vocês foi maravilhoso do início ao fim, sempre com muita agilidade, profissionalismo e uma atenção genuína às nossas necessidades. O resultado final ficou ótimo! Sobre pontos de melhoria, sinceramente, não temos nada a acrescentar. Houve uma comunicação clara e constante durante todo o processo e os prazos foram cumpridos. Agradecemos imensamente pelo trabalho excepcional! Um grande abraço de toda a equipe Constru.",
+  },
+  {
+    author: "Marketeando",
+    quote:
+      "Equipe muito organizada e atenciosa. Foram muito solícitos em mostrar o andamento do projeto e em tirar nossas dúvidas. Buscaram se adequar ao máximo a nossa identidade visual e acataram os ajustes necessários muito bem. Agradecemos todo o empenho que tiveram para entregar o site que, a propósito, ficou do jeitinho que imaginávamos.",
+  },
+  {
+    author: "Ledoc",
+    quote:
+      "Olá, fizemos a contratação da Conselt para a criação do site do projeto que foi finalizado, porém o site ficou aquém do que esperávamos e não comporta todo o material que precisamos inserir. Acredito que não houve um dimensionamento correto por falta de conhecimento da demanda e estamos com alguns problemas. A equipe tinha boa vontade, mas acho que faltou compreensão da nossa demanda de disponibilizar um acervo fotográfico que acarretaria espaço e, um site um pouco mais moderno e dinâmico. Gostaria de sugerir que as reuniões não sejam somente on-line, que façam visitas aos contratantes a depender da demanda para a visualização e melhor compreensão do serviço a ser prestado. Sugiro, ainda, que tentem estabelecer uma comunicação mais clara e mais detida, buscando atender o público que pode não ter acesso ou conhecimento da linguagem técnica da área.",
   },
 ];
 
@@ -140,6 +169,72 @@ function ComoTrabalhamosPage() {
                   </li>
                 ))}
               </ol>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="relative px-6 lg:px-10 py-20 lg:py-28"
+          style={{ background: "#051D3E" }}
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-14 lg:mb-18">
+              <h2
+                className="font-montserrat text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
+                style={{
+                  color: "#FFFFFF",
+                  textShadow: "0 2px 10px rgba(0,0,0,0.25)",
+                }}
+              >
+                O que dizem quem confia na gente
+              </h2>
+              <p
+                className="mt-3 text-base sm:text-lg max-w-2xl mx-auto"
+                style={{ color: "#B1D3E1" }}
+              >
+                Histórias reais de parceiros que viveram nosso processo de perto
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 lg:gap-8">
+              {TESTIMONIALS.map((t) => (
+                <article
+                  key={t.author}
+                  className="group relative flex flex-col lg:flex-row items-stretch rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_-12px_rgba(9,53,101,0.55)]"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #093565 0%, #184C77 100%)",
+                    borderColor: "rgba(66,165,211,0.35)",
+                  }}
+                >
+                  <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+                    <Quote
+                      className="w-8 h-8 mb-4 opacity-40"
+                      style={{ color: "#42A5D3" }}
+                    />
+                    <p
+                      className="text-sm sm:text-base leading-relaxed"
+                      style={{ color: "#FFFFFF" }}
+                    >
+                      {t.quote}
+                    </p>
+                  </div>
+
+                  <div
+                    className="lg:w-64 shrink-0 flex items-center justify-center p-6 sm:p-8 lg:p-10 lg:border-l border-t lg:border-t-0"
+                    style={{
+                      borderColor: "rgba(177,211,225,0.22)",
+                    }}
+                  >
+                    <span
+                      className="font-opensans text-sm sm:text-base font-semibold tracking-wide text-center lg:text-left"
+                      style={{ color: "#B1D3E1" }}
+                    >
+                      — {t.author}
+                    </span>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
