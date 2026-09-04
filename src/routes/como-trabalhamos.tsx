@@ -87,10 +87,10 @@ function ComoTrabalhamosPage() {
       <Header />
       <main className="flex-1">
         <section
-          className="relative bg-brand-white pt-32 lg:pt-36 pb-10 lg:pb-12 px-6 lg:px-10"
+          className="relative bg-white pt-32 lg:pt-36 pb-10 lg:pb-12 px-6 lg:px-10"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 1px 1px, rgba(9,53,101,0.07) 1px, transparent 0)",
+              "radial-gradient(circle at 1px 1px, rgba(66,165,211,0.10) 1px, transparent 0)",
             backgroundSize: "26px 26px",
           }}
         >
@@ -99,7 +99,7 @@ function ComoTrabalhamosPage() {
               className="font-montserrat text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
               style={{
                 color: "#093565",
-                textShadow: "0 3px 14px rgba(9,53,101,0.18)",
+                textShadow: "0 3px 14px rgba(9,53,101,0.10)",
               }}
             >
               {"Do diagnóstico à entrega:\u00a0"}
@@ -109,26 +109,25 @@ function ComoTrabalhamosPage() {
           </div>
         </section>
 
-        <section className="bg-brand-white px-6 lg:px-10 pb-10 lg:pb-14">
+        <section className="bg-white px-6 lg:px-10 pb-10 lg:pb-14">
           <div className="max-w-6xl mx-auto">
             <div className="relative">
               <div
                 className="hidden lg:block absolute top-[52px] left-[10%] right-[10%] h-px"
                 style={{
                   background:
-                    "linear-gradient(90deg, #42A5D3, #2270A1, #184C77, #2270A1, #42A5D3)",
+                    "linear-gradient(90deg, #B1D3E1, #42A5D3, #2270A1, #42A5D3, #B1D3E1)",
                 }}
               />
               <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-6">
                 {STEPS.map((step, i) => (
                   <li key={step.title} className="group relative text-center">
                     <div
-                      className="step-icon relative mx-auto flex items-center justify-center w-[104px] h-[104px] rounded-3xl transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 group-hover:shadow-[0_22px_50px_-12px_rgba(9,53,101,0.55)]"
+                      className="step-icon relative mx-auto flex items-center justify-center w-[104px] h-[104px] rounded-3xl transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 group-hover:shadow-[0_22px_50px_-12px_rgba(66,165,211,0.45)]"
                       style={{
-                        background:
-                          "linear-gradient(135deg, #093565 0%, #184C77 55%, #2270A1 100%)",
+                        background: "#FFFFFF",
                         boxShadow:
-                          "0 18px 40px -14px rgba(9,53,101,0.45), inset 0 1px 0 rgba(177,211,225,0.35)",
+                          "0 18px 40px -14px rgba(66,165,211,0.35), inset 0 0 0 2px rgba(66,165,211,0.55)",
                       }}
                     >
                       <span
@@ -146,8 +145,8 @@ function ComoTrabalhamosPage() {
                       </span>
                       <step.icon
                         className="relative z-10 w-11 h-11 transition-transform duration-300 group-hover:scale-110"
-                        style={{ color: "#FFFFFF" }}
-                        strokeWidth={3}
+                        style={{ color: "#2270A1" }}
+                        strokeWidth={2.5}
                       />
                       <span
                         className="step-ring absolute inset-0 rounded-3xl pointer-events-none z-10"
@@ -175,22 +174,30 @@ function ComoTrabalhamosPage() {
 
         <section
           className="relative px-6 lg:px-10 py-20 lg:py-28"
-          style={{ background: "#051D3E" }}
+          style={{ background: "#B1D3E1" }}
         >
-          <div className="max-w-6xl mx-auto">
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.35) 1px, transparent 0)",
+              backgroundSize: "24px 24px",
+            }}
+          />
+          <div className="relative max-w-6xl mx-auto">
             <div className="text-center mb-14 lg:mb-18">
               <h2
                 className="font-montserrat text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight tracking-tight"
                 style={{
-                  color: "#FFFFFF",
-                  textShadow: "0 2px 10px rgba(0,0,0,0.25)",
+                  color: "#051D3E",
+                  textShadow: "0 2px 10px rgba(255,255,255,0.35)",
                 }}
               >
                 O que dizem quem confia na gente
               </h2>
               <p
                 className="mt-3 text-base sm:text-lg max-w-2xl mx-auto"
-                style={{ color: "#B1D3E1" }}
+                style={{ color: "#093565" }}
               >
                 Histórias reais de parceiros que viveram nosso processo de perto
               </p>
@@ -200,21 +207,20 @@ function ComoTrabalhamosPage() {
               {TESTIMONIALS.map((t) => (
                 <article
                   key={t.author}
-                  className="group relative flex flex-col lg:flex-row items-stretch rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_-12px_rgba(9,53,101,0.55)]"
+                  className="group relative flex flex-col lg:flex-row items-stretch rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_50px_-12px_rgba(9,53,101,0.20)]"
                   style={{
-                    background:
-                      "linear-gradient(135deg, #093565 0%, #184C77 100%)",
+                    background: "#FFFFFF",
                     borderColor: "rgba(66,165,211,0.35)",
                   }}
                 >
                   <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
                     <Quote
-                      className="w-8 h-8 mb-4 opacity-40"
+                      className="w-8 h-8 mb-4 opacity-60"
                       style={{ color: "#42A5D3" }}
                     />
                     <p
                       className="text-sm sm:text-base leading-relaxed"
-                      style={{ color: "#FFFFFF" }}
+                      style={{ color: "#162638" }}
                     >
                       {t.quote}
                     </p>
@@ -223,12 +229,12 @@ function ComoTrabalhamosPage() {
                   <div
                     className="lg:w-64 shrink-0 flex items-center justify-center p-6 sm:p-8 lg:p-10 lg:border-l border-t lg:border-t-0"
                     style={{
-                      borderColor: "rgba(177,211,225,0.22)",
+                      borderColor: "rgba(177,211,225,0.55)",
                     }}
                   >
                     <span
                       className="font-opensans text-sm sm:text-base font-semibold tracking-wide text-center lg:text-left"
-                      style={{ color: "#B1D3E1" }}
+                      style={{ color: "#2270A1" }}
                     >
                       — {t.author}
                     </span>
