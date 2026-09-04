@@ -10,7 +10,7 @@ import {
   Quote,
 } from "lucide-react";
 
-const STEPS = [
+export const STEPS = [
   {
     icon: Search,
     title: "Diagnóstico",
@@ -43,7 +43,7 @@ const STEPS = [
   },
 ];
 
-const TESTIMONIALS = [
+export const TESTIMONIALS = [
   {
     author: "Lary Pacheco",
     quote:
