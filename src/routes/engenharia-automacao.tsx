@@ -354,10 +354,10 @@ function EngenhariaAutomacaoPage() {
                     </div>
 
                     {/* Título & Subtítulo */}
-                    <h3 className="mt-6 font-montserrat text-2xl font-bold text-deep">
+                    <h3 className="mt-6 font-montserrat text-2xl font-bold text-deep min-h-[40px] flex items-center">
                       {servico.title}
                     </h3>
-                    <p className="mt-3 text-base leading-relaxed text-ink/75">
+                    <p className="mt-3 text-base leading-relaxed text-ink/75 text-left">
                       {servico.headline}
                     </p>
 
@@ -426,8 +426,8 @@ function EngenhariaAutomacaoPage() {
                   className="rounded-2xl border border-mid/50 bg-deep/40 p-7 transition-colors hover:border-cyan"
                 >
                   <Icon className="h-8 w-8 text-cyan" strokeWidth={1.75} />
-                  <h3 className="mt-5 font-montserrat text-lg font-bold">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ice/75">{desc}</p>
+                  <h3 className="mt-5 font-montserrat text-lg font-bold min-h-[56px] flex items-center">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ice/75 text-left">{desc}</p>
                 </div>
               ))}
             </div>
@@ -559,7 +559,7 @@ function EngenhariaAutomacaoPage() {
         )}
       </main>
 
-      <Footer />
+      <Footer fromColor="#E5F2F7" />
     </div>
   );
 }

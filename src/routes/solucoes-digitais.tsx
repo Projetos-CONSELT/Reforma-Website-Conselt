@@ -150,10 +150,10 @@ function SolucoesDigitaisPage() {
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-ice/60 text-mid transition-colors duration-300 group-hover:bg-main group-hover:text-brand-white">
                     <Icon className="h-7 w-7" strokeWidth={1.75} />
                   </div>
-                  <h3 className="mt-6 font-montserrat text-2xl font-bold text-deep">
+                  <h3 className="mt-6 font-montserrat text-2xl font-bold text-deep min-h-[40px] flex items-center">
                     {title}
                   </h3>
-                  <p className="mt-3 text-base leading-relaxed text-ink/75">{desc}</p>
+                  <p className="mt-3 text-base leading-relaxed text-ink/75 text-left">{desc}</p>
                   <ul className="mt-6 space-y-3">
                     {features.map((f) => (
                       <li key={f} className="flex items-start gap-3 text-sm text-ink/85">
@@ -194,8 +194,8 @@ function SolucoesDigitaisPage() {
                   className="rounded-2xl border border-mid/50 bg-deep/40 p-7 transition-colors hover:border-cyan"
                 >
                   <Icon className="h-8 w-8 text-cyan" strokeWidth={1.75} />
-                  <h3 className="mt-5 font-montserrat text-lg font-bold">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ice/75">{desc}</p>
+                  <h3 className="mt-5 font-montserrat text-lg font-bold min-h-[56px] flex items-center">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ice/75 text-left">{desc}</p>
                 </div>
               ))}
             </div>
@@ -264,7 +264,7 @@ function SolucoesDigitaisPage() {
         </section>
       </main>
 
-      <Footer />
+      <Footer fromColor="#E5F2F7" />
     </div>
   );
 }

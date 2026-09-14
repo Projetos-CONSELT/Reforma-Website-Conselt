@@ -46,7 +46,7 @@ function SobrePage() {
         <TeamSection />
       </main>
 
-      <Footer />
+      <Footer fromColor="#FFFFFF" />
     </div>
   );
 }

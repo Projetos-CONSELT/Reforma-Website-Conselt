@@ -642,7 +642,7 @@ function CasesPage() {
         </Dialog>
       </main>
 
-      <Footer />
+      <Footer fromColor="#070b14" />
     </div>
   );
 }

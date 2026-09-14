@@ -125,18 +125,18 @@ function BlogPage() {
         </div>
       </section>
 
-      {/* 2. Navegação de Categorias (Clusters) & Barra de Busca */}
-      <section className="bg-[#F4F9FC] border-b border-[#093565]/10 py-6 px-6 lg:px-10 sticky top-20 z-20 shadow-sm backdrop-blur">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      {/* 2. Navegação de Categorias (Clusters) & Barra de Busca (Compacta e Fixa no topo abaixo do Header) */}
+      <section className="bg-[#F4F9FC]/95 backdrop-blur-md border-b border-[#093565]/10 py-3 px-4 sm:px-6 lg:px-10 sticky top-24 lg:top-28 z-20 shadow-sm transition-all duration-300">
+        <div className="w-[90%] max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
           
           {/* Menu Horizontal de Pills de Categoria */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
+          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1.5 md:pb-0 no-scrollbar">
             {clusters.map((cat) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setActiveCluster(cat)}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-opensans font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-opensans font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer ${
                   activeCluster === cat
                     ? "bg-[#2270A1] text-white shadow-md"
                     : "bg-white border border-[#093565]/15 text-[#093565] hover:border-[#2270A1] hover:text-[#2270A1]"
@@ -154,7 +154,7 @@ function BlogPage() {
               placeholder="Buscar artigos..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-xs sm:text-sm rounded-full border border-[#093565]/15 bg-white text-[#162638] focus:outline-none focus:border-[#2270A1]"
+              className="w-full pl-9 pr-4 py-1.5 text-xs sm:text-sm rounded-full border border-[#093565]/15 bg-white text-[#162638] focus:outline-none focus:border-[#2270A1]"
             />
             <Search className="w-4 h-4 text-[#093565]/50 absolute left-3 top-1/2 -translate-y-1/2" />
           </div>
@@ -241,7 +241,7 @@ function BlogPage() {
         </div>
       </main>
 
-      <Footer />
+      <Footer fromColor="#F4F9FC" />
     </div>
   );
 }

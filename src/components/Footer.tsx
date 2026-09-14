@@ -12,9 +12,38 @@ const quickLinks = [
   { label: "Solicitar Diagnóstico", href: "/contato" },
 ];
 
-export function Footer() {
+interface FooterProps {
+  fromColor?: string;
+  variant?: "gradient" | "structural" | "none";
+}
+
+export function Footer({ fromColor, variant }: FooterProps) {
+  const isDarkStart = fromColor === "#093565" || fromColor === "#070b14";
+  const isStructural = variant === "structural" || (fromColor && !isDarkStart && variant !== "gradient");
+
   return (
     <footer id="contatos" className="relative bg-[#051D3E] font-opensans text-[#FFFFFF]">
+      {/* 1. Transição em Gradiente para seções escuras (Home e Cases) */}
+      {variant !== "none" && fromColor && isDarkStart && (
+        <div
+          className="w-full h-20 sm:h-28 lg:h-36 pointer-events-none"
+          style={{
+            background: `linear-gradient(to bottom, ${fromColor} 0%, #051D3E 100%)`,
+          }}
+        />
+      )}
+
+      {/* 2. Quebra Estrutural Precisa (Corte Seco com Linha #B1D3E1 e Selo do Diamante CONSELT) */}
+      {variant !== "none" && isStructural && (
+        <div className="w-full relative z-20 pointer-events-none bg-transparent">
+          <div className="w-full h-[1px] bg-[#B1D3E1] relative flex items-center justify-center">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#051D3E] border border-[#B1D3E1] grid place-items-center shadow-md">
+              <Logo className="w-4 h-4 sm:w-5 sm:h-5 text-[#B1D3E1]" />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Container Principal do Rodapé em 4 Colunas */}
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 text-left">
         

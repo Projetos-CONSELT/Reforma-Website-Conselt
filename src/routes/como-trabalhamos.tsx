@@ -81,6 +81,42 @@ export const Route = createFileRoute("/como-trabalhamos")({
   component: ComoTrabalhamosPage,
 });
 
+function SectionDivider({ flip = false }: { flip?: boolean }) {
+  return (
+    <div className={`w-full overflow-hidden leading-none relative z-20 pointer-events-none -my-px bg-transparent ${flip ? "rotate-180" : ""}`}>
+      <svg
+        className="relative block w-full h-3.5 sm:h-5 lg:h-7"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0 Q600,100 1200,0 L1200,120 L0,120 Z"
+          fill="#B1D3E1"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function TaperedLineDivider() {
+  return (
+    <div className="w-full relative z-20 pointer-events-none py-4 sm:py-6 bg-[#051D3E]">
+      <div className="mx-auto max-w-6xl px-6 sm:px-12">
+        <svg
+          className="w-full h-1.5 sm:h-2"
+          viewBox="0 0 1000 10"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M 0,5 Q 500,0 1000,5 Q 500,10 0,5 Z"
+            fill="#B1D3E1"
+          />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 function ComoTrabalhamosPage() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-foreground">
@@ -173,6 +209,8 @@ function ComoTrabalhamosPage() {
           </div>
         </section>
 
+        <SectionDivider />
+
         <section
           className="relative px-6 lg:px-10 py-20 lg:py-28"
           style={{ background: "#051D3E" }}
@@ -239,6 +277,7 @@ function ComoTrabalhamosPage() {
           </div>
         </section>
       </main>
+      <TaperedLineDivider />
       <Footer />
     </div>
   );

@@ -326,14 +326,6 @@ function Hero() {
                   filter: "drop-shadow(0 30px 60px oklch(0.55 0.22 255 / 0.25))",
                 }}
               />
-              {/* Floating accents */}
-              <div className="absolute top-6 -right-2 w-16 h-16 rounded-2xl bg-white/80 backdrop-blur border border-brand-blue/10 shadow-card grid place-items-center animate-[float_5s_ease-in-out_infinite_reverse]">
-                <Logo className="w-8 h-8" />
-              </div>
-              <div className="absolute bottom-10 -left-4 px-4 py-3 rounded-2xl bg-white/90 backdrop-blur border border-brand-blue/10 shadow-card">
-                <div className="text-[10px] uppercase tracking-widest text-brand-blue/60">Projetos</div>
-                <div className="font-display font-extrabold text-xl text-brand-blue">+120</div>
-              </div>
             </div>
           </div>
         </div>
@@ -448,12 +440,12 @@ function ChallengesSection() {
 
 function ServicesIntro() {
   return (
-    <section className="bg-[#B1D3E1] py-16 sm:py-20 lg:py-24 px-6 lg:px-10 text-center relative z-10">
+    <section className="bg-[#093565] py-16 sm:py-20 lg:py-24 px-6 lg:px-10 text-center relative z-10">
       <div className="max-w-4xl mx-auto flex flex-col items-center">
-        <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#093565]">
+        <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#FFFFFF]">
           Soluções que conectam engenharia, tecnologia e resultado.
         </h2>
-        <p className="mt-4 sm:mt-6 font-opensans text-base sm:text-lg leading-relaxed text-[#162638] max-w-3xl">
+        <p className="mt-4 sm:mt-6 font-opensans text-base sm:text-lg leading-relaxed text-[#B1D3E1] max-w-3xl">
           Escolha a frente que mais se conecta ao seu desafio. Cada solução é estruturada a partir de diagnóstico, escopo e validação.
         </p>
       </div>
@@ -527,10 +519,10 @@ function ServiceCardsSection() {
                 className="bg-[#FFFFFF] border border-[#093565]/15 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#093565]">
+                  <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#093565] min-h-[60px] flex items-center">
                     {card.title}
                   </h3>
-                  <p className="mt-3 sm:mt-4 font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#162638]">
+                  <p className="mt-3 sm:mt-4 font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#162638] text-left">
                     {card.description}
                   </p>
                 </div>
@@ -555,10 +547,10 @@ function ServiceCardsSection() {
                 className="bg-[#FFFFFF] border border-[#093565]/15 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#093565]">
+                  <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#093565] min-h-[60px] flex items-center">
                     {card.title}
                   </h3>
-                  <p className="mt-3 sm:mt-4 font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#162638]">
+                  <p className="mt-3 sm:mt-4 font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#162638] text-left">
                     {card.description}
                   </p>
                 </div>
@@ -658,7 +650,7 @@ function DifferentialsSection() {
                   </div>
 
                   {/* Título H3 com acento de traço ciano */}
-                  <div className="flex items-center gap-2 mb-3">
+                  <div className="flex items-center gap-2 mb-3 min-h-[56px]">
                     <span className="w-2 h-2 rounded-full bg-[#42A5D3] shrink-0" />
                     <h3 className="font-opensans font-bold text-[20px] lg:text-[22px] leading-snug text-[#FFFFFF]">
                       {item.title}
@@ -666,7 +658,7 @@ function DifferentialsSection() {
                   </div>
 
                   {/* Descrição em tag p em branco */}
-                  <p className="font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#FFFFFF]">
+                  <p className="font-opensans font-normal text-base lg:text-[17px] leading-relaxed text-[#FFFFFF] text-left">
                     {item.description}
                   </p>
                 </div>
@@ -689,33 +681,33 @@ function DifferentialsSection() {
 
 const featuredCases = [
   {
-    image: blog1,
-    category: "Website Institucional",
-    title: "LAPEG | Website institucional",
-    challenge: "Desafio: organizar um volume técnico complexo sem perder clareza.",
-    solution: "Solução: arquitetura de informação, páginas de pesquisa e navegação orientada aos públicos.",
-    result: "Resultado: Presença digital reestruturada com navegação clara e rápida para os usuários.",
-    cta: "Ver como o projeto foi desenvolvido.",
+    image: "/cases/constru.png",
+    category: "Engenharia & Arquitetura",
+    title: "CONSTRU | Website Institucional",
+    challenge: "Desafio: Conectar o aprendizado técnico de engenharia civil e arquitetura às demandas de mercado.",
+    solution: "Solução: Arquitetura de informação moderna, portal institucional e fluxo simplificado de orçamentos.",
+    result: "Resultado: Presença digital fortalecida perante o mercado regional de Uberlândia.",
+    cta: "Ver case completo",
     link: "/cases" as const,
   },
   {
-    image: blog2,
-    category: "E-Commerce",
-    title: "Constru EJ | Plataforma Digital",
-    challenge: "Desafio: integrar canais de atendimento e otimizar solicitações de orçamento.",
-    solution: "Solução: interface fluida com catálogo de serviços e integração direta para vendas.",
-    result: "Resultado: Aumento significativo de orçamentos qualificados e melhoria de experiência.",
-    cta: "Ver case completo.",
+    image: "/cases/consenso.png",
+    category: "Consultoria Jurídica",
+    title: "CONSENSO JR | Portal Corporativo",
+    challenge: "Desafio: Tornar a consultoria jurídica acessível e aproximar o Direito Preventivo de empreendedores.",
+    solution: "Solução: Portal corporativo com apresentação clara de serviços de marcas e contratos.",
+    result: "Resultado: Consolidação da marca e captação contínua de contratos no setor jurídico.",
+    cta: "Ver case completo",
     link: "/cases" as const,
   },
   {
-    image: blog3,
-    category: "Software Sob Medida",
-    title: "La Biblioteca | Sistema de Gestão",
-    challenge: "Desafio: centralizar o acervo técnico e facilitar a gestão operacional interna.",
-    solution: "Solução: aplicação web sob medida com controle de acessos e buscas otimizadas.",
-    result: "Resultado: Processos operacionais 100% digitalizados com ganho de eficiência.",
-    cta: "Ver como o projeto foi desenvolvido.",
+    image: "/cases/sustenta.png",
+    category: "Engenharia Ambiental",
+    title: "SUSTENTA | Portal Institucional",
+    challenge: "Desafio: Transformar uma atuação ampla em uma presença digital clara e confiável.",
+    solution: "Solução: Arquitetura de informação completa, portal responsivo e captura de leads.",
+    result: "Resultado: Estrutura 100% preparada para captação contínua de projetos ambientais.",
+    cta: "Ver case completo",
     link: "/cases" as const,
   },
 ];
@@ -935,20 +927,20 @@ const partnerLogos = [
 
 function PartnersSocialProofSection() {
   return (
-    <section className="bg-[#B1D3E1] py-16 sm:py-20 lg:py-28 px-6 lg:px-10 relative z-10">
+    <section className="bg-[#093565] py-16 sm:py-20 lg:py-28 px-6 lg:px-10 relative z-10">
       <div className="max-w-7xl mx-auto">
         {/* Cabeçalho H2 da Seção */}
         <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-18">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#093565]/10 border border-[#093565]/20 text-[#093565] text-xs font-semibold tracking-widest uppercase mb-4 font-opensans">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#093565]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#B1D3E1] text-xs font-semibold tracking-widest uppercase mb-4 font-opensans">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#B1D3E1]" />
             Prova Social & Parcerias
           </div>
 
-          <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#093565]">
+          <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#FFFFFF]">
             Organizações que já confiaram em nossas soluções e parcerias.
           </h2>
 
-          <div className="w-16 h-1 bg-[#093565] rounded-full mt-5 mx-auto" />
+          <div className="w-16 h-1 bg-[#B1D3E1] rounded-full mt-5 mx-auto" />
         </div>
 
         {/* Bloco de Logos (Grid Horizontal Responsivo) */}
@@ -963,7 +955,7 @@ function PartnersSocialProofSection() {
                   src={partner.image}
                   alt={partner.name}
                   loading="lazy"
-                  className="max-h-16 w-auto max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                  className="max-h-16 w-auto max-w-full object-contain transition-all duration-300"
                 />
               </div>
 
@@ -1034,7 +1026,7 @@ const faqData = [
 ];
 
 function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -1101,12 +1093,6 @@ function FaqSection() {
 function FinalCtaSection() {
   return (
     <section className="bg-[#093565] py-16 sm:py-20 lg:py-24 px-6 lg:px-10 text-center relative z-10 overflow-hidden">
-      {/* Elemento gráfico decorativo sutil no fundo */}
-      <div className="absolute inset-0 pointer-events-none opacity-10">
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#42A5D3] blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#2270A1] blur-3xl" />
-      </div>
-
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center">
         {/* Título H2 em Branco (#FFFFFF) */}
         <h2 className="font-opensans font-bold text-[28px] sm:text-[34px] lg:text-[40px] leading-tight text-[#FFFFFF]">
@@ -1280,21 +1266,108 @@ function Blog() {
   );
 }
 
+// Transições inspiradas nas formas geométricas na cor #B1D3E1 (tamanho reduzido em 30%)
+function WaveDivider({ flip = false }: { flip?: boolean }) {
+  return (
+    <div className={`w-full overflow-hidden leading-none relative z-20 pointer-events-none -my-px bg-transparent ${flip ? "rotate-180" : ""}`}>
+      <svg
+        className="relative block w-full h-3.5 sm:h-5 lg:h-7"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0 C150,90 350,-40 500,40 C650,120 900,10 1200,60 L1200,120 L0,120 Z"
+          fill="#B1D3E1"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function TriangleDivider({ flip = false }: { flip?: boolean }) {
+  return (
+    <div className={`w-full overflow-hidden leading-none relative z-20 pointer-events-none -my-px bg-transparent ${flip ? "rotate-180" : ""}`}>
+      <svg
+        className="relative block w-full h-3 sm:h-4 lg:h-5.5"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0 L600,75 L1200,0 L1200,120 L0,120 Z"
+          fill="#B1D3E1"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function CurveDivider({ flip = false }: { flip?: boolean }) {
+  return (
+    <div className={`w-full overflow-hidden leading-none relative z-20 pointer-events-none -my-px bg-transparent ${flip ? "rotate-180" : ""}`}>
+      <svg
+        className="relative block w-full h-3.5 sm:h-5 lg:h-7"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0 Q600,100 1200,0 L1200,120 L0,120 Z"
+          fill="#B1D3E1"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function SlantDivider({ flip = false }: { flip?: boolean }) {
+  return (
+    <div className={`w-full overflow-hidden leading-none relative z-20 pointer-events-none -my-px bg-transparent ${flip ? "rotate-180" : ""}`}>
+      <svg
+        className="relative block w-full h-3 sm:h-4 lg:h-5"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,0 L1200,90 L1200,120 L0,120 Z"
+          fill="#B1D3E1"
+        />
+      </svg>
+    </div>
+  );
+}
+
+// Transição exatamente como a imagem enviada (linha fina com desvanecimento suave nas extremidades)
+function GlowLineDivider() {
+  return (
+    <div className="w-full relative z-20 pointer-events-none py-3 bg-transparent">
+      <div className="mx-auto max-w-5xl px-6">
+        <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-transparent via-[#B1D3E1] to-transparent shadow-[0_0_8px_rgba(177,211,225,0.7)]" />
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-white text-foreground">
       <Header />
       <Hero />
       <ChallengesSection />
+      <WaveDivider />
       <ServicesIntro />
+      <TriangleDivider flip />
       <ServiceCardsSection />
+      <SlantDivider />
       <DifferentialsSection />
+      <CurveDivider flip />
       <FeaturedCasesSection />
+      <GlowLineDivider />
       <ProcessSection />
+      <TriangleDivider />
       <PartnersSocialProofSection />
+      <WaveDivider flip />
       <FaqSection />
       <FinalCtaSection />
-      <Footer />
+      <Footer fromColor="#093565" />
     </main>
   );
 }

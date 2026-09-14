@@ -17,6 +17,25 @@ export const Route = createFileRoute("/contato")({
   component: ContatoPage,
 });
 
+function TaperedLineDivider() {
+  return (
+    <div className="w-full relative z-20 pointer-events-none py-4 sm:py-6 bg-[#051D3E]">
+      <div className="mx-auto max-w-6xl px-6 sm:px-12">
+        <svg
+          className="w-full h-1.5 sm:h-2"
+          viewBox="0 0 1000 10"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M 0,5 Q 500,0 1000,5 Q 500,10 0,5 Z"
+            fill="#B1D3E1"
+          />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 function ContatoPage() {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -269,6 +288,7 @@ function ContatoPage() {
         </div>
       </main>
 
+      <TaperedLineDivider />
       <Footer />
     </div>
   );
