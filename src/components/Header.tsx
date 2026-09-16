@@ -154,66 +154,57 @@ export function Header() {
       {/* Menu mobile em fonte Open Sans */}
       {open && (
         <div className="lg:hidden border-t border-brand-blue/10 bg-brand-white font-opensans">
-          <nav className="flex flex-col p-6 gap-4 font-opensans">
-            <div className="flex flex-col gap-2 items-center">
-              <span className="font-opensans text-xs font-bold uppercase tracking-widest text-brand-blue/60 text-center">
-                Soluções
-              </span>
-              <Link
-                to="/solucoes-digitais"
-                onClick={() => setOpen(false)}
-                className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity text-center"
-                activeProps={{ className: "font-bold text-primary" }}
-              >
-                Soluções digitais
-              </Link>
-              <Link
-                to="/engenharia-automacao"
-                onClick={() => setOpen(false)}
-                className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity text-center"
-                activeProps={{ className: "font-bold text-primary" }}
-              >
-                Engenharia e automação
-              </Link>
-            </div>
-
+          <nav className="flex flex-col p-6 gap-4 font-opensans items-center text-center">
+            <Link
+              to="/solucoes-digitais"
+              onClick={() => setOpen(false)}
+              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity text-center"
+              activeProps={{ className: "font-bold text-primary" }}
+            >
+              Soluções digitais
+            </Link>
+            <Link
+              to="/engenharia-automacao"
+              onClick={() => setOpen(false)}
+              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity text-center"
+              activeProps={{ className: "font-bold text-primary" }}
+            >
+              Engenharia e automação
+            </Link>
             <Link
               to="/cases"
               onClick={() => setOpen(false)}
-              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity"
+              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity text-center"
               activeProps={{ className: "font-bold text-primary" }}
             >
               Cases
             </Link>
-
             <Link
               to="/como-trabalhamos"
               onClick={() => setOpen(false)}
-              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity"
+              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity text-center"
               activeProps={{ className: "font-bold text-primary" }}
             >
               Como Trabalhamos
             </Link>
-
             <Link
               to="/sobre"
               onClick={() => setOpen(false)}
-              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity"
+              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity text-center"
               activeProps={{ className: "font-bold text-primary" }}
             >
               Sobre a CONSELT
             </Link>
-
             <Link
               to="/blog"
               onClick={() => setOpen(false)}
-              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity"
+              className="font-opensans text-base font-semibold uppercase text-brand-blue hover:opacity-70 transition-opacity text-center"
               activeProps={{ className: "font-bold text-primary" }}
             >
               Conteúdos
             </Link>
 
-            <div className="pt-2 font-opensans">
+            <div className="pt-2 font-opensans w-full flex justify-center">
               <Link
                 to="/contato"
                 onClick={() => setOpen(false)}

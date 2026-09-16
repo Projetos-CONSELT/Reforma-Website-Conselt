@@ -174,6 +174,9 @@ function SolucoesDigitaisPage() {
           </div>
         </section>
 
+        {/* Transição ultra estreita entre Serviços e Por que a CONSELT */}
+        <div className="h-4 sm:h-6 w-full bg-gradient-to-b from-brand-white to-night pointer-events-none select-none" />
+
         {/* Autoridade */}
         <section className="bg-night py-20 lg:py-28 text-brand-white">
           <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -214,6 +217,9 @@ function SolucoesDigitaisPage() {
             </div>
           </div>
         </section>
+
+        {/* Transição ultra estreita ao final de Por que a CONSELT */}
+        <div className="h-4 sm:h-6 w-full bg-gradient-to-b from-night to-ice/40 pointer-events-none select-none" />
 
         {/* CTA final */}
         <section className="bg-ice/40 py-20 lg:py-28">

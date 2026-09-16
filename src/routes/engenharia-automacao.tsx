@@ -84,8 +84,8 @@ const SERVICOS: ServiceItem[] = [
     specs: {
       norma: "NBR 5410 & NBR 5419 (SPDA)",
       entregavel: "Diagramas DWG/BIM + Prumadas + ART CREA",
-      aplicacao: "Indústrias, comércios e residências de grande porte",
-      impacto: "Até 30% de economia em condutores sem superdimensionamento",
+      aplicacao: "Indústrias, comércios e residências de grande porte.",
+      impacto: "Até 30% de economia em condutores sem superdimensionamento.",
     },
     checklist: [
       "Dimensionamento de cargas, condutores e barramentos",
@@ -125,8 +125,8 @@ const SERVICOS: ServiceItem[] = [
     specs: {
       norma: "NBR 8995-1 / ISO 8995",
       entregavel: "Relatório Fotométrico DIALux + Planta Executiva",
-      aplicacao: "Galpões industriais, escritórios e residências de luxo",
-      impacto: "Até 65% de redução no consumo de energia de iluminação",
+      aplicacao: "Galpões industriais, escritórios e residências de luxo.",
+      impacto: "Até 65% de redução no consumo de energia de iluminação.",
     },
     checklist: [
       "Simulação fotométrica 3D e mapa de curvas de iluminância (Lux)",
@@ -164,8 +164,8 @@ const SERVICOS: ServiceItem[] = [
     specs: {
       norma: "Protocolos KNX, Control4, Zigbee & Modbus",
       entregavel: "Projeto de Infraestrutura + Programação de Cenas",
-      aplicacao: "Casas de alto padrão, condomínios e apartamentos",
-      impacto: "Conforto total, valorização do imóvel e eficiência térmica",
+      aplicacao: "Casas de alto padrão, condomínios e apartamentos.",
+      impacto: "Conforto total, valorização do imóvel e eficiência térmica.",
     },
     checklist: [
       "Cenas inteligentes de iluminação ('Cinema', 'Festa', 'Ausente', 'Relax')",
@@ -203,8 +203,8 @@ const SERVICOS: ServiceItem[] = [
     specs: {
       norma: "NR-10, NR-12, Profinet & Modbus TCP",
       entregavel: "Código CLP/SCADA + Projeto do Painel + Treinamento",
-      aplicacao: "Linhas de produção, galpões fabris, agroindústria e farma",
-      impacto: "Redução de downtime e rastreabilidade total do processo",
+      aplicacao: "Linhas de produção, galpões fabris, agroindústria e farma.",
+      impacto: "Redução de downtime e rastreabilidade total do processo.",
     },
     checklist: [
       "Programação de CLPs (Siemens, Rockwell, Schneider, ABB)",
@@ -302,7 +302,7 @@ function EngenhariaAutomacaoPage() {
 
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink/80">
                 Engenharia focada na rápida conversão de demandas técnicas em projetos executivos viáveis. 
-                Combinamos rigor normativo (NBR 5410, NBR 5419, NR-10 e NR-12) a soluções de eficiência 
+                Combinamos rigor normativo a soluções de eficiência 
                 energética e automação inteligente para indústrias, comércios e residências.
               </p>
             </div>
@@ -362,16 +362,18 @@ function EngenhariaAutomacaoPage() {
                     </p>
 
                     {/* Mini Tabela de Especificações */}
-                    <div className="mt-6 rounded-2xl border border-mid/20 bg-ice/30 p-4 space-y-2.5 text-xs">
-                      <div className="flex justify-between items-center pb-2 border-b border-mid/10">
+                    <div className="mt-6 rounded-2xl border border-mid/20 bg-ice/30 p-4 space-y-3.5 text-xs">
+                      <div className="flex flex-col gap-1 pb-3.5 border-b border-mid/10">
                         <span className="font-bold text-mid">Aplicação Primária:</span>
-                        <span className="font-semibold text-ink text-right truncate max-w-[200px]" title={servico.specs.aplicacao}>
+                        <span className="font-semibold text-ink leading-relaxed">
                           {servico.specs.aplicacao}
                         </span>
                       </div>
-                      <div className="flex justify-between items-center">
+                      <div className="flex flex-col gap-1">
                         <span className="font-bold text-mid">Diferencial de Custo:</span>
-                        <span className="font-bold text-main">{servico.specs.impacto}</span>
+                        <span className="font-semibold text-ink leading-relaxed">
+                          {servico.specs.impacto}
+                        </span>
                       </div>
                     </div>
 
@@ -403,6 +405,9 @@ function EngenhariaAutomacaoPage() {
             </div>
           </div>
         </section>
+
+        {/* Transição ultra estreita entre Serviços e Por que a CONSELT */}
+        <div className="h-4 sm:h-6 w-full bg-gradient-to-b from-brand-white to-night pointer-events-none select-none" />
 
         {/* ==========================================
             3. SEÇÃO POR QUE A CONSELT (Herdada e com Tipografia Idêntica)
@@ -446,6 +451,9 @@ function EngenhariaAutomacaoPage() {
             </div>
           </div>
         </section>
+
+        {/* Transição ultra estreita ao final de Por que a CONSELT */}
+        <div className="h-4 sm:h-6 w-full bg-gradient-to-b from-night to-ice/40 pointer-events-none select-none" />
 
         {/* ==========================================
             4. CTA FINAL (Herdada de Soluções Digitais)
