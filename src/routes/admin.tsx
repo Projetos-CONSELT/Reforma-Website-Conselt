@@ -13,8 +13,8 @@ import {
   Mail,
   AlertCircle,
   Upload,
-} from "lucide-react";
 import { supabase } from "@/supabaseClient";
+import diamondImg from "@/assets/conselt-diamond-icon.png";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -330,9 +330,7 @@ function AdminPage() {
         <div className="w-full max-w-md bg-[#FFFFFF] rounded-3xl p-8 sm:p-10 shadow-2xl space-y-6">
           
           <div className="text-center space-y-2">
-            <div className="w-14 h-14 mx-auto rounded-2xl bg-[#051D3E] grid place-items-center text-[#42A5D3] font-extrabold text-xl shadow-md">
-              C
-            </div>
+            <img src={diamondImg} alt="CONSELT" className="w-14 h-14 mx-auto object-contain mb-2" />
             <h1 className="font-montserrat text-2xl font-extrabold text-[#051D3E] tracking-tight">CONSELT Admin</h1>
             <p className="text-xs text-slate-500">Painel de Gestão e Controle Interno</p>
           </div>
@@ -403,9 +401,7 @@ function AdminPage() {
       <aside className="w-full md:w-64 bg-[#051D3E] text-white flex flex-col justify-between shrink-0 border-r border-[#051D3E]">
         <div>
           <div className="p-6 border-b border-white/10 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#42A5D3] text-[#051D3E] font-black grid place-items-center text-sm shadow-md">
-              C
-            </div>
+            <img src={diamondImg} alt="CONSELT" className="w-9 h-9 object-contain" />
             <div>
               <h2 className="font-montserrat font-extrabold text-base tracking-tight text-white">CONSELT</h2>
               <span className="text-[10px] text-[#42A5D3] uppercase font-bold tracking-widest block -mt-1">Painel Admin</span>

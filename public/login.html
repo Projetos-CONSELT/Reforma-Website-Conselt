@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login — CONSELT Painel Administrativo</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -17,10 +21,7 @@
 
   <header class="p-6">
     <div class="flex items-center gap-3">
-      <div
-        class="w-9 h-9 rounded-xl bg-[#42A5D3]/20 border border-[#42A5D3]/40 grid place-items-center text-[#42A5D3] font-bold">
-        C
-      </div>
+      <img src="/conselt-diamond.png" alt="CONSELT" class="w-10 h-10 object-contain" />
       <span class="font-bold text-lg text-white">CONSELT</span>
     </div>
   </header>
@@ -77,7 +78,7 @@
   </footer>
 
   <script type="module">
-    import { supabase } from '/supabaseClient.js';
+    import { supabase } from './supabaseClient.js';
 
     // Verificar se já possui sessão ativa ao abrir /login.html
     async function checkExistingSession() {
