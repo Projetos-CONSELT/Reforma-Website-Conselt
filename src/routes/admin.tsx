@@ -13,6 +13,7 @@ import {
   Mail,
   AlertCircle,
   Upload,
+} from "lucide-react";
 import { supabase } from "@/supabaseClient";
 import diamondImg from "@/assets/conselt-diamond-icon.png";
 
@@ -242,7 +243,7 @@ function AdminPage() {
 
     checkSession();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       if (session && session.user && session.user.email === AUTHORIZED_EMAIL) {
         setIsAuthenticated(true);
       } else {
