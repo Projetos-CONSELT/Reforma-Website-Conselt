@@ -12,18 +12,18 @@ const HeroSection: React.FC = () => {
     <>
     <section className="relative left-1/2 w-screen -ml-[50vw] bg-[#101A26]" aria-labelledby="hero-title">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Esquerda - Imagem/Frame */}
-          <div className="order-2 lg:order-1">
+          <div className="order-2 lg:order-1 lg:col-span-7">
             <div className="relative">
               <div
-                className="aspect-[16/10] w-full overflow-hidden rounded-2xl border border-[#162436] shadow-2xl"
+                className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-[#162436] shadow-2xl bg-[#162436]"
               >
                 {hasTeamImage ? (
                   <img
                     src={TEAM_MEDIA.team}
                     alt="Equipe CONSELT"
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-contain object-center"
                     onError={() => setHasTeamImage(false)}
                   />
                 ) : (
@@ -58,7 +58,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Direita - Texto Institucional */}
-          <div className="order-1 lg:order-2">
+          <div className="order-1 lg:order-2 lg:col-span-5">
             <h1
               id="hero-title"
               className="mb-4 text-3xl font-extrabold text-white md:text-5xl"
