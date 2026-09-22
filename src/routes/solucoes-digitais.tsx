@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Logo } from "@/components/Logo";
@@ -13,7 +14,11 @@ import {
   ShieldCheck,
   Users,
   Rocket,
+  CheckCircle2,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
+import { supabase } from "@/supabaseClient";
 
 export const Route = createFileRoute("/solucoes-digitais")({
   head: () => ({
@@ -36,6 +41,14 @@ export const Route = createFileRoute("/solucoes-digitais")({
   }),
   component: SolucoesDigitaisPage,
 });
+
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (!digits) return "";
+  if (digits.length <= 2) return `(${digits}`;
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
 
 const servicos = [
   {
@@ -62,18 +75,18 @@ const servicos = [
   },
   {
     icon: Code2,
-    title: "Software",
-    desc: "Sistemas sob medida que automatizam processos e eliminam retrabalho da sua operação.",
+    title: "Software sob Medida",
+    desc: "Sistemas web e plataformas internas desenhados para a regra de negócio da sua empresa.",
     features: [
-      "ERPs, portais e dashboards",
-      "Automação de rotinas manuais",
-      "Integrações via API",
-      "Arquitetura segura e escalável",
+      "Painéis administrativos e dashboards",
+      "Automação de processos internos",
+      "APIs e integrações com terceiros",
+      "Arquitetura escalável na nuvem",
     ],
   },
   {
     icon: Smartphone,
-    title: "Aplicativos",
+    title: "Aplicativos Mobile",
     desc: "Apps iOS e Android com experiência nativa e foco em uso recorrente.",
     features: [
       "iOS e Android em uma base",
@@ -92,6 +105,50 @@ const diferenciais = [
 ];
 
 function SolucoesDigitaisPage() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [desafio, setDesafio] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage("");
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from("solicitacoes_comercial").insert([
+        {
+          nome: nome.trim(),
+          email: email.trim(),
+          whatsapp: whatsapp.trim() || "Não informado",
+          empresa: null,
+          servico: "Soluções Digitais",
+          prazo: null,
+          desafio: desafio.trim(),
+          status: "Novo",
+        },
+      ]);
+
+      if (error) {
+        throw error;
+      }
+
+      setSubmitted(true);
+      setNome("");
+      setEmail("");
+      setWhatsapp("");
+      setDesafio("");
+    } catch (err: any) {
+      console.error("Erro ao enviar formulário:", err);
+      setErrorMessage("Não foi possível enviar a solicitação. Tente novamente.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-brand-white text-ink font-opensans">
       <Header />
@@ -207,11 +264,13 @@ function SolucoesDigitaisPage() {
               {[
                 { n: "+120", l: "projetos entregues" },
                 { n: "98%", l: "clientes que renovam" },
-                { n: "15 dias", l: "para o primeiro entregável" },
-              ].map((s) => (
-                <div key={s.l}>
-                  <div className="font-montserrat text-4xl font-extrabold text-cyan">{s.n}</div>
-                  <div className="mt-1 text-sm uppercase tracking-widest text-ice/70">{s.l}</div>
+                { n: "100%", l: "supervisão docente" },
+              ].map(({ n, l }) => (
+                <div key={l}>
+                  <div className="font-montserrat text-3xl sm:text-4xl font-extrabold text-cyan">
+                    {n}
+                  </div>
+                  <div className="mt-1 text-sm text-ice/70">{l}</div>
                 </div>
               ))}
             </div>
@@ -236,34 +295,94 @@ function SolucoesDigitaisPage() {
                   </p>
                 </div>
 
-                <form
-                  className="grid gap-4"
-                  onSubmit={(e) => e.preventDefault()}
-                >
-                  <input
-                    type="text"
-                    required
-                    placeholder="Seu nome"
-                    className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
-                  />
-                  <input
-                    type="email"
-                    required
-                    placeholder="E-mail corporativo"
-                    className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
-                  />
-                  <textarea
-                    rows={3}
-                    placeholder="Qual solução você precisa?"
-                    className="w-full resize-none rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
-                  />
-                  <button
-                    type="submit"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-night transition-all duration-300 hover:scale-[1.02] hover:opacity-95"
+                {submitted ? (
+                  <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-4 animate-in fade-in">
+                    <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 grid place-items-center mx-auto">
+                      <CheckCircle2 className="w-8 h-8" />
+                    </div>
+                    <h3 className="font-montserrat font-bold text-lg text-emerald-900">
+                      Solicitação Recebida com Sucesso!
+                    </h3>
+                    <p className="text-xs text-emerald-700 leading-relaxed">
+                      Nossa equipe técnica e comercial analisará sua necessidade e entrará em contato em até <strong>24 horas úteis</strong>.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(false)}
+                      className="text-xs font-bold text-emerald-800 underline hover:text-emerald-950 cursor-pointer"
+                    >
+                      Enviar outra mensagem
+                    </button>
+                  </div>
+                ) : (
+                  <form
+                    className="grid gap-4"
+                    onSubmit={handleSubmit}
                   >
-                    Solicitar diagnóstico <ArrowRight className="h-4 w-4" />
-                  </button>
-                </form>
+                    {errorMessage && (
+                      <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+                        <span>{errorMessage}</span>
+                      </div>
+                    )}
+
+                    <input
+                      type="text"
+                      required
+                      value={nome}
+                      onChange={(e) => setNome(e.target.value)}
+                      placeholder="Seu nome completo"
+                      className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
+                    />
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="E-mail corporativo"
+                        className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
+                      />
+                      <input
+                        type="tel"
+                        required
+                        maxLength={15}
+                        value={whatsapp}
+                        onChange={(e) => setWhatsapp(formatPhone(e.target.value))}
+                        placeholder="WhatsApp (00) 00000-0000"
+                        className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
+                      />
+                    </div>
+
+                    <textarea
+                      rows={3}
+                      required
+                      value={desafio}
+                      onChange={(e) => setDesafio(e.target.value)}
+                      placeholder="Qual solução você precisa? Descreva o desafio..."
+                      className="w-full resize-none rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
+                    />
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-night transition-all duration-300 hover:scale-[1.02] hover:opacity-95 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          <span>Enviando...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Solicitar diagnóstico</span>
+                          <ArrowRight className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

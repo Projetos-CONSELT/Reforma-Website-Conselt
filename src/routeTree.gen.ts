@@ -18,6 +18,7 @@ import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as EngenhariaAutomacaoRouteImport } from './routes/engenharia-automacao'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as SolucoesDigitaisRouteImport } from './routes/solucoes-digitais'
+import { Route as AdminSolicitacoesRouteImport } from './routes/admin.solicitacoes'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,10 +65,15 @@ const SolucoesDigitaisRoute = SolucoesDigitaisRouteImport.update({
   path: '/solucoes-digitais',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSolicitacoesRoute = AdminSolicitacoesRouteImport.update({
+  id: '/solicitacoes',
+  path: '/solicitacoes',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRoute
   '/cases': typeof CasesRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
@@ -75,10 +81,11 @@ export interface FileRoutesByFullPath {
   '/engenharia-automacao': typeof EngenhariaAutomacaoRoute
   '/sobre': typeof SobreRoute
   '/solucoes-digitais': typeof SolucoesDigitaisRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRoute
   '/cases': typeof CasesRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
@@ -86,11 +93,12 @@ export interface FileRoutesByTo {
   '/engenharia-automacao': typeof EngenhariaAutomacaoRoute
   '/sobre': typeof SobreRoute
   '/solucoes-digitais': typeof SolucoesDigitaisRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/blog': typeof BlogRoute
   '/cases': typeof CasesRoute
   '/como-trabalhamos': typeof ComoTrabalhamosRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/engenharia-automacao': typeof EngenhariaAutomacaoRoute
   '/sobre': typeof SobreRoute
   '/solucoes-digitais': typeof SolucoesDigitaisRoute
+  '/admin/solicitacoes': typeof AdminSolicitacoesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/engenharia-automacao'
     | '/sobre'
     | '/solucoes-digitais'
+    | '/admin/solicitacoes'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/engenharia-automacao'
     | '/sobre'
     | '/solucoes-digitais'
+    | '/admin/solicitacoes'
   id:
     | '__root__'
     | '/'
@@ -133,11 +144,12 @@ export interface FileRouteTypes {
     | '/engenharia-automacao'
     | '/sobre'
     | '/solucoes-digitais'
+    | '/admin/solicitacoes'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   BlogRoute: typeof BlogRoute
   CasesRoute: typeof CasesRoute
   ComoTrabalhamosRoute: typeof ComoTrabalhamosRoute
@@ -212,12 +224,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolucoesDigitaisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/solicitacoes': {
+      id: '/admin/solicitacoes'
+      path: '/solicitacoes'
+      fullPath: '/admin/solicitacoes'
+      preLoaderRoute: typeof AdminSolicitacoesRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminSolicitacoesRoute: typeof AdminSolicitacoesRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminSolicitacoesRoute: AdminSolicitacoesRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   BlogRoute: BlogRoute,
   CasesRoute: CasesRoute,
   ComoTrabalhamosRoute: ComoTrabalhamosRoute,

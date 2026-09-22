@@ -18,7 +18,10 @@ import {
   Gauge,
   Users,
   Rocket,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
+import { supabase } from "@/supabaseClient";
 
 export const Route = createFileRoute("/engenharia-automacao")({
   head: () => ({
@@ -239,7 +242,58 @@ const diferenciais = [
   { icon: Rocket, title: "Entrega em ciclos curtos", desc: "Sprints com validação constante — você vê valor antes do fim." },
 ];
 
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (!digits) return "";
+  if (digits.length <= 2) return `(${digits}`;
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
 function EngenhariaAutomacaoPage() {
+  // Estado do Formulário CTA de Diagnóstico
+  const [formNome, setFormNome] = useState("");
+  const [formEmail, setFormEmail] = useState("");
+  const [formWhatsapp, setFormWhatsapp] = useState("");
+  const [formDesafio, setFormDesafio] = useState("");
+  const [isSubmittingForm, setIsSubmittingForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formError, setFormError] = useState("");
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormError("");
+    setIsSubmittingForm(true);
+
+    try {
+      const { error } = await supabase.from("solicitacoes_comercial").insert([
+        {
+          nome: formNome.trim(),
+          email: formEmail.trim(),
+          whatsapp: formWhatsapp.trim() || "Não informado",
+          empresa: null,
+          servico: "Engenharia e Automação",
+          prazo: null,
+          desafio: formDesafio.trim(),
+          status: "Novo",
+        },
+      ]);
+
+      if (error) throw error;
+
+      setFormSubmitted(true);
+      setFormNome("");
+      setFormEmail("");
+      setFormWhatsapp("");
+      setFormDesafio("");
+    } catch (err: any) {
+      console.error("Erro ao enviar formulário:", err);
+      setFormError("Não foi possível enviar a solicitação. Tente novamente.");
+    } finally {
+      setIsSubmittingForm(false);
+    }
+  };
+
   // Estado do Modal de Detalhes do Serviço
   const [selectedModalService, setSelectedModalService] =
     useState<ServiceItem | null>(null);
@@ -472,34 +526,94 @@ function EngenhariaAutomacaoPage() {
                   </p>
                 </div>
 
-                <form
-                  className="grid gap-4"
-                  onSubmit={(e) => e.preventDefault()}
-                >
-                  <input
-                    type="text"
-                    required
-                    placeholder="Seu nome"
-                    className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
-                  />
-                  <input
-                    type="email"
-                    required
-                    placeholder="E-mail corporativo"
-                    className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
-                  />
-                  <textarea
-                    rows={3}
-                    placeholder="Qual solução você precisa?"
-                    className="w-full resize-none rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
-                  />
-                  <button
-                    type="submit"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-night transition-all duration-300 hover:scale-[1.02] hover:opacity-95"
+                {formSubmitted ? (
+                  <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-4 animate-in fade-in">
+                    <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 grid place-items-center mx-auto">
+                      <CheckCircle2 className="w-8 h-8" />
+                    </div>
+                    <h3 className="font-montserrat font-bold text-lg text-emerald-900">
+                      Solicitação Recebida com Sucesso!
+                    </h3>
+                    <p className="text-xs text-emerald-700 leading-relaxed">
+                      Nossa equipe técnica e comercial analisará sua necessidade e entrará em contato em até <strong>24 horas úteis</strong>.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setFormSubmitted(false)}
+                      className="text-xs font-bold text-emerald-800 underline hover:text-emerald-950 cursor-pointer"
+                    >
+                      Enviar outra mensagem
+                    </button>
+                  </div>
+                ) : (
+                  <form
+                    className="grid gap-4"
+                    onSubmit={handleFormSubmit}
                   >
-                    Solicitar diagnóstico <ArrowRight className="h-4 w-4" />
-                  </button>
-                </form>
+                    {formError && (
+                      <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+                        <span>{formError}</span>
+                      </div>
+                    )}
+
+                    <input
+                      type="text"
+                      required
+                      value={formNome}
+                      onChange={(e) => setFormNome(e.target.value)}
+                      placeholder="Seu nome completo"
+                      className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <input
+                        type="email"
+                        required
+                        value={formEmail}
+                        onChange={(e) => setFormEmail(e.target.value)}
+                        placeholder="E-mail corporativo"
+                        className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
+                      />
+                      <input
+                        type="tel"
+                        required
+                        maxLength={15}
+                        value={formWhatsapp}
+                        onChange={(e) => setFormWhatsapp(formatPhone(e.target.value))}
+                        placeholder="WhatsApp (00) 00000-0000"
+                        className="w-full rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
+                      />
+                    </div>
+
+                    <textarea
+                      rows={3}
+                      required
+                      value={formDesafio}
+                      onChange={(e) => setFormDesafio(e.target.value)}
+                      placeholder="Qual solução você precisa? Descreva o desafio..."
+                      className="w-full resize-none rounded-xl border border-mid/30 bg-brand-white px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-main"
+                    />
+
+                    <button
+                      type="submit"
+                      disabled={isSubmittingForm}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan px-8 py-4 text-sm font-extrabold uppercase tracking-wider text-night transition-all duration-300 hover:scale-[1.02] hover:opacity-95 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                    >
+                      {isSubmittingForm ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          <span>Enviando...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Solicitar diagnóstico</span>
+                          <ArrowRight className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
           </div>

@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ArrowRight, CheckCircle2, ShieldCheck, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Mail, Phone, MapPin, Loader2, AlertCircle } from "lucide-react";
+import { supabase } from "@/supabaseClient";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -50,6 +51,8 @@ function formatPhone(value: string): string {
 
 function ContatoPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -60,9 +63,39 @@ function ContatoPage() {
     desafio: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setErrorMessage("");
+    setIsSubmitting(true);
+
+    try {
+      // Inserir os dados diretamente na tabela solicitacoes_comercial do Supabase
+      const { error: dbError } = await supabase
+        .from("solicitacoes_comercial")
+        .insert([
+          {
+            nome: formData.nome.trim(),
+            email: formData.email.trim(),
+            whatsapp: formData.whatsapp.trim(),
+            empresa: formData.empresa.trim() || null,
+            servico: formData.servico,
+            prazo: formData.prazo || null,
+            desafio: formData.desafio.trim(),
+            status: "Novo",
+          },
+        ]);
+
+      if (dbError) {
+        console.error("Erro ao registrar solicitação no Supabase:", dbError);
+        throw new Error("Não foi possível enviar a solicitação. Verifique sua conexão e tente novamente.");
+      }
+
+      setSubmitted(true);
+    } catch (err: any) {
+      setErrorMessage(err.message || "Ocorreu um erro ao enviar a solicitação.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -137,7 +170,18 @@ function ContatoPage() {
                   </p>
                   <button
                     type="button"
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({
+                        nome: "",
+                        email: "",
+                        whatsapp: "",
+                        empresa: "",
+                        servico: "",
+                        prazo: "",
+                        desafio: "",
+                      });
+                    }}
                     className="inline-flex items-center justify-center px-6 py-3 rounded-xl font-opensans font-semibold text-sm bg-[#093565] text-white hover:bg-[#2270A1] transition-colors"
                   >
                     Enviar nova solicitação
@@ -153,6 +197,13 @@ function ContatoPage() {
                       Preencha os dados abaixo para direcionarmos ao especialista responsável.
                     </p>
                   </div>
+
+                  {errorMessage && (
+                    <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm font-semibold flex items-center gap-3">
+                      <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
 
                   {/* 1. Nome Completo */}
                   <div>
@@ -286,10 +337,20 @@ function ContatoPage() {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full h-12 sm:h-14 px-6 rounded-xl font-opensans font-bold text-base sm:text-lg bg-[#2270A1] text-white shadow-md hover:bg-[#093565] hover:scale-[1.01] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                      disabled={isSubmitting}
+                      className="w-full h-12 sm:h-14 px-6 rounded-xl font-opensans font-bold text-base sm:text-lg bg-[#2270A1] text-white shadow-md hover:bg-[#093565] hover:scale-[1.01] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
                     >
-                      <span>Solicitar avaliação</span>
-                      <ArrowRight className="w-5 h-5" />
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          <span>Enviando solicitação...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Solicitar avaliação</span>
+                          <ArrowRight className="w-5 h-5" />
+                        </>
+                      )}
                     </button>
                   </div>
 
