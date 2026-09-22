@@ -94,15 +94,15 @@ export function Footer({ fromColor, variant }: FooterProps) {
 
             <div className="flex items-center gap-3">
               <Phone className="w-5 h-5 text-[#42A5D3] shrink-0" />
-              <a href="tel:+5534999999999" className="hover:text-[#FFFFFF] transition-colors">
-                (34) 99999-9999
+              <a href="tel:+5534997346250" className="hover:text-[#FFFFFF] transition-colors">
+                (34) 99734-6250
               </a>
             </div>
 
             <div className="flex items-center gap-3">
               <Mail className="w-5 h-5 text-[#42A5D3] shrink-0" />
-              <a href="mailto:contato@conselt.com.br" className="hover:text-[#FFFFFF] transition-colors">
-                contato@conselt.com.br
+              <a href="mailto:comercial@conselt.com.br" className="hover:text-[#FFFFFF] transition-colors">
+                comercial@conselt.com.br
               </a>
             </div>
           </div>
@@ -118,7 +118,7 @@ export function Footer({ fromColor, variant }: FooterProps) {
             {/* Ícones de Redes Sociais incluindo WhatsApp */}
             <div className="flex items-center gap-4 mb-6">
               <a
-                href="https://wa.me/5534999999999"
+                href="https://wa.me/5534997346250"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"

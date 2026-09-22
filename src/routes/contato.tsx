@@ -36,6 +36,18 @@ function TaperedLineDivider() {
   );
 }
 
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (!digits) return "";
+  if (digits.length <= 2) {
+    return `(${digits}`;
+  }
+  if (digits.length <= 7) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  }
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
 function ContatoPage() {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -89,12 +101,16 @@ function ContatoPage() {
 
                 <div className="flex items-center gap-3 text-sm text-[#B1D3E1]">
                   <Mail className="w-5 h-5 text-[#42A5D3] shrink-0" />
-                  <span>contato@conselt.com.br</span>
+                  <a href="mailto:comercial@conselt.com.br" className="hover:text-white transition-colors">
+                    comercial@conselt.com.br
+                  </a>
                 </div>
 
                 <div className="flex items-center gap-3 text-sm text-[#B1D3E1]">
                   <Phone className="w-5 h-5 text-[#42A5D3] shrink-0" />
-                  <span>(34) 99999-9999</span>
+                  <a href="tel:+5534997346250" className="hover:text-white transition-colors">
+                    (34) 99734-6250
+                  </a>
                 </div>
 
                 <div className="flex items-start gap-3 text-sm text-[#B1D3E1]">
@@ -181,9 +197,10 @@ function ContatoPage() {
                         id="whatsapp"
                         type="tel"
                         required
+                        maxLength={15}
                         value={formData.whatsapp}
-                        onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
-                        placeholder="(34) 99999-9999"
+                        onChange={(e) => setFormData({ ...formData, whatsapp: formatPhone(e.target.value) })}
+                        placeholder="(00) 00000-0000"
                         className="w-full px-4 py-3 rounded-xl border border-[#093565]/20 focus:border-[#42A5D3] focus:ring-2 focus:ring-[#42A5D3]/20 text-[#162638] font-opensans text-sm sm:text-base outline-none transition-all"
                       />
                     </div>
