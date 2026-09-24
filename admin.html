@@ -275,6 +275,24 @@
         <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Países / regiões</span><strong id="analytics-regions" class="block mt-2 text-2xl text-[#051D3E]">0</strong></div>
       </div>
 
+      <div class="mt-8 p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div class="flex flex-col lg:flex-row lg:items-center gap-8">
+          <div class="flex items-center gap-6">
+            <div id="analytics-time-ring" class="w-40 h-40 rounded-full grid place-items-center shrink-0" style="background: conic-gradient(#e2e8f0 0deg 360deg);">
+              <div class="w-24 h-24 rounded-full bg-white grid place-items-center text-center">
+                <strong id="analytics-ring-total" class="block text-xl text-[#051D3E]">0</strong>
+                <span class="block text-[10px] uppercase font-bold text-slate-400">visitas</span>
+              </div>
+            </div>
+            <div>
+              <h2 class="font-montserrat font-extrabold text-[#051D3E]">Tempo ativo por visita</h2>
+              <p class="text-xs text-slate-500 mt-1">Atualização automática a cada 15 segundos.</p>
+            </div>
+          </div>
+          <div id="analytics-time-legend" class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-xs flex-1"></div>
+        </div>
+      </div>
+
       <div class="mt-8 border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-white">
         <div class="px-5 py-4 border-b border-slate-200"><h2 class="font-montserrat font-extrabold text-[#051D3E]">Visitas recentes</h2></div>
         <div class="overflow-x-auto">
@@ -631,6 +649,8 @@
     ];
     let solicitacoes = [];
     let selectedSolicitacao = null;
+    let analyticsRefreshTimer = null;
+    let analyticsChannel = null;
 
     function saveState() {
       // O Supabase é a fonte principal; localStorage só serve para migração legada.
@@ -790,6 +810,31 @@
       return `${Math.floor(total / 60)}min ${total % 60}s`;
     }
 
+    function renderTimeRing(visits) {
+      const ranges = [
+        { label: 'Até 10 segundos', color: '#42A5D3', matches: seconds => seconds <= 10 },
+        { label: '11 a 30 segundos', color: '#2270A1', matches: seconds => seconds > 10 && seconds <= 30 },
+        { label: '31 a 60 segundos', color: '#F59E0B', matches: seconds => seconds > 30 && seconds <= 60 },
+        { label: 'Mais de 60 segundos', color: '#10B981', matches: seconds => seconds > 60 }
+      ];
+      const counts = ranges.map(range => visits.filter(visit => range.matches(Number(visit.duration_seconds) || 0)).length);
+      const total = visits.length;
+      const totalForRing = total || 1;
+      let currentDegree = 0;
+      const segments = counts.map((count, index) => {
+        const start = currentDegree;
+        currentDegree += (count / totalForRing) * 360;
+        return `${ranges[index].color} ${start}deg ${currentDegree}deg`;
+      });
+      const ring = document.getElementById('analytics-time-ring');
+      ring.style.background = total ? `conic-gradient(${segments.join(', ')})` : 'conic-gradient(#e2e8f0 0deg 360deg)';
+      document.getElementById('analytics-ring-total').textContent = total;
+      document.getElementById('analytics-time-legend').innerHTML = ranges.map((range, index) => {
+        const percentage = total ? Math.round((counts[index] / total) * 100) : 0;
+        return `<div class="flex items-center justify-between gap-4"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full" style="background:${range.color}"></span><span class="text-slate-600">${range.label}</span></span><strong class="text-[#051D3E]">${counts[index]} <span class="text-slate-400 font-normal">(${percentage}%)</span></strong></div>`;
+      }).join('');
+    }
+
     async function loadAnalytics() {
       const tbody = document.getElementById('analytics-table-body');
       const errorBox = document.getElementById('analytics-error');
@@ -812,6 +857,7 @@
       const visits = data || [];
       const totalDuration = visits.reduce((sum, visit) => sum + (Number(visit.duration_seconds) || 0), 0);
       const regions = new Set(visits.map(visit => [visit.city, visit.region, visit.country].filter(Boolean).join(', ')).filter(Boolean));
+      renderTimeRing(visits);
       document.getElementById('analytics-total').textContent = visits.length;
       document.getElementById('analytics-sessions').textContent = new Set(visits.map(visit => visit.session_id)).size;
       document.getElementById('analytics-average').textContent = formatDuration(visits.length ? Math.round(totalDuration / visits.length) : 0);
@@ -834,6 +880,26 @@
       `).join('');
     }
 
+    function startAnalyticsRealtime() {
+      if (analyticsRefreshTimer) return;
+      analyticsRefreshTimer = window.setInterval(() => {
+        if (!document.getElementById('analytics-content').classList.contains('hidden')) loadAnalytics();
+      }, 15000);
+      analyticsChannel = supabase
+        .channel('site-analytics-live')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'site_analytics' }, () => {
+          if (!document.getElementById('analytics-content').classList.contains('hidden')) loadAnalytics();
+        })
+        .subscribe();
+    }
+
+    function stopAnalyticsRealtime() {
+      if (analyticsRefreshTimer) window.clearInterval(analyticsRefreshTimer);
+      analyticsRefreshTimer = null;
+      if (analyticsChannel) supabase.removeChannel(analyticsChannel);
+      analyticsChannel = null;
+    }
+
     // Funções de Visibilidade
     function showDashboard(user) {
       loginSection.style.display = 'none';
@@ -846,6 +912,7 @@
         showError(`Erro ao carregar o blog: ${err.message}`);
       });
       loadSolicitacoes();
+      startAnalyticsRealtime();
     }
 
     function showLogin() {
@@ -927,6 +994,7 @@
       } catch (err) {
         console.error('Erro no logout:', err);
       } finally {
+        stopAnalyticsRealtime();
         showLogin();
       }
     });

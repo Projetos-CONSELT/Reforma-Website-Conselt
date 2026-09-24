@@ -36,4 +36,18 @@ CREATE INDEX IF NOT EXISTS idx_site_analytics_started_at
 CREATE INDEX IF NOT EXISTS idx_site_analytics_page_path
     ON public.site_analytics (page_path);
 
+DO $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM pg_publication WHERE pubname = 'supabase_realtime')
+       AND NOT EXISTS (
+           SELECT 1
+           FROM pg_publication_tables
+           WHERE pubname = 'supabase_realtime'
+             AND schemaname = 'public'
+             AND tablename = 'site_analytics'
+       ) THEN
+        ALTER PUBLICATION supabase_realtime ADD TABLE public.site_analytics;
+    END IF;
+END $$;
+
 NOTIFY pgrst, 'reload schema';
