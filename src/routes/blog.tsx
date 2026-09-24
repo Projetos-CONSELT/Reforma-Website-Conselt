@@ -6,6 +6,7 @@ import { ArrowRight, UserCheck, Search, Sparkles } from "lucide-react";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
+import { supabase } from "@/supabaseClient";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -130,60 +131,41 @@ const INITIAL_POSTS = [
 
 function BlogPage() {
   // Estado dos posts dinâmicos vinculados à página de Admin
-  const [posts, setPosts] = useState<any[]>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("conselt_blog_posts");
-      if (saved) {
-        try {
-          return JSON.parse(saved);
-        } catch (e) {
-          console.error("Erro ao ler posts do localStorage:", e);
-        }
-      }
-    }
-    return INITIAL_POSTS;
-  });
+  const [posts, setPosts] = useState<any[]>(INITIAL_POSTS);
 
   // Estado das categorias dinâmicas do Admin
-  const [categories, setCategories] = useState<string[]>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("conselt_blog_categories");
-      if (saved) {
-        try {
-          return JSON.parse(saved);
-        } catch (e) {
-          console.error("Erro ao ler categorias do localStorage:", e);
-        }
-      }
-    }
-    return ["Automação", "Websites", "Software", "Projetos elétricos", "Inovação"];
-  });
+  const [categories, setCategories] = useState<string[]>([
+    "Automação",
+    "Websites",
+    "Software",
+    "Projetos elétricos",
+    "Inovação",
+  ]);
 
   const [activeCluster, setActiveCluster] = useState("Todos");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedArticle, setSelectedArticle] = useState<any | null>(null);
 
-  // Sincronização em tempo real ao alterar posts/categorias no Admin
+  // Fonte única do blog: Supabase.
   useEffect(() => {
-    const handleStorageChange = () => {
-      if (typeof window !== "undefined") {
-        const savedPosts = localStorage.getItem("conselt_blog_posts");
-        if (savedPosts) {
-          try {
-            setPosts(JSON.parse(savedPosts));
-          } catch (e) {}
-        }
-        const savedCategories = localStorage.getItem("conselt_blog_categories");
-        if (savedCategories) {
-          try {
-            setCategories(JSON.parse(savedCategories));
-          } catch (e) {}
-        }
+    const loadBlog = async () => {
+      const [postsResult, categoriesResult] = await Promise.all([
+        supabase.from("blog_posts").select("*").eq("published", true).order("created_at", { ascending: false }),
+        supabase.from("blog_categories").select("name").order("name"),
+      ]);
+
+      if (!postsResult.error && postsResult.data) {
+        setPosts(postsResult.data.map((post) => ({
+          ...post,
+          fullText: post.full_text,
+        })));
+      }
+      if (!categoriesResult.error && categoriesResult.data) {
+        setCategories(categoriesResult.data.map((category) => category.name));
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    loadBlog().catch((error) => console.error("Erro ao carregar blog do Supabase:", error));
   }, []);
 
   // Lista de pills de categorias dinâmicas (únicas)

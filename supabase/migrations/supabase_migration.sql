@@ -38,8 +38,8 @@ CREATE POLICY "permitir_gestao_autenticados"
     ON public.solicitacoes_comercial
     FOR ALL
     TO authenticated
-    USING ((auth.jwt() ->> 'email') = 'projetos@conselt.com.br')
-    WITH CHECK ((auth.jwt() ->> 'email') = 'projetos@conselt.com.br');
+    USING (true)
+    WITH CHECK (true);
 
 -- 7. Cria índice para carregar o painel administrativo rapidamente ordenado por data
 CREATE INDEX idx_solicitacoes_comercial_created_at
@@ -82,16 +82,12 @@ ALTER TABLE public.blog_categories ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "blog_posts_public_read" ON public.blog_posts;
 CREATE POLICY "blog_posts_public_read"
     ON public.blog_posts FOR SELECT TO anon, authenticated
-    USING (
-        published = true
-        OR (auth.jwt() ->> 'email') = 'projetos@conselt.com.br'
-    );
+    USING (published = true OR auth.role() = 'authenticated');
 
 DROP POLICY IF EXISTS "blog_posts_authenticated_manage" ON public.blog_posts;
 CREATE POLICY "blog_posts_authenticated_manage"
     ON public.blog_posts FOR ALL TO authenticated
-    USING ((auth.jwt() ->> 'email') = 'projetos@conselt.com.br')
-    WITH CHECK ((auth.jwt() ->> 'email') = 'projetos@conselt.com.br');
+    USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "blog_categories_public_read" ON public.blog_categories;
 CREATE POLICY "blog_categories_public_read"
@@ -101,8 +97,7 @@ CREATE POLICY "blog_categories_public_read"
 DROP POLICY IF EXISTS "blog_categories_authenticated_manage" ON public.blog_categories;
 CREATE POLICY "blog_categories_authenticated_manage"
     ON public.blog_categories FOR ALL TO authenticated
-    USING ((auth.jwt() ->> 'email') = 'projetos@conselt.com.br')
-    WITH CHECK ((auth.jwt() ->> 'email') = 'projetos@conselt.com.br');
+    USING (true) WITH CHECK (true);
 
 INSERT INTO public.blog_categories (name)
 VALUES ('Automação'), ('Websites'), ('Software'), ('Projetos elétricos'), ('Inovação')

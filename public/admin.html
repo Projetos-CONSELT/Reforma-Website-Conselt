@@ -489,8 +489,52 @@
     ];
 
     function saveState() {
-      localStorage.setItem('conselt_blog_posts', JSON.stringify(posts));
-      localStorage.setItem('conselt_blog_categories', JSON.stringify(categories));
+      // O Supabase é a fonte principal; localStorage só serve para migração legada.
+    }
+
+    async function loadBlogData() {
+      const [{ data: postData, error: postError }, { data: categoryData, error: categoryError }] = await Promise.all([
+        supabase.from('blog_posts').select('*').order('created_at', { ascending: false }),
+        supabase.from('blog_categories').select('name').order('name')
+      ]);
+
+      if (postError) throw postError;
+      if (categoryError) throw categoryError;
+
+      let databasePosts = postData || [];
+      const localPosts = JSON.parse(localStorage.getItem('conselt_blog_posts') || '[]');
+      if (databasePosts.length === 0 && Array.isArray(localPosts) && localPosts.length > 0) {
+        const { error } = await supabase.from('blog_posts').insert(localPosts.map(post => ({
+          title: post.title,
+          author: post.author,
+          excerpt: post.excerpt,
+          category: post.category,
+          image: post.image || null,
+          full_text: post.fullText || post.excerpt,
+          date: post.date
+        })));
+        if (error) throw error;
+        const refreshed = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false });
+        if (refreshed.error) throw refreshed.error;
+        databasePosts = refreshed.data || [];
+        localStorage.removeItem('conselt_blog_posts');
+      }
+
+      posts = databasePosts.map(post => ({
+        id: post.id,
+        title: post.title,
+        category: post.category,
+        author: post.author,
+        image: post.image || '',
+        excerpt: post.excerpt,
+        fullText: post.full_text,
+        date: post.date
+      }));
+
+      categories = (categoryData || []).map(category => category.name);
+      renderPostsTable();
+      updateCategorySelect();
+    }
     }
 
     // Funções de Visibilidade
@@ -501,7 +545,9 @@
       if (userEmailDisplay && user) {
         userEmailDisplay.textContent = user.email || AUTHORIZED_EMAIL;
       }
-      renderPostsTable();
+      loadBlogData().catch(err => {
+        showError(`Erro ao carregar o blog: ${err.message}`);
+      });
     }
 
     function showLogin() {
@@ -668,7 +714,7 @@
     document.getElementById('close-post-modal').addEventListener('click', () => postModal.classList.add('hidden'));
     document.getElementById('cancel-post-modal').addEventListener('click', () => postModal.classList.add('hidden'));
 
-    document.getElementById('post-form').addEventListener('submit', (e) => {
+    document.getElementById('post-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const id = document.getElementById('post-id').value;
       const title = document.getElementById('post-title').value;
@@ -678,15 +724,36 @@
       const excerpt = document.getElementById('post-excerpt').value;
       const fullText = document.getElementById('post-fulltext').value;
 
-      if (id) {
-        posts = posts.map(p => p.id === parseInt(id) ? { ...p, title, category, author, image, excerpt, fullText } : p);
-      } else {
-        const newId = posts.length > 0 ? Math.max(...posts.map(p => p.id)) + 1 : 1;
-        const date = new Date().toLocaleDateString('pt-BR');
-        posts.unshift({ id: newId, title, category, author, image, excerpt, fullText, date });
+      const postData = {
+        title: title.trim(),
+        category,
+        author: author.trim(),
+        image: image || null,
+        excerpt: excerpt.trim(),
+        full_text: fullText.trim(),
+        date: id ? posts.find(post => post.id === parseInt(id))?.date || new Date().toLocaleDateString('pt-BR') : new Date().toLocaleDateString('pt-BR')
+      };
+      const result = id
+        ? await supabase.from('blog_posts').update(postData).eq('id', parseInt(id)).select().single()
+        : await supabase.from('blog_posts').insert(postData).select().single();
+
+      if (result.error) {
+        alert(`Erro ao salvar postagem: ${result.error.message}`);
+        return;
       }
 
-      saveState();
+      const savedPost = result.data;
+      const normalizedPost = {
+        id: savedPost.id,
+        title: savedPost.title,
+        category: savedPost.category,
+        author: savedPost.author,
+        image: savedPost.image || '',
+        excerpt: savedPost.excerpt,
+        fullText: savedPost.full_text,
+        date: savedPost.date
+      };
+      posts = id ? posts.map(post => post.id === parseInt(id) ? normalizedPost : post) : [normalizedPost, ...posts];
       postModal.classList.add('hidden');
       renderPostsTable();
     });
@@ -711,10 +778,14 @@
       postModal.classList.remove('hidden');
     };
 
-    window.deletePost = (id) => {
+    window.deletePost = async (id) => {
       if (confirm('Deseja realmente excluir esta postagem?')) {
+        const { error } = await supabase.from('blog_posts').delete().eq('id', id);
+        if (error) {
+          alert(`Erro ao excluir postagem: ${error.message}`);
+          return;
+        }
         posts = posts.filter(p => p.id !== id);
-        saveState();
         renderPostsTable();
       }
     };
@@ -727,21 +798,29 @@
     document.getElementById('close-filter-modal').addEventListener('click', () => filterModal.classList.add('hidden'));
     document.getElementById('done-filter-modal').addEventListener('click', () => filterModal.classList.add('hidden'));
 
-    document.getElementById('filter-form').addEventListener('submit', (e) => {
+    document.getElementById('filter-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const input = document.getElementById('new-filter-name');
       const val = input.value.trim();
       if (val && !categories.includes(val)) {
+        const { error } = await supabase.from('blog_categories').insert({ name: val });
+        if (error) {
+          alert(`Erro ao adicionar categoria: ${error.message}`);
+          return;
+        }
         categories.push(val);
-        saveState();
         input.value = '';
         renderFilterList();
       }
     });
 
-    window.removeCategory = (index) => {
+    window.removeCategory = async (index) => {
+      const { error } = await supabase.from('blog_categories').delete().eq('name', categories[index]);
+      if (error) {
+        alert(`Erro ao remover categoria: ${error.message}`);
+        return;
+      }
       categories.splice(index, 1);
-      saveState();
       renderFilterList();
     };
 

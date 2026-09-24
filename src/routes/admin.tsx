@@ -193,18 +193,6 @@ function AdminPage() {
     return ["Automação", "Websites", "Software", "Projetos elétricos", "Inovação"];
   });
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("conselt_blog_posts", JSON.stringify(posts));
-    }
-  }, [posts]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("conselt_blog_categories", JSON.stringify(categories));
-    }
-  }, [categories]);
-
   const [isPostModalOpen, setIsPostModalOpen] = useState(false);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<PostItem | null>(null);
@@ -216,6 +204,101 @@ function AdminPage() {
   const [formImage, setFormImage] = useState("");
   const [formFullText, setFormFullText] = useState("");
   const [newFilterInput, setNewFilterInput] = useState("");
+  const [isLoadingPosts, setIsLoadingPosts] = useState(false);
+  const [postsError, setPostsError] = useState("");
+
+  const fetchPosts = async () => {
+    setIsLoadingPosts(true);
+    setPostsError("");
+
+    try {
+      const { data, error } = await supabase
+        .from("blog_posts")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      let postsFromDatabase = data || [];
+      if (postsFromDatabase.length === 0 && typeof window !== "undefined") {
+        const localPosts = JSON.parse(localStorage.getItem("conselt_blog_posts") || "[]");
+        if (Array.isArray(localPosts) && localPosts.length > 0) {
+          const { error: migrationError } = await supabase.from("blog_posts").insert(
+            localPosts.map((post: PostItem) => ({
+              title: post.title,
+              author: post.author,
+              excerpt: post.excerpt,
+              category: post.category,
+              image: post.image || null,
+              full_text: post.fullText || post.excerpt,
+              date: post.date,
+            })),
+          );
+          if (migrationError) throw migrationError;
+
+          const refreshed = await supabase
+            .from("blog_posts")
+            .select("*")
+            .order("created_at", { ascending: false });
+          if (refreshed.error) throw refreshed.error;
+          postsFromDatabase = refreshed.data || [];
+          localStorage.removeItem("conselt_blog_posts");
+        }
+      }
+
+      setPosts(
+        postsFromDatabase.map((post) => ({
+          id: post.id,
+          title: post.title,
+          author: post.author,
+          excerpt: post.excerpt,
+          category: post.category,
+          image: post.image || "",
+          fullText: post.full_text,
+          date: post.date,
+        })),
+      );
+    } catch (err: any) {
+      console.error("Erro ao carregar posts do Supabase:", err);
+      setPostsError(err.message || "Não foi possível carregar os posts do blog.");
+    } finally {
+      setIsLoadingPosts(false);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("blog_categories")
+        .select("name")
+        .order("name");
+      if (error) throw error;
+
+      let categoryNames = (data || []).map((item) => item.name);
+      if (categoryNames.length === 0 && typeof window !== "undefined") {
+        const localCategories = JSON.parse(localStorage.getItem("conselt_blog_categories") || "[]");
+        if (Array.isArray(localCategories) && localCategories.length > 0) {
+          const { error: migrationError } = await supabase
+            .from("blog_categories")
+            .insert(localCategories.map((name: string) => ({ name })));
+          if (migrationError) throw migrationError;
+          categoryNames = localCategories;
+          localStorage.removeItem("conselt_blog_categories");
+        }
+      }
+      setCategories(categoryNames);
+    } catch (err: any) {
+      console.error("Erro ao carregar categorias do Supabase:", err);
+      setPostsError(err.message || "Não foi possível carregar as categorias do blog.");
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchPosts();
+      fetchCategories();
+    }
+  }, [isAuthenticated]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -250,61 +333,81 @@ function AdminPage() {
     setIsPostModalOpen(true);
   };
 
-  const handleDeletePost = (id: number) => {
-    if (window.confirm("Deseja realmente excluir esta postagem?")) {
-      setPosts(posts.filter((p) => p.id !== id));
+  const handleDeletePost = async (id: number) => {
+    if (!window.confirm("Deseja realmente excluir esta postagem?")) return;
+
+    const { error } = await supabase.from("blog_posts").delete().eq("id", id);
+    if (error) {
+      alert("Erro ao excluir postagem: " + error.message);
+      return;
     }
+    setPosts((previous) => previous.filter((post) => post.id !== id));
   };
 
-  const handleSavePost = (e: React.FormEvent) => {
+  const handleSavePost = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (editingPost) {
-      setPosts(
-        posts.map((p) =>
-          p.id === editingPost.id
-            ? {
-                ...p,
-                title: formTitle,
-                author: formAuthor,
-                excerpt: formExcerpt,
-                category: formCategory,
-                image: formImage,
-                fullText: formFullText,
-              }
-            : p
-        )
-      );
-    } else {
-      const newId = posts.length > 0 ? Math.max(...posts.map((p) => p.id)) + 1 : 1;
-      const today = new Date().toLocaleDateString("pt-BR");
-      setPosts([
-        {
-          id: newId,
-          title: formTitle,
-          author: formAuthor,
-          excerpt: formExcerpt,
-          category: formCategory,
-          image: formImage,
-          fullText: formFullText,
-          date: today,
-        },
-        ...posts,
-      ]);
+
+    const postData = {
+      title: formTitle.trim(),
+      author: formAuthor.trim(),
+      excerpt: formExcerpt.trim(),
+      category: formCategory,
+      image: formImage || null,
+      full_text: formFullText.trim(),
+      date: editingPost?.date || new Date().toLocaleDateString("pt-BR"),
+    };
+
+    const result = editingPost
+      ? await supabase.from("blog_posts").update(postData).eq("id", editingPost.id).select().single()
+      : await supabase.from("blog_posts").insert(postData).select().single();
+
+    if (result.error) {
+      alert("Erro ao salvar postagem: " + result.error.message);
+      return;
     }
+
+    const savedPost = result.data;
+    const postForState: PostItem = {
+      id: savedPost.id,
+      title: savedPost.title,
+      author: savedPost.author,
+      excerpt: savedPost.excerpt,
+      category: savedPost.category,
+      image: savedPost.image || "",
+      fullText: savedPost.full_text,
+      date: savedPost.date,
+    };
+
+    setPosts((previous) =>
+      editingPost
+        ? previous.map((post) => (post.id === editingPost.id ? postForState : post))
+        : [postForState, ...previous],
+    );
     setIsPostModalOpen(false);
   };
 
-  const handleAddCategory = (e: React.FormEvent) => {
+  const handleAddCategory = async (e: React.FormEvent) => {
     e.preventDefault();
     const val = newFilterInput.trim();
-    if (val && !categories.includes(val)) {
-      setCategories([...categories, val]);
-      setNewFilterInput("");
+    if (!val || categories.includes(val)) return;
+
+    const { error } = await supabase.from("blog_categories").insert({ name: val });
+    if (error) {
+      alert("Erro ao adicionar categoria: " + error.message);
+      return;
     }
+    setCategories((previous) => [...previous, val].sort((a, b) => a.localeCompare(b)));
+    setNewFilterInput("");
   };
 
-  const handleRemoveCategory = (index: number) => {
-    setCategories(categories.filter((_, i) => i !== index));
+  const handleRemoveCategory = async (index: number) => {
+    const category = categories[index];
+    const { error } = await supabase.from("blog_categories").delete().eq("name", category);
+    if (error) {
+      alert("Erro ao remover categoria: " + error.message);
+      return;
+    }
+    setCategories((previous) => previous.filter((_, i) => i !== index));
   };
 
   // ==========================================
@@ -702,6 +805,12 @@ function AdminPage() {
             </div>
           </div>
 
+          {postsError && (
+            <div className="mt-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-semibold">
+              Não foi possível sincronizar o blog com o Supabase: {postsError}
+            </div>
+          )}
+
           {/* Tabela Estruturada de Artigos */}
           <div className="mt-8 border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-white">
             <div className="overflow-x-auto">
@@ -716,7 +825,13 @@ function AdminPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-sm">
-                  {posts.length === 0 ? (
+                  {isLoadingPosts ? (
+                    <tr>
+                      <td colSpan={5} className="py-8 text-center text-slate-400 font-normal">
+                        Carregando artigos do Supabase...
+                      </td>
+                    </tr>
+                  ) : posts.length === 0 ? (
                     <tr>
                       <td colSpan={5} className="py-8 text-center text-slate-400 font-normal">
                         Nenhum artigo cadastrado. Clique em "Novo Post" para adicionar.
