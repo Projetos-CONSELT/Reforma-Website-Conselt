@@ -126,12 +126,21 @@
 
         <!-- Menu Lateral -->
         <nav class="px-4 space-y-1">
-          <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#42A5D3] text-[#051D3E] font-bold text-xs shadow-md">
+          <button id="btn-blog-tab" type="button" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-[#42A5D3] text-[#051D3E] font-bold text-xs shadow-md text-left">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
             </svg>
             <span>Gerenciar Conteúdos</span>
-          </a>
+          </button>
+          <button id="btn-solicitacoes-tab" type="button" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-[#B1D3E1] hover:bg-white/10 hover:text-white font-bold text-xs transition-all text-left">
+            <span class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0l-2.5 3h-11L4 13m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m5 5h6" />
+              </svg>
+              <span>Solicitações Comerciais</span>
+            </span>
+            <span id="solicitacoes-count" class="hidden px-2 py-0.5 rounded-full bg-[#42A5D3] text-[#051D3E] text-[10px] font-extrabold"></span>
+          </button>
         </nav>
       </div>
 
@@ -151,7 +160,7 @@
     </aside>
 
     <!-- Área Principal Branca (#FFFFFF) -->
-    <main class="flex-1 bg-[#FFFFFF] p-6 md:p-10 overflow-y-auto">
+    <main id="blog-content" class="flex-1 bg-[#FFFFFF] p-6 md:p-10 overflow-y-auto">
       
       <!-- Topo: Título & Botões Superiores -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
@@ -206,6 +215,80 @@
       </div>
 
     </main>
+
+    <main id="solicitacoes-content" class="hidden flex-1 bg-[#FFFFFF] p-6 md:p-10 overflow-y-auto">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+        <div>
+          <h1 class="font-montserrat text-2xl font-extrabold text-[#051D3E]">Solicitações Comerciais</h1>
+          <p class="text-xs text-slate-500 mt-1">Consulte e gerencie os contatos enviados pelos formulários do site.</p>
+        </div>
+        <button id="btn-refresh-solicitacoes" type="button" class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 font-bold text-xs hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M5.5 9A7 7 0 0117 5.5L20 9M18.5 15A7 7 0 017 18.5L4 15" /></svg>
+          <span>Atualizar</span>
+        </button>
+      </div>
+
+      <div id="solicitacoes-error" class="hidden mt-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-semibold"></div>
+      <div class="mt-8 border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-white">
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[900px] text-left font-['Open_Sans',sans-serif]">
+            <thead class="bg-slate-50 border-b border-slate-200 uppercase tracking-[0.05em] text-[11px] font-bold text-[#051D3E]">
+              <tr>
+                <th class="py-4 px-5">Nome / Empresa</th>
+                <th class="py-4 px-5">Contato</th>
+                <th class="py-4 px-5">Serviço</th>
+                <th class="py-4 px-5">Prazo</th>
+                <th class="py-4 px-5">Status</th>
+                <th class="py-4 px-5">Recebida em</th>
+                <th class="py-4 px-5 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="solicitacoes-table-body" class="divide-y divide-slate-100 text-sm"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Detalhes da Solicitação -->
+  <div id="solicitacao-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+      <div class="p-6 bg-[#051D3E] text-white flex items-center justify-between">
+        <div>
+          <h3 class="font-montserrat font-extrabold text-lg">Detalhes da Solicitação</h3>
+          <p id="solicitacao-modal-date" class="text-xs text-[#B1D3E1] mt-1"></p>
+        </div>
+        <button id="close-solicitacao-modal" type="button" class="text-white/70 hover:text-white text-xl font-bold">✕</button>
+      </div>
+      <div class="p-6 sm:p-8 space-y-5 overflow-y-auto text-sm text-slate-700">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div><span class="block text-[11px] font-bold uppercase text-slate-400">Nome</span><strong id="detail-nome" class="text-[#051D3E]"></strong></div>
+          <div><span class="block text-[11px] font-bold uppercase text-slate-400">Empresa</span><strong id="detail-empresa" class="text-[#051D3E]"></strong></div>
+          <div><span class="block text-[11px] font-bold uppercase text-slate-400">E-mail</span><strong id="detail-email" class="break-all"></strong></div>
+          <div><span class="block text-[11px] font-bold uppercase text-slate-400">WhatsApp</span><strong id="detail-whatsapp"></strong></div>
+          <div><span class="block text-[11px] font-bold uppercase text-slate-400">Serviço</span><strong id="detail-servico" class="text-[#2270A1]"></strong></div>
+          <div><span class="block text-[11px] font-bold uppercase text-slate-400">Prazo</span><strong id="detail-prazo"></strong></div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <span class="block text-[11px] font-bold uppercase text-slate-400 mb-1">Desafio / Objetivo</span>
+          <p id="detail-desafio" class="whitespace-pre-wrap leading-relaxed"></p>
+        </div>
+        <div class="flex items-center justify-between gap-3 pt-2">
+          <label for="detail-status" class="text-xs font-bold text-slate-600">Status</label>
+          <select id="detail-status" class="px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs font-semibold text-slate-700">
+            <option>Novo</option>
+            <option>Em Atendimento</option>
+            <option>Aguardando Proposta</option>
+            <option>Finalizado</option>
+            <option>Cancelado</option>
+          </select>
+        </div>
+      </div>
+      <div class="p-5 bg-slate-50 border-t border-slate-200 flex justify-between gap-3">
+        <button id="delete-solicitacao-detail" type="button" class="px-4 py-2 rounded-xl text-red-600 hover:bg-red-50 font-bold text-xs">Excluir solicitação</button>
+        <button id="close-solicitacao-detail" type="button" class="px-5 py-2 rounded-xl bg-[#051D3E] text-white font-bold text-xs">Fechar</button>
+      </div>
+    </div>
   </div>
 
 
@@ -509,6 +592,8 @@
         fullText: 'Garantir a conformidade das instalações elétricas comerciais com a NR-10 e NBR 5410 evita paralisações operacionais, autuações e riscos de curtos-circuitos.\n\n### Principais Etapas do Laudo Técnico\n1. Inspeção termográfica das instalações;\n2. Verificação de sistemas de aterramento e SPDA;\n3. Emissão de ART (Anotação de Responsabilidade Técnica) assinada por engenheiros supervisores.'
       }
     ];
+    let solicitacoes = [];
+    let selectedSolicitacao = null;
 
     function saveState() {
       // O Supabase é a fonte principal; localStorage só serve para migração legada.
@@ -558,6 +643,110 @@
       updateCategorySelect();
     }
 
+    function escapeHtml(value) {
+      return String(value || '').replace(/[&<>'"]/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+      })[character]);
+    }
+
+    function formatSolicitacaoDate(value) {
+      if (!value) return 'Não informado';
+      return new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(value));
+    }
+
+    async function loadSolicitacoes() {
+      const tbody = document.getElementById('solicitacoes-table-body');
+      const errorBox = document.getElementById('solicitacoes-error');
+      tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400">Carregando solicitações...</td></tr>';
+      errorBox.classList.add('hidden');
+
+      const { data, error } = await supabase
+        .from('solicitacoes_comercial')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        errorBox.textContent = `Não foi possível carregar as solicitações: ${error.message}`;
+        errorBox.classList.remove('hidden');
+        tbody.innerHTML = '';
+        return;
+      }
+
+      solicitacoes = data || [];
+      renderSolicitacoesTable();
+    }
+
+    function renderSolicitacoesTable() {
+      const tbody = document.getElementById('solicitacoes-table-body');
+      const count = document.getElementById('solicitacoes-count');
+      const novos = solicitacoes.filter(item => item.status === 'Novo').length;
+      count.textContent = novos;
+      count.classList.toggle('hidden', novos === 0);
+
+      if (solicitacoes.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="py-8 text-center text-slate-400">Nenhuma solicitação recebida.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = solicitacoes.map(item => `
+        <tr class="hover:bg-slate-50/80 transition-colors border-b border-slate-100">
+          <td class="py-4 px-5"><strong class="block text-[#093565]">${escapeHtml(item.nome)}</strong><span class="text-xs text-slate-500">${escapeHtml(item.empresa || 'Pessoa física')}</span></td>
+          <td class="py-4 px-5"><span class="block text-xs">${escapeHtml(item.email)}</span><span class="text-xs text-slate-500">${escapeHtml(item.whatsapp)}</span></td>
+          <td class="py-4 px-5 text-xs font-semibold text-[#2270A1]">${escapeHtml(item.servico)}</td>
+          <td class="py-4 px-5 text-xs">${escapeHtml(item.prazo || 'Não informado')}</td>
+          <td class="py-4 px-5"><select data-status-id="${item.id}" class="solicitacao-status text-xs px-2 py-1 rounded-lg border border-slate-300 bg-white font-semibold text-slate-700"><option ${item.status === 'Novo' ? 'selected' : ''}>Novo</option><option ${item.status === 'Em Atendimento' ? 'selected' : ''}>Em Atendimento</option><option ${item.status === 'Aguardando Proposta' ? 'selected' : ''}>Aguardando Proposta</option><option ${item.status === 'Finalizado' ? 'selected' : ''}>Finalizado</option><option ${item.status === 'Cancelado' ? 'selected' : ''}>Cancelado</option></select></td>
+          <td class="py-4 px-5 text-xs whitespace-nowrap">${formatSolicitacaoDate(item.created_at)}</td>
+          <td class="py-4 px-5 text-right whitespace-nowrap"><button type="button" data-detail-id="${item.id}" class="view-solicitacao px-3 py-1.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-xs">Ver detalhes</button><button type="button" data-delete-id="${item.id}" class="delete-solicitacao ml-2 px-3 py-1.5 rounded-lg bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 font-semibold text-xs">Excluir</button></td>
+        </tr>
+      `).join('');
+
+      tbody.querySelectorAll('.view-solicitacao').forEach(button => button.addEventListener('click', () => openSolicitacao(Number(button.dataset.detailId))));
+      tbody.querySelectorAll('.delete-solicitacao').forEach(button => button.addEventListener('click', () => deleteSolicitacao(Number(button.dataset.deleteId))));
+      tbody.querySelectorAll('.solicitacao-status').forEach(select => select.addEventListener('change', () => updateSolicitacaoStatus(Number(select.dataset.statusId), select.value)));
+    }
+
+    function openSolicitacao(id) {
+      selectedSolicitacao = solicitacoes.find(item => item.id === id);
+      if (!selectedSolicitacao) return;
+      document.getElementById('solicitacao-modal-date').textContent = `Recebida em ${formatSolicitacaoDate(selectedSolicitacao.created_at)}`;
+      document.getElementById('detail-nome').textContent = selectedSolicitacao.nome;
+      document.getElementById('detail-empresa').textContent = selectedSolicitacao.empresa || 'Não informada';
+      document.getElementById('detail-email').textContent = selectedSolicitacao.email;
+      document.getElementById('detail-whatsapp').textContent = selectedSolicitacao.whatsapp;
+      document.getElementById('detail-servico').textContent = selectedSolicitacao.servico;
+      document.getElementById('detail-prazo').textContent = selectedSolicitacao.prazo || 'Não informado';
+      document.getElementById('detail-desafio').textContent = selectedSolicitacao.desafio;
+      document.getElementById('detail-status').value = selectedSolicitacao.status;
+      document.getElementById('solicitacao-modal').classList.remove('hidden');
+    }
+
+    async function updateSolicitacaoStatus(id, status) {
+      const { error } = await supabase.from('solicitacoes_comercial').update({ status }).eq('id', id);
+      if (error) {
+        alert(`Erro ao atualizar status: ${error.message}`);
+        await loadSolicitacoes();
+        return;
+      }
+      const item = solicitacoes.find(item => item.id === id);
+      if (item) item.status = status;
+      renderSolicitacoesTable();
+    }
+
+    async function deleteSolicitacao(id) {
+      if (!confirm('Deseja realmente excluir esta solicitação?')) return;
+      const { error } = await supabase.from('solicitacoes_comercial').delete().eq('id', id);
+      if (error) {
+        alert(`Erro ao excluir solicitação: ${error.message}`);
+        return;
+      }
+      solicitacoes = solicitacoes.filter(item => item.id !== id);
+      if (selectedSolicitacao && selectedSolicitacao.id === id) {
+        selectedSolicitacao = null;
+        document.getElementById('solicitacao-modal').classList.add('hidden');
+      }
+      renderSolicitacoesTable();
+    }
+
     // Funções de Visibilidade
     function showDashboard(user) {
       loginSection.style.display = 'none';
@@ -569,6 +758,7 @@
       loadBlogData().catch(err => {
         showError(`Erro ao carregar o blog: ${err.message}`);
       });
+      loadSolicitacoes();
     }
 
     function showLogin() {
@@ -719,6 +909,36 @@
     // Eventos dos Modais
     const postModal = document.getElementById('post-modal');
     const filterModal = document.getElementById('filter-modal');
+    const blogContent = document.getElementById('blog-content');
+    const solicitacoesContent = document.getElementById('solicitacoes-content');
+    const blogTabButton = document.getElementById('btn-blog-tab');
+    const solicitacoesTabButton = document.getElementById('btn-solicitacoes-tab');
+    const solicitacaoModal = document.getElementById('solicitacao-modal');
+
+    function switchDashboardTab(tab) {
+      const showingSolicitacoes = tab === 'solicitacoes';
+      blogContent.classList.toggle('hidden', showingSolicitacoes);
+      solicitacoesContent.classList.toggle('hidden', !showingSolicitacoes);
+      blogTabButton.className = showingSolicitacoes
+        ? 'w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[#B1D3E1] hover:bg-white/10 hover:text-white font-bold text-xs text-left'
+        : 'w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-[#42A5D3] text-[#051D3E] font-bold text-xs shadow-md text-left';
+      solicitacoesTabButton.className = showingSolicitacoes
+        ? 'w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[#42A5D3] text-[#051D3E] font-bold text-xs shadow-md text-left'
+        : 'w-full flex items-center justify-between px-4 py-3 rounded-xl text-[#B1D3E1] hover:bg-white/10 hover:text-white font-bold text-xs transition-all text-left';
+      if (showingSolicitacoes) loadSolicitacoes();
+    }
+
+    blogTabButton.addEventListener('click', () => switchDashboardTab('blog'));
+    solicitacoesTabButton.addEventListener('click', () => switchDashboardTab('solicitacoes'));
+    document.getElementById('btn-refresh-solicitacoes').addEventListener('click', loadSolicitacoes);
+    document.getElementById('close-solicitacao-modal').addEventListener('click', () => solicitacaoModal.classList.add('hidden'));
+    document.getElementById('close-solicitacao-detail').addEventListener('click', () => solicitacaoModal.classList.add('hidden'));
+    document.getElementById('delete-solicitacao-detail').addEventListener('click', () => {
+      if (selectedSolicitacao) deleteSolicitacao(selectedSolicitacao.id);
+    });
+    document.getElementById('detail-status').addEventListener('change', (event) => {
+      if (selectedSolicitacao) updateSolicitacaoStatus(selectedSolicitacao.id, event.target.value);
+    });
 
     document.getElementById('btn-new-post').addEventListener('click', () => {
       document.getElementById('post-form').reset();
