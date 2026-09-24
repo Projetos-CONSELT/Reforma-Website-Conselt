@@ -141,6 +141,12 @@
             </span>
             <span id="solicitacoes-count" class="hidden px-2 py-0.5 rounded-full bg-[#42A5D3] text-[#051D3E] text-[10px] font-extrabold"></span>
           </button>
+          <button id="btn-analytics-tab" type="button" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[#B1D3E1] hover:bg-white/10 hover:text-white font-bold text-xs transition-all text-left">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 19V5m0 14h16M8 16v-4m4 4V8m4 8v-7" />
+            </svg>
+            <span>Analytics do Site</span>
+          </button>
         </nav>
       </div>
 
@@ -244,6 +250,37 @@
               </tr>
             </thead>
             <tbody id="solicitacoes-table-body" class="divide-y divide-slate-100 text-sm"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <main id="analytics-content" class="hidden flex-1 bg-[#FFFFFF] p-6 md:p-10 overflow-y-auto">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+        <div>
+          <h1 class="font-montserrat text-2xl font-extrabold text-[#051D3E]">Analytics do Site</h1>
+          <p class="text-xs text-slate-500 mt-1">Visitas, origem, região e tempo ativo nas páginas públicas.</p>
+        </div>
+        <button id="btn-refresh-analytics" type="button" class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 font-bold text-xs hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M5.5 9A7 7 0 0117 5.5L20 9M18.5 15A7 7 0 017 18.5L4 15" /></svg>
+          <span>Atualizar</span>
+        </button>
+      </div>
+
+      <div id="analytics-error" class="hidden mt-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-semibold"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Visitas</span><strong id="analytics-total" class="block mt-2 text-2xl text-[#051D3E]">0</strong></div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Sessões únicas</span><strong id="analytics-sessions" class="block mt-2 text-2xl text-[#051D3E]">0</strong></div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Tempo médio</span><strong id="analytics-average" class="block mt-2 text-2xl text-[#051D3E]">0s</strong></div>
+        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Países / regiões</span><strong id="analytics-regions" class="block mt-2 text-2xl text-[#051D3E]">0</strong></div>
+      </div>
+
+      <div class="mt-8 border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-white">
+        <div class="px-5 py-4 border-b border-slate-200"><h2 class="font-montserrat font-extrabold text-[#051D3E]">Visitas recentes</h2></div>
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[1100px] text-left font-['Open_Sans',sans-serif]">
+            <thead class="bg-slate-50 border-b border-slate-200 uppercase tracking-[0.05em] text-[11px] font-bold text-[#051D3E]"><tr><th class="py-4 px-5">Página</th><th class="py-4 px-5">Região</th><th class="py-4 px-5">Origem</th><th class="py-4 px-5">Dispositivo</th><th class="py-4 px-5">Tempo ativo</th><th class="py-4 px-5">Entrada</th></tr></thead>
+            <tbody id="analytics-table-body" class="divide-y divide-slate-100 text-sm"></tbody>
           </table>
         </div>
       </div>
@@ -747,6 +784,56 @@
       renderSolicitacoesTable();
     }
 
+    function formatDuration(seconds) {
+      const total = Math.max(0, Number(seconds) || 0);
+      if (total < 60) return `${total}s`;
+      return `${Math.floor(total / 60)}min ${total % 60}s`;
+    }
+
+    async function loadAnalytics() {
+      const tbody = document.getElementById('analytics-table-body');
+      const errorBox = document.getElementById('analytics-error');
+      tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-400">Carregando analytics...</td></tr>';
+      errorBox.classList.add('hidden');
+
+      const { data, error } = await supabase
+        .from('site_analytics')
+        .select('visit_id, session_id, page_path, referrer, duration_seconds, country, region, city, device_type, browser, started_at')
+        .order('started_at', { ascending: false })
+        .limit(200);
+
+      if (error) {
+        errorBox.textContent = `Não foi possível carregar os analytics: ${error.message}`;
+        errorBox.classList.remove('hidden');
+        tbody.innerHTML = '';
+        return;
+      }
+
+      const visits = data || [];
+      const totalDuration = visits.reduce((sum, visit) => sum + (Number(visit.duration_seconds) || 0), 0);
+      const regions = new Set(visits.map(visit => [visit.city, visit.region, visit.country].filter(Boolean).join(', ')).filter(Boolean));
+      document.getElementById('analytics-total').textContent = visits.length;
+      document.getElementById('analytics-sessions').textContent = new Set(visits.map(visit => visit.session_id)).size;
+      document.getElementById('analytics-average').textContent = formatDuration(visits.length ? Math.round(totalDuration / visits.length) : 0);
+      document.getElementById('analytics-regions').textContent = regions.size;
+
+      if (!visits.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-400">Ainda não há visitas registradas.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = visits.map(visit => `
+        <tr class="hover:bg-slate-50/80 transition-colors border-b border-slate-100">
+          <td class="py-4 px-5 font-semibold text-[#093565]">${escapeHtml(visit.page_path)}</td>
+          <td class="py-4 px-5 text-xs">${escapeHtml([visit.city, visit.region, visit.country].filter(Boolean).join(', ') || 'Não identificado')}</td>
+          <td class="py-4 px-5 text-xs">${escapeHtml(visit.referrer || 'Acesso direto')}</td>
+          <td class="py-4 px-5 text-xs">${escapeHtml(`${visit.device_type || 'unknown'} / ${visit.browser || 'unknown'}`)}</td>
+          <td class="py-4 px-5 text-xs font-semibold text-[#2270A1]">${formatDuration(visit.duration_seconds)}</td>
+          <td class="py-4 px-5 text-xs whitespace-nowrap">${formatSolicitacaoDate(visit.started_at)}</td>
+        </tr>
+      `).join('');
+    }
+
     // Funções de Visibilidade
     function showDashboard(user) {
       loginSection.style.display = 'none';
@@ -911,26 +998,37 @@
     const filterModal = document.getElementById('filter-modal');
     const blogContent = document.getElementById('blog-content');
     const solicitacoesContent = document.getElementById('solicitacoes-content');
+    const analyticsContent = document.getElementById('analytics-content');
     const blogTabButton = document.getElementById('btn-blog-tab');
     const solicitacoesTabButton = document.getElementById('btn-solicitacoes-tab');
+    const analyticsTabButton = document.getElementById('btn-analytics-tab');
     const solicitacaoModal = document.getElementById('solicitacao-modal');
 
     function switchDashboardTab(tab) {
       const showingSolicitacoes = tab === 'solicitacoes';
+      const showingAnalytics = tab === 'analytics';
       blogContent.classList.toggle('hidden', showingSolicitacoes);
       solicitacoesContent.classList.toggle('hidden', !showingSolicitacoes);
-      blogTabButton.className = showingSolicitacoes
+      analyticsContent.classList.toggle('hidden', !showingAnalytics);
+      blogContent.classList.toggle('hidden', showingSolicitacoes || showingAnalytics);
+      blogTabButton.className = showingSolicitacoes || showingAnalytics
         ? 'w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[#B1D3E1] hover:bg-white/10 hover:text-white font-bold text-xs text-left'
         : 'w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-[#42A5D3] text-[#051D3E] font-bold text-xs shadow-md text-left';
       solicitacoesTabButton.className = showingSolicitacoes
         ? 'w-full flex items-center justify-between px-4 py-3 rounded-xl bg-[#42A5D3] text-[#051D3E] font-bold text-xs shadow-md text-left'
         : 'w-full flex items-center justify-between px-4 py-3 rounded-xl text-[#B1D3E1] hover:bg-white/10 hover:text-white font-bold text-xs transition-all text-left';
+      analyticsTabButton.className = showingAnalytics
+        ? 'w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-[#42A5D3] text-[#051D3E] font-bold text-xs shadow-md text-left'
+        : 'w-full flex items-center gap-3 px-4 py-3 rounded-xl text-[#B1D3E1] hover:bg-white/10 hover:text-white font-bold text-xs transition-all text-left';
       if (showingSolicitacoes) loadSolicitacoes();
+      if (showingAnalytics) loadAnalytics();
     }
 
     blogTabButton.addEventListener('click', () => switchDashboardTab('blog'));
     solicitacoesTabButton.addEventListener('click', () => switchDashboardTab('solicitacoes'));
+    analyticsTabButton.addEventListener('click', () => switchDashboardTab('analytics'));
     document.getElementById('btn-refresh-solicitacoes').addEventListener('click', loadSolicitacoes);
+    document.getElementById('btn-refresh-analytics').addEventListener('click', loadAnalytics);
     document.getElementById('close-solicitacao-modal').addEventListener('click', () => solicitacaoModal.classList.add('hidden'));
     document.getElementById('close-solicitacao-detail').addEventListener('click', () => solicitacaoModal.classList.add('hidden'));
     document.getElementById('delete-solicitacao-detail').addEventListener('click', () => {

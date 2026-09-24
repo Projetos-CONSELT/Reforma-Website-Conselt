@@ -81,6 +81,7 @@ CREATE POLICY "blog_categories_authenticated_manage"
     USING ((auth.jwt() ->> 'email') = 'projetos@conselt.com.br')
     WITH CHECK ((auth.jwt() ->> 'email') = 'projetos@conselt.com.br');
 
+
 INSERT INTO public.blog_categories (name)
 VALUES ('Automação'), ('Websites'), ('Software'), ('Projetos elétricos'), ('Inovação')
 ON CONFLICT (name) DO NOTHING;
