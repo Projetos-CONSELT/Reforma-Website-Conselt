@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ArrowRight, UserCheck, Search, Sparkles } from "lucide-react";
@@ -21,6 +21,85 @@ export const Route = createFileRoute("/blog")({
 });
 
 const COVER_IMAGES = [blog1, blog2, blog3];
+
+function renderArticleContent(content: string): ReactNode[] {
+  const blocks: ReactNode[] = [];
+  const lines = content.replace(/\r\n?/g, "\n").split("\n");
+  let paragraph: string[] = [];
+  let list: { type: "ul" | "ol"; items: string[] } | null = null;
+  let key = 0;
+
+  const flushParagraph = () => {
+    if (!paragraph.length) return;
+    blocks.push(
+      <p key={`paragraph-${key++}`} className="text-[#162638] leading-relaxed whitespace-pre-line">
+        {paragraph.join("\n")}
+      </p>,
+    );
+    paragraph = [];
+  };
+
+  const flushList = () => {
+    if (!list) return;
+    const ListTag = list.type;
+    blocks.push(
+      <ListTag key={`list-${key++}`} className="pl-5 space-y-1.5 text-[#162638] list-inside">
+        {list.items.map((item, index) => <li key={index}>{item}</li>)}
+      </ListTag>,
+    );
+    list = null;
+  };
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+    if (!trimmed) {
+      flushParagraph();
+      flushList();
+      return;
+    }
+
+    const listMatch = trimmed.match(/^([-*+•]|\d+[.)])\s+(.+)$/);
+    if (listMatch) {
+      flushParagraph();
+      const type = /^\d/.test(listMatch[1]) ? "ol" : "ul";
+      if (!list || list.type !== type) {
+        flushList();
+        list = { type, items: [] };
+      }
+      list.items.push(listMatch[2]);
+      return;
+    }
+
+    flushList();
+    const heading = trimmed.match(/^(#{1,3})\s+(.+)$/);
+    if (heading) {
+      flushParagraph();
+      const level = heading[1].length;
+      const HeadingTag = level === 1 ? "h2" : level === 2 ? "h3" : "h4";
+      blocks.push(
+        <HeadingTag key={`heading-${key++}`} className="text-xl sm:text-2xl font-extrabold text-[#093565] mt-6 mb-2 font-montserrat">
+          {heading[2]}
+        </HeadingTag>,
+      );
+    } else if (trimmed === "---") {
+      flushParagraph();
+      blocks.push(<hr key={`divider-${key++}`} className="my-6 border-slate-200" />);
+    } else if (trimmed.startsWith(">")) {
+      flushParagraph();
+      blocks.push(
+        <blockquote key={`quote-${key++}`} className="border-l-4 border-[#2270A1] bg-[#F4F9FC] p-4 my-3 rounded-r-xl text-[#093565] italic font-medium">
+          {trimmed.replace(/^>\s?/, "")}
+        </blockquote>,
+      );
+    } else {
+      paragraph.push(trimmed);
+    }
+  });
+
+  flushParagraph();
+  flushList();
+  return blocks;
+}
 
 const INITIAL_POSTS = [
   {
@@ -318,72 +397,7 @@ function BlogPage() {
 
               {/* Corpo Completo do Texto */}
               <div className="space-y-4 text-sm sm:text-base leading-relaxed text-[#162638] font-opensans">
-                {(selectedArticle.fullText || selectedArticle.content || selectedArticle.excerpt || "")
-                  .split(/\n{2,}/)
-                  .map((block: string, idx: number) => {
-                    const trimmed = block.trim();
-                    if (!trimmed) return null;
-
-                    // Título H1
-                    if (trimmed.startsWith("# ")) {
-                      return (
-                        <h2 key={idx} className="text-xl sm:text-2xl font-extrabold text-[#093565] mt-6 mb-2 font-montserrat">
-                          {trimmed.replace(/^# /, "")}
-                        </h2>
-                      );
-                    }
-
-                    // Título H2
-                    if (trimmed.startsWith("## ")) {
-                      return (
-                        <h3 key={idx} className="text-lg sm:text-xl font-bold text-[#093565] mt-6 mb-2 font-montserrat">
-                          {trimmed.replace(/^## /, "")}
-                        </h3>
-                      );
-                    }
-
-                    // Título H3
-                    if (trimmed.startsWith("### ")) {
-                      return (
-                        <h4 key={idx} className="text-base sm:text-lg font-bold text-[#093565] mt-4 mb-1 font-montserrat">
-                          {trimmed.replace(/^### /, "")}
-                        </h4>
-                      );
-                    }
-
-                    // Citação
-                    if (trimmed.startsWith("> ")) {
-                      return (
-                        <blockquote key={idx} className="border-l-4 border-[#2270A1] bg-[#F4F9FC] p-4 my-3 rounded-r-xl text-[#093565] italic font-medium">
-                          {trimmed.replace(/^> /, "")}
-                        </blockquote>
-                      );
-                    }
-
-                    // Divisor
-                    if (trimmed === "---") {
-                      return <hr key={idx} className="my-6 border-slate-200" />;
-                    }
-
-                    // Lista
-                    if (trimmed.startsWith("- ") || trimmed.startsWith("* ") || trimmed.startsWith("• ")) {
-                      const items = trimmed.split("\n").filter(Boolean);
-                      return (
-                        <ul key={idx} className="list-disc pl-5 space-y-1.5 text-[#162638]">
-                          {items.map((it, i) => (
-                            <li key={i}>{it.replace(/^[-*•]\s+/, "")}</li>
-                          ))}
-                        </ul>
-                      );
-                    }
-
-                    // Parágrafo regular (suporta quebras de linha simples internas e **negrito**)
-                    return (
-                      <p key={idx} className="text-[#162638] leading-relaxed whitespace-pre-line">
-                        {trimmed}
-                      </p>
-                    );
-                  })}
+                {renderArticleContent(selectedArticle.fullText || selectedArticle.content || selectedArticle.excerpt || "")}
               </div>
 
               <div className="pt-6 border-t border-slate-200 text-right">

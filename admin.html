@@ -775,44 +775,39 @@
     // Limpeza Inteligente de Texto copiado de PDF / Word
     function cleanPdfFormatting(text) {
       if (!text) return '';
-      
-      return text
-        // 1. Unir palavras cortadas com hífen e quebra de linha de colunas de PDF (ex: "desenvolvi-\n mento" -> "desenvolvimento")
-        .replace(/([a-zA-ZÀ-ÿ0-9])-\s*\r?\n\s*([a-zA-ZÀ-ÿ0-9])/g, '$1$2')
-        // 2. Tratar quebras de linha duras artificiais de PDF mantendo quebras de parágrafos reais
-        .replace(/\r\n/g, '\n')
-        .split(/\n{2,}/)
-        .map(paragraph => {
-          const lines = paragraph.split('\n');
-          const processed = [];
-          
-          for (let i = 0; i < lines.length; i++) {
-            let line = lines[i].trim();
-            if (!line) continue;
-            
-            // Se for título (#), item de lista (-, *, •, 1.), citação (>) ou divisor (---)
-            const isStructural = /^(\#{1,6}\s|[-*+•]\s|\d+[\.\)]\s|>\s|---)/.test(line);
-            
-            if (isStructural || processed.length === 0) {
-              processed.push(line);
-            } else {
-              const lastIdx = processed.length - 1;
-              const lastLine = processed[lastIdx];
-              const lastIsStructural = /^(\#{1,6}\s|[-*+•]\s|\d+[\.\)]\s|>\s|---)/.test(lastLine);
-              
-              if (!lastIsStructural) {
-                processed[lastIdx] = lastLine + ' ' + line;
-              } else {
-                processed.push(line);
-              }
-            }
-          }
-          return processed.join('\n');
-        })
-        .join('\n\n')
-        // 3. Normalizar múltiplos espaços consecutivos
-        .replace(/[ \t]{2,}/g, ' ')
+
+      const normalized = text
+        .replace(/\u00a0/g, ' ')
+        .replace(/\r\n?/g, '\n')
+        .replace(/([\p{L}\p{N}])-\s*\n\s*(?=[\p{L}\p{N}])/gu, '$1')
+        .replace(/[ \t]+/g, ' ')
         .trim();
+
+      const isListItem = (line) => /^(?:[-*+•]\s+|\d+[.)]\s+)/.test(line);
+      const isStructural = (line) => /^(?:#{1,6}\s|[-*+•]\s+|\d+[.)]\s+|>\s|---\s*$)/.test(line);
+
+      return normalized
+        .split(/\n{2,}/)
+        .map((paragraph) => {
+          const output = [];
+          paragraph.split('\n').forEach((rawLine) => {
+            const line = rawLine.trim();
+            if (!line) return;
+            if (!output.length || isStructural(line)) {
+              output.push(line);
+              return;
+            }
+            const previous = output[output.length - 1];
+            if (isListItem(previous) || !isStructural(previous)) {
+              output[output.length - 1] = `${previous} ${line}`;
+            } else {
+              output.push(line);
+            }
+          });
+          return output.join('\n');
+        })
+        .filter(Boolean)
+        .join('\n\n');
     }
 
     window.cleanCurrentTextPdf = () => {
@@ -944,45 +939,58 @@
       updateWordAndCharCount();
     };
 
-    // Renderizador de Markdown simples e elegante para Pré-visualização
+    // Renderizador de Markdown em blocos para manter parágrafos e listas do artigo.
     function renderMarkdownToHtml(md) {
       if (!md) return '<p class="text-slate-400 italic">Nenhum conteúdo para pré-visualizar ainda...</p>';
 
-      let html = md
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-
-      // Divisores
-      html = html.replace(/^---$/gm, '<hr class="my-6 border-slate-200" />');
-
-      // Títulos
-      html = html.replace(/^### (.*$)/gim, '<h3 class="text-lg font-bold text-[#051D3E] mt-5 mb-2">$1</h3>');
-      html = html.replace(/^## (.*$)/gim, '<h2 class="text-xl font-extrabold text-[#051D3E] mt-6 mb-2 pb-1 border-b border-slate-100">$1</h2>');
-      html = html.replace(/^# (.*$)/gim, '<h1 class="text-2xl font-extrabold text-[#051D3E] mt-6 mb-3">$1</h1>');
-
-      // Citações
-      html = html.replace(/^\> (.*$)/gim, '<blockquote class="border-l-4 border-[#42A5D3] bg-[#42A5D3]/10 p-3.5 my-4 rounded-r-xl text-slate-700 italic font-medium">$1</blockquote>');
-
-      // Negrito e Itálico
-      html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#051D3E]">$1</strong>');
-      html = html.replace(/\*(.*?)\*/g, '<em class="italic text-slate-700">$1</em>');
-
-      // Links
-      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-[#42A5D3] underline hover:text-[#093565] font-semibold">$1</a>');
-
-      // Listas não ordenadas
-      html = html.replace(/^[-\*•] (.*$)/gim, '<li class="ml-4 list-disc text-slate-700 my-1">$1</li>');
-
-      // Parágrafos
-      const paragraphs = html.split(/\n{2,}/).map(p => {
-        if (p.startsWith('<h') || p.startsWith('<block') || p.startsWith('<li') || p.startsWith('<hr')) {
-          return p;
+      const escapeHtml = (value) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      const inline = (value) => escapeHtml(value)
+        .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#051D3E]">$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em class="italic text-slate-700">$1</em>')
+        .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[#42A5D3] underline hover:text-[#093565] font-semibold">$1</a>');
+      const lines = md.replace(/\r\n?/g, '\n').split('\n');
+      const blocks = [];
+      let paragraph = [];
+      let list = null;
+      const flushParagraph = () => {
+        if (paragraph.length) {
+          blocks.push(`<p class="my-3 text-slate-700 leading-relaxed">${paragraph.map(inline).join('<br/>')}</p>`);
+          paragraph = [];
         }
-        return `<p class="my-3 text-slate-700 leading-relaxed">${p.replace(/\n/g, '<br/>')}</p>`;
+      };
+      const flushList = () => {
+        if (!list) return;
+        const tag = list.type === 'ol' ? 'ol' : 'ul';
+        blocks.push(`<${tag} class="my-4 space-y-1 ${tag === 'ol' ? 'list-decimal' : 'list-disc'} pl-6 text-slate-700">${list.items.map((item) => `<li>${inline(item)}</li>`).join('')}</${tag}>`);
+        list = null;
+      };
+      lines.forEach((line) => {
+        const trimmed = line.trim();
+        const listMatch = trimmed.match(/^([-*+•]|\d+[.)])\s+(.+)$/);
+        if (!trimmed) { flushParagraph(); flushList(); return; }
+        if (listMatch) {
+          flushParagraph();
+          const type = /^\d/.test(listMatch[1]) ? 'ol' : 'ul';
+          if (!list || list.type !== type) { flushList(); list = { type, items: [] }; }
+          list.items.push(listMatch[2]);
+          return;
+        }
+        flushList();
+        const heading = trimmed.match(/^(#{1,3})\s+(.+)$/);
+        if (heading) {
+          const level = heading[1].length;
+          blocks.push(`<h${level} class="${level === 1 ? 'text-2xl' : level === 2 ? 'text-xl' : 'text-lg'} font-extrabold text-[#051D3E] mt-5 mb-2">${inline(heading[2])}</h${level}>`);
+        } else if (/^---\s*$/.test(trimmed)) {
+          blocks.push('<hr class="my-6 border-slate-200" />');
+        } else if (/^>\s?/.test(trimmed)) {
+          blocks.push(`<blockquote class="border-l-4 border-[#42A5D3] bg-[#42A5D3]/10 p-3.5 my-4 rounded-r-xl text-slate-700 italic font-medium">${inline(trimmed.replace(/^>\s?/, ''))}</blockquote>`);
+        } else {
+          paragraph.push(trimmed);
+        }
       });
-
-      return paragraphs.join('\n');
+      flushParagraph();
+      flushList();
+      return blocks.join('\n');
     }
 
     // Alternância de Abas: Escrever vs Pré-visualizar
