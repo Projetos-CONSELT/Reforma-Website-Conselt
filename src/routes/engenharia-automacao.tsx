@@ -21,7 +21,7 @@ import {
   Loader2,
   AlertCircle,
 } from "lucide-react";
-import { supabase } from "@/supabaseClient";
+import { supabase } from "../supabaseClient.ts";
 
 export const Route = createFileRoute("/engenharia-automacao")({
   head: () => ({

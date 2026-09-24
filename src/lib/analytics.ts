@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { supabase } from "@/supabaseClient";
+import { supabase } from "../supabaseClient.ts";
 
 function makeId() {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();

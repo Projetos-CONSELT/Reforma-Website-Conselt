@@ -6,7 +6,7 @@ import { ArrowRight, UserCheck, Search, Sparkles } from "lucide-react";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
-import { supabase } from "@/supabaseClient";
+import { supabase } from "../supabaseClient.ts";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({

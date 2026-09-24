@@ -22,7 +22,7 @@ import {
   MessageCircle,
   Filter,
 } from "lucide-react";
-import { supabase } from "@/supabaseClient";
+import { supabase } from "../supabaseClient.ts";
 import diamondImg from "@/assets/conselt-diamond-icon.png";
 
 export const Route = createFileRoute("/admin/solicitacoes")({

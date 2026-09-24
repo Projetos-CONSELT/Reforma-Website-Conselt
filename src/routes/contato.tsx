@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ArrowRight, CheckCircle2, ShieldCheck, Mail, Phone, MapPin, Loader2, AlertCircle } from "lucide-react";
-import { supabase } from "@/supabaseClient";
+import { supabase } from "../supabaseClient.ts";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
