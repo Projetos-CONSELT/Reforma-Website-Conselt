@@ -1,4 +1,10 @@
+// @ts-expect-error Supabase Edge Functions resolvem imports HTTPS no runtime Deno.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+declare const Deno: {
+  env: { get(name: string): string | undefined };
+  serve(handler: (request: Request) => Response | Promise<Response>): void;
+};
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -22,9 +28,11 @@ interface AnalyticsPayload {
 }
 
 function getClientIp(request: Request) {
-  return request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
-    || request.headers.get("x-real-ip")
-    || "";
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    ""
+  );
 }
 
 async function getLocation(request: Request) {
@@ -61,7 +69,7 @@ Deno.serve(async (request) => {
   }
 
   try {
-    const payload = await request.json() as AnalyticsPayload;
+    const payload = (await request.json()) as AnalyticsPayload;
     if (!payload.visitId || !payload.sessionId || !payload.pagePath) {
       return new Response(JSON.stringify({ error: "Dados de visita incompletos" }), {
         status: 400,
@@ -77,29 +85,35 @@ Deno.serve(async (request) => {
     let error;
     if ((payload.eventType || "page_view") === "page_view") {
       const location = await getLocation(request);
-      ({ error } = await supabase.from("site_analytics").upsert({
-        visit_id: payload.visitId,
-        session_id: payload.sessionId,
-        event_type: "page_view",
-        page_path: payload.pagePath.slice(0, 500),
-        page_title: (payload.pageTitle || "").slice(0, 300) || null,
-        referrer: (payload.referrer || "").slice(0, 1000) || null,
-        started_at: payload.startedAt || new Date().toISOString(),
-        duration_seconds: durationSeconds,
-        country: location.country,
-        region: location.region,
-        city: location.city,
-        device_type: (payload.deviceType || "unknown").slice(0, 40),
-        browser: (payload.browser || "unknown").slice(0, 80),
-        language: (payload.language || "").slice(0, 40) || null,
-        screen_width: Number.isFinite(payload.screenWidth) ? payload.screenWidth : null,
-      }, { onConflict: "visit_id" }));
+      ({ error } = await supabase.from("site_analytics").upsert(
+        {
+          visit_id: payload.visitId,
+          session_id: payload.sessionId,
+          event_type: "page_view",
+          page_path: payload.pagePath.slice(0, 500),
+          page_title: (payload.pageTitle || "").slice(0, 300) || null,
+          referrer: (payload.referrer || "").slice(0, 1000) || null,
+          started_at: payload.startedAt || new Date().toISOString(),
+          duration_seconds: durationSeconds,
+          country: location.country,
+          region: location.region,
+          city: location.city,
+          device_type: (payload.deviceType || "unknown").slice(0, 40),
+          browser: (payload.browser || "unknown").slice(0, 80),
+          language: (payload.language || "").slice(0, 40) || null,
+          screen_width: Number.isFinite(payload.screenWidth) ? payload.screenWidth : null,
+        },
+        { onConflict: "visit_id" },
+      ));
     } else {
-      ({ error } = await supabase.from("site_analytics").update({
-        event_type: payload.eventType,
-        duration_seconds: durationSeconds,
-        ended_at: payload.eventType === "page_exit" ? new Date().toISOString() : null,
-      }).eq("visit_id", payload.visitId));
+      ({ error } = await supabase
+        .from("site_analytics")
+        .update({
+          event_type: payload.eventType,
+          duration_seconds: durationSeconds,
+          ended_at: payload.eventType === "page_exit" ? new Date().toISOString() : null,
+        })
+        .eq("visit_id", payload.visitId));
     }
 
     if (error) throw error;
