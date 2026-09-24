@@ -257,9 +257,94 @@
           <textarea id="post-excerpt" rows="2" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium text-sm focus:outline-none focus:border-[#42A5D3]" placeholder="Escreva um breve resumo chamativo que aparecerá no card do blog..."></textarea>
         </div>
 
-        <div class="space-y-1">
-          <label class="font-bold text-slate-700 block">Corpo Completo do Texto do Blog (Artigo Completo) *</label>
-          <textarea id="post-fulltext" rows="6" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium text-sm focus:outline-none focus:border-[#42A5D3]" placeholder="Escreva aqui todo o artigo completo do blog, incluindo parágrafos e detalhes técnicos..."></textarea>
+        <!-- Editor Rico do Artigo Completo -->
+        <div class="space-y-2 pt-1">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <label class="font-bold text-slate-700 block">Corpo Completo do Texto do Blog (Artigo Completo) *</label>
+            
+            <!-- Abas Editar / Preview -->
+            <div class="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200 text-[11px] font-bold">
+              <button type="button" id="tab-editor-btn" class="px-3 py-1 rounded-lg bg-white text-[#051D3E] shadow-sm transition-all cursor-pointer">
+                ✏️ Escrever
+              </button>
+              <button type="button" id="tab-preview-btn" class="px-3 py-1 rounded-lg text-slate-500 hover:text-slate-800 transition-all cursor-pointer">
+                👁️ Pré-visualizar
+              </button>
+            </div>
+          </div>
+
+          <!-- Container do Editor com Barra de Ferramentas -->
+          <div class="border border-slate-300 rounded-2xl overflow-hidden focus-within:border-[#42A5D3] focus-within:ring-2 focus-within:ring-[#42A5D3]/20 bg-white transition-all">
+            
+            <!-- Toolbar de Formatação -->
+            <div id="editor-toolbar" class="bg-slate-50 border-b border-slate-200 p-2 flex flex-wrap items-center gap-1.5 text-xs select-none">
+              
+              <!-- Grupo: Títulos -->
+              <div class="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-2xs">
+                <button type="button" onclick="formatText('h2')" title="Título (H2)" class="px-2 py-1 rounded hover:bg-slate-100 text-slate-700 font-bold">H2</button>
+                <button type="button" onclick="formatText('h3')" title="Subtítulo (H3)" class="px-2 py-1 rounded hover:bg-slate-100 text-slate-700 font-bold">H3</button>
+              </div>
+
+              <!-- Grupo: Estilo de Texto -->
+              <div class="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-2xs">
+                <button type="button" onclick="formatText('bold')" title="Negrito (**texto**)" class="w-7 h-7 flex items-center justify-center rounded hover:bg-slate-100 text-slate-800 font-black">B</button>
+                <button type="button" onclick="formatText('italic')" title="Itálico (*texto*)" class="w-7 h-7 flex items-center justify-center rounded hover:bg-slate-100 text-slate-800 font-bold italic">I</button>
+              </div>
+
+              <!-- Grupo: Listas e Citação -->
+              <div class="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-2xs">
+                <button type="button" onclick="formatText('bullet')" title="Lista com Marcadores" class="px-2 py-1 rounded hover:bg-slate-100 text-slate-700 font-semibold flex items-center gap-1">
+                  <span>•</span><span>Lista</span>
+                </button>
+                <button type="button" onclick="formatText('numbered')" title="Lista Numerada" class="px-2 py-1 rounded hover:bg-slate-100 text-slate-700 font-semibold">1. Num</button>
+                <button type="button" onclick="formatText('quote')" title="Citação / Destaque" class="px-2 py-1 rounded hover:bg-slate-100 text-slate-700 font-semibold">❝ Citação</button>
+                <button type="button" onclick="formatText('divider')" title="Linha Divisória" class="px-2 py-1 rounded hover:bg-slate-100 text-slate-700 font-semibold">― Divisor</button>
+                <button type="button" onclick="formatText('link')" title="Inserir Link" class="px-2 py-1 rounded hover:bg-slate-100 text-slate-700 font-semibold">🔗 Link</button>
+              </div>
+
+              <!-- Grupo Especial: Limpeza Inteligente de PDF / Word -->
+              <div class="flex items-center gap-1.5 ml-auto">
+                <button type="button" onclick="pasteAndCleanPdf()" title="Colar e limpar texto copiado de PDF" class="px-2.5 py-1 rounded-lg bg-[#42A5D3]/15 text-[#051D3E] border border-[#42A5D3]/30 hover:bg-[#42A5D3]/25 font-bold flex items-center gap-1 cursor-pointer transition-colors text-[11px]">
+                  <span>📋</span><span>Colar do PDF</span>
+                </button>
+                <button type="button" onclick="cleanCurrentTextPdf()" title="Corrigir quebras de linha e hífens de PDF no texto" class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 font-bold flex items-center gap-1 cursor-pointer transition-colors text-[11px]">
+                  <span>🪄</span><span>Limpar / Corrigir PDF</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Toast / Notificação Rápida de Limpeza -->
+            <div id="pdf-clean-toast" class="hidden px-3 py-1.5 bg-emerald-50 border-b border-emerald-200 text-emerald-800 text-[11px] font-semibold flex items-center justify-between">
+              <span>✨ Texto formatado e normalizado com sucesso! Quebras de linhas artificiais de PDF corrigidas.</span>
+              <button type="button" onclick="document.getElementById('pdf-clean-toast').classList.add('hidden')" class="text-emerald-600 hover:text-emerald-900 font-bold ml-2">✕</button>
+            </div>
+
+            <!-- Área de Edição (Textarea) -->
+            <div id="editor-tab-content">
+              <textarea id="post-fulltext" rows="8" required class="w-full p-4 bg-white text-slate-900 font-medium text-sm focus:outline-none resize-y min-h-[220px] font-mono leading-relaxed" placeholder="Escreva aqui o artigo completo. Você pode colar de PDFs ou Word e clicar em 'Limpar / Corrigir PDF' para normalizar quebras de linha automaticamente..."></textarea>
+            </div>
+
+            <!-- Área de Pré-visualização (Preview) -->
+            <div id="preview-tab-content" class="hidden p-6 bg-slate-50 min-h-[220px] max-h-[380px] overflow-y-auto text-slate-800 text-sm leading-relaxed">
+              <div id="article-rendered-preview" class="space-y-4">
+                <!-- Renderizado dinamicamente -->
+              </div>
+            </div>
+
+            <!-- Barra de Status / Contadores -->
+            <div class="bg-slate-50/80 border-t border-slate-200 px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 font-medium">
+              <div class="flex items-center gap-3">
+                <span id="word-count">0 palavras</span>
+                <span>•</span>
+                <span id="char-count">0 caracteres</span>
+                <span>•</span>
+                <span id="reading-time">~1 min de leitura</span>
+              </div>
+              <span class="text-slate-400 italic">Suporta Markdown (# Títulos, **Negrito**, - Listas, > Citações)</span>
+            </div>
+
+          </div>
         </div>
 
         <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
@@ -575,6 +660,8 @@
       currentImageData = '';
       hidePreview();
       updateCategorySelect();
+      if (typeof switchTab === 'function') switchTab('editor');
+      if (typeof updateWordAndCharCount === 'function') updateWordAndCharCount();
       postModal.classList.remove('hidden');
     });
 
@@ -619,6 +706,8 @@
       document.getElementById('post-excerpt').value = post.excerpt || '';
       document.getElementById('post-fulltext').value = post.fullText || post.excerpt || '';
       document.getElementById('modal-post-title').textContent = 'Editar Artigo';
+      if (typeof switchTab === 'function') switchTab('editor');
+      if (typeof updateWordAndCharCount === 'function') updateWordAndCharCount();
       postModal.classList.remove('hidden');
     };
 
@@ -655,6 +744,265 @@
       saveState();
       renderFilterList();
     };
+
+    // ==========================================
+    // 5. FUNÇÕES DO EDITOR RICO E LIMPEZA DE PDF
+    // ==========================================
+    const fullTextTextarea = document.getElementById('post-fulltext');
+    const tabEditorBtn = document.getElementById('tab-editor-btn');
+    const tabPreviewBtn = document.getElementById('tab-preview-btn');
+    const editorTabContent = document.getElementById('editor-tab-content');
+    const previewTabContent = document.getElementById('preview-tab-content');
+    const articleRenderedPreview = document.getElementById('article-rendered-preview');
+    const wordCountEl = document.getElementById('word-count');
+    const charCountEl = document.getElementById('char-count');
+    const readingTimeEl = document.getElementById('reading-time');
+    const pdfToast = document.getElementById('pdf-clean-toast');
+
+    function updateWordAndCharCount() {
+      const text = fullTextTextarea.value || '';
+      const chars = text.length;
+      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+      const minutes = Math.max(1, Math.ceil(words / 180));
+
+      charCountEl.textContent = `${chars} caracteres`;
+      wordCountEl.textContent = `${words} palavras`;
+      readingTimeEl.textContent = `~${minutes} min de leitura`;
+    }
+
+    fullTextTextarea.addEventListener('input', updateWordAndCharCount);
+
+    // Limpeza Inteligente de Texto copiado de PDF / Word
+    function cleanPdfFormatting(text) {
+      if (!text) return '';
+      
+      return text
+        // 1. Unir palavras cortadas com hífen e quebra de linha de colunas de PDF (ex: "desenvolvi-\n mento" -> "desenvolvimento")
+        .replace(/([a-zA-ZÀ-ÿ0-9])-\s*\r?\n\s*([a-zA-ZÀ-ÿ0-9])/g, '$1$2')
+        // 2. Tratar quebras de linha duras artificiais de PDF mantendo quebras de parágrafos reais
+        .replace(/\r\n/g, '\n')
+        .split(/\n{2,}/)
+        .map(paragraph => {
+          const lines = paragraph.split('\n');
+          const processed = [];
+          
+          for (let i = 0; i < lines.length; i++) {
+            let line = lines[i].trim();
+            if (!line) continue;
+            
+            // Se for título (#), item de lista (-, *, •, 1.), citação (>) ou divisor (---)
+            const isStructural = /^(\#{1,6}\s|[-*+•]\s|\d+[\.\)]\s|>\s|---)/.test(line);
+            
+            if (isStructural || processed.length === 0) {
+              processed.push(line);
+            } else {
+              const lastIdx = processed.length - 1;
+              const lastLine = processed[lastIdx];
+              const lastIsStructural = /^(\#{1,6}\s|[-*+•]\s|\d+[\.\)]\s|>\s|---)/.test(lastLine);
+              
+              if (!lastIsStructural) {
+                processed[lastIdx] = lastLine + ' ' + line;
+              } else {
+                processed.push(line);
+              }
+            }
+          }
+          return processed.join('\n');
+        })
+        .join('\n\n')
+        // 3. Normalizar múltiplos espaços consecutivos
+        .replace(/[ \t]{2,}/g, ' ')
+        .trim();
+    }
+
+    window.cleanCurrentTextPdf = () => {
+      const currentVal = fullTextTextarea.value;
+      if (!currentVal) return;
+
+      const selStart = fullTextTextarea.selectionStart;
+      const selEnd = fullTextTextarea.selectionEnd;
+
+      if (selStart !== selEnd) {
+        // Limpar apenas o trecho selecionado
+        const selectedText = currentVal.substring(selStart, selEnd);
+        const cleaned = cleanPdfFormatting(selectedText);
+        fullTextTextarea.setRangeText(cleaned, selStart, selEnd, 'end');
+      } else {
+        // Limpar todo o texto
+        fullTextTextarea.value = cleanPdfFormatting(currentVal);
+      }
+
+      updateWordAndCharCount();
+      showPdfCleanToast();
+    };
+
+    window.pasteAndCleanPdf = async () => {
+      try {
+        let text = '';
+        if (navigator.clipboard && navigator.clipboard.readText) {
+          text = await navigator.clipboard.readText();
+        } else {
+          text = prompt('Cole aqui o texto copiado do PDF:');
+        }
+
+        if (text) {
+          const cleaned = cleanPdfFormatting(text);
+          const selStart = fullTextTextarea.selectionStart || 0;
+          const selEnd = fullTextTextarea.selectionEnd || 0;
+          
+          if (fullTextTextarea.value.trim() === '') {
+            fullTextTextarea.value = cleaned;
+          } else {
+            fullTextTextarea.setRangeText('\n\n' + cleaned, selStart, selEnd, 'end');
+          }
+          
+          updateWordAndCharCount();
+          showPdfCleanToast();
+        }
+      } catch (err) {
+        console.warn('Erro ao ler clipboard:', err);
+        const fallbackText = prompt('Cole aqui o texto copiado do PDF:');
+        if (fallbackText) {
+          const cleaned = cleanPdfFormatting(fallbackText);
+          fullTextTextarea.value += (fullTextTextarea.value ? '\n\n' : '') + cleaned;
+          updateWordAndCharCount();
+          showPdfCleanToast();
+        }
+      }
+    };
+
+    function showPdfCleanToast() {
+      pdfToast.classList.remove('hidden');
+      setTimeout(() => {
+        pdfToast.classList.add('hidden');
+      }, 4000);
+    }
+
+    // Ações da Barra de Formatação
+    window.formatText = (action) => {
+      const start = fullTextTextarea.selectionStart;
+      const end = fullTextTextarea.selectionEnd;
+      const selected = fullTextTextarea.value.substring(start, end);
+
+      let replacement = '';
+      let cursorOffset = 0;
+
+      switch (action) {
+        case 'h2':
+          replacement = `\n\n## ${selected || 'Título da Seção'}\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'h3':
+          replacement = `\n\n### ${selected || 'Subtítulo'}\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'bold':
+          replacement = `**${selected || 'texto em negrito'}**`;
+          cursorOffset = replacement.length;
+          break;
+        case 'italic':
+          replacement = `*${selected || 'texto em itálico'}*`;
+          cursorOffset = replacement.length;
+          break;
+        case 'bullet':
+          if (selected) {
+            replacement = selected.split('\n').map(l => `- ${l}`).join('\n');
+          } else {
+            replacement = '\n- Item 1\n- Item 2\n- Item 3\n';
+          }
+          cursorOffset = replacement.length;
+          break;
+        case 'numbered':
+          if (selected) {
+            replacement = selected.split('\n').map((l, idx) => `${idx + 1}. ${l}`).join('\n');
+          } else {
+            replacement = '\n1. Primeiro passo\n2. Segundo passo\n3. Terceiro passo\n';
+          }
+          cursorOffset = replacement.length;
+          break;
+        case 'quote':
+          replacement = `\n> ${selected || 'Destaque ou citação importante...'}\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'divider':
+          replacement = `\n\n---\n\n`;
+          cursorOffset = replacement.length;
+          break;
+        case 'link':
+          const url = prompt('Digite o endereço do link (URL):', 'https://');
+          if (url) {
+            replacement = `[${selected || 'Texto do Link'}](${url})`;
+            cursorOffset = replacement.length;
+          } else {
+            return;
+          }
+          break;
+      }
+
+      fullTextTextarea.setRangeText(replacement, start, end, 'end');
+      fullTextTextarea.focus();
+      updateWordAndCharCount();
+    };
+
+    // Renderizador de Markdown simples e elegante para Pré-visualização
+    function renderMarkdownToHtml(md) {
+      if (!md) return '<p class="text-slate-400 italic">Nenhum conteúdo para pré-visualizar ainda...</p>';
+
+      let html = md
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // Divisores
+      html = html.replace(/^---$/gm, '<hr class="my-6 border-slate-200" />');
+
+      // Títulos
+      html = html.replace(/^### (.*$)/gim, '<h3 class="text-lg font-bold text-[#051D3E] mt-5 mb-2">$1</h3>');
+      html = html.replace(/^## (.*$)/gim, '<h2 class="text-xl font-extrabold text-[#051D3E] mt-6 mb-2 pb-1 border-b border-slate-100">$1</h2>');
+      html = html.replace(/^# (.*$)/gim, '<h1 class="text-2xl font-extrabold text-[#051D3E] mt-6 mb-3">$1</h1>');
+
+      // Citações
+      html = html.replace(/^\> (.*$)/gim, '<blockquote class="border-l-4 border-[#42A5D3] bg-[#42A5D3]/10 p-3.5 my-4 rounded-r-xl text-slate-700 italic font-medium">$1</blockquote>');
+
+      // Negrito e Itálico
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#051D3E]">$1</strong>');
+      html = html.replace(/\*(.*?)\*/g, '<em class="italic text-slate-700">$1</em>');
+
+      // Links
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-[#42A5D3] underline hover:text-[#093565] font-semibold">$1</a>');
+
+      // Listas não ordenadas
+      html = html.replace(/^[-\*•] (.*$)/gim, '<li class="ml-4 list-disc text-slate-700 my-1">$1</li>');
+
+      // Parágrafos
+      const paragraphs = html.split(/\n{2,}/).map(p => {
+        if (p.startsWith('<h') || p.startsWith('<block') || p.startsWith('<li') || p.startsWith('<hr')) {
+          return p;
+        }
+        return `<p class="my-3 text-slate-700 leading-relaxed">${p.replace(/\n/g, '<br/>')}</p>`;
+      });
+
+      return paragraphs.join('\n');
+    }
+
+    // Alternância de Abas: Escrever vs Pré-visualizar
+    function switchTab(tab) {
+      if (tab === 'preview') {
+        tabEditorBtn.className = 'px-3 py-1 rounded-lg text-slate-500 hover:text-slate-800 transition-all cursor-pointer';
+        tabPreviewBtn.className = 'px-3 py-1 rounded-lg bg-white text-[#051D3E] shadow-sm transition-all cursor-pointer';
+        editorTabContent.classList.add('hidden');
+        previewTabContent.classList.remove('hidden');
+        articleRenderedPreview.innerHTML = renderMarkdownToHtml(fullTextTextarea.value);
+      } else {
+        tabPreviewBtn.className = 'px-3 py-1 rounded-lg text-slate-500 hover:text-slate-800 transition-all cursor-pointer';
+        tabEditorBtn.className = 'px-3 py-1 rounded-lg bg-white text-[#051D3E] shadow-sm transition-all cursor-pointer';
+        previewTabContent.classList.add('hidden');
+        editorTabContent.classList.remove('hidden');
+      }
+    }
+
+    tabEditorBtn.addEventListener('click', () => switchTab('editor'));
+    tabPreviewBtn.addEventListener('click', () => switchTab('preview'));
 
     // Inicialização ao carregar o documento
     initSessionCheck();

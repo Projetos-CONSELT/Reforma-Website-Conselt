@@ -317,8 +317,73 @@ function BlogPage() {
               )}
 
               {/* Corpo Completo do Texto */}
-              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-[#162638] whitespace-pre-line font-opensans">
-                {selectedArticle.fullText || selectedArticle.content || selectedArticle.excerpt}
+              <div className="space-y-4 text-sm sm:text-base leading-relaxed text-[#162638] font-opensans">
+                {(selectedArticle.fullText || selectedArticle.content || selectedArticle.excerpt || "")
+                  .split(/\n{2,}/)
+                  .map((block: string, idx: number) => {
+                    const trimmed = block.trim();
+                    if (!trimmed) return null;
+
+                    // Título H1
+                    if (trimmed.startsWith("# ")) {
+                      return (
+                        <h2 key={idx} className="text-xl sm:text-2xl font-extrabold text-[#093565] mt-6 mb-2 font-montserrat">
+                          {trimmed.replace(/^# /, "")}
+                        </h2>
+                      );
+                    }
+
+                    // Título H2
+                    if (trimmed.startsWith("## ")) {
+                      return (
+                        <h3 key={idx} className="text-lg sm:text-xl font-bold text-[#093565] mt-6 mb-2 font-montserrat">
+                          {trimmed.replace(/^## /, "")}
+                        </h3>
+                      );
+                    }
+
+                    // Título H3
+                    if (trimmed.startsWith("### ")) {
+                      return (
+                        <h4 key={idx} className="text-base sm:text-lg font-bold text-[#093565] mt-4 mb-1 font-montserrat">
+                          {trimmed.replace(/^### /, "")}
+                        </h4>
+                      );
+                    }
+
+                    // Citação
+                    if (trimmed.startsWith("> ")) {
+                      return (
+                        <blockquote key={idx} className="border-l-4 border-[#2270A1] bg-[#F4F9FC] p-4 my-3 rounded-r-xl text-[#093565] italic font-medium">
+                          {trimmed.replace(/^> /, "")}
+                        </blockquote>
+                      );
+                    }
+
+                    // Divisor
+                    if (trimmed === "---") {
+                      return <hr key={idx} className="my-6 border-slate-200" />;
+                    }
+
+                    // Lista
+                    if (trimmed.startsWith("- ") || trimmed.startsWith("* ") || trimmed.startsWith("• ")) {
+                      const items = trimmed.split("\n").filter(Boolean);
+                      return (
+                        <ul key={idx} className="list-disc pl-5 space-y-1.5 text-[#162638]">
+                          {items.map((it, i) => (
+                            <li key={i}>{it.replace(/^[-*•]\s+/, "")}</li>
+                          ))}
+                        </ul>
+                      );
+                    }
+
+                    // Parágrafo regular (suporta quebras de linha simples internas e **negrito**)
+                    return (
+                      <p key={idx} className="text-[#162638] leading-relaxed whitespace-pre-line">
+                        {trimmed}
+                      </p>
+                    );
+                  })}
               </div>
 
               <div className="pt-6 border-t border-slate-200 text-right">
