@@ -6,4 +6,3 @@ const supabaseAnonKey = (typeof import.meta !== 'undefined' && import.meta.env?.
   || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wdnZibmh4eHFtYXBramd1anJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3MTMzMjQsImV4cCI6MjEwNTI4OTMyNH0.aKEMPjWTBXfCdgvh7kL8rns_DNVt4KYCAFVuBFas5HA';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
-
