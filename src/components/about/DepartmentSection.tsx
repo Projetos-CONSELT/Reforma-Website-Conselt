@@ -12,7 +12,7 @@ interface DepartmentSectionProps {
  */
 const DepartmentSection = React.memo(({ department }: DepartmentSectionProps) => {
   return (
-    <article className="mb-16 lg:mb-20" aria-labelledby={`dept-${department.id}`}>
+    <article aria-labelledby={`dept-${department.id}`}>
       {/* Header da Diretoria */}
       <div className="mb-10 border-b border-[#0A4591]/20 pb-6 text-center">
         <h3

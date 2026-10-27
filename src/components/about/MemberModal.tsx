@@ -47,8 +47,21 @@ const MemberModal: React.FC<MemberModalProps> = ({ isOpen, member, onClose }) =>
         {/* Conteúdo */}
         <div className="p-6">
           <div className="mb-6 flex flex-col items-center text-center">
-            <div className="mb-4 h-40 w-40 overflow-hidden rounded-full border-2 border-blue-600">
-              <img src={member.image} alt={`Foto de ${member.name}`} className="h-full w-full object-cover" />
+            <div className="mb-4 h-40 w-40 overflow-hidden rounded-full border-2 border-blue-600 bg-slate-100">
+              <picture>
+                <source
+                  srcSet={member.image.replace(/\.(jpg|jpeg|png)$/i, ".webp")}
+                  type="image/webp"
+                />
+                <img
+                  src={member.image}
+                  alt={`Foto de ${member.name}`}
+                  width={160}
+                  height={160}
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+              </picture>
             </div>
             <p className="text-sm text-slate-500">{member.department}</p>
           </div>

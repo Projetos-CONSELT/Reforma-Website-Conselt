@@ -21,6 +21,14 @@ export const Route = createFileRoute("/sobre")({
       },
       { property: "og:type", content: "website" },
     ],
+    links: [
+      {
+        rel: "preload",
+        as: "image",
+        href: "/images/equipe/EQUIPE_CONSELT_2026.webp",
+        type: "image/webp",
+      },
+    ],
   }),
   component: SobrePage,
 });
@@ -32,10 +40,10 @@ export const Route = createFileRoute("/sobre")({
  */
 function SobrePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-white text-foreground">
+    <div className="min-h-screen flex flex-col bg-white text-foreground overflow-x-hidden w-full">
       <Header />
 
-      <main className="flex-1 pt-32 pb-20 lg:pt-40 lg:pb-32 px-6 lg:px-10 max-w-7xl mx-auto w-full">
+      <main className="flex-1 w-full pt-24 lg:pt-28">
         {/* Hero Section - Apresentação Institucional */}
         <HeroSection />
 

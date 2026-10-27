@@ -8,30 +8,46 @@ import { essenceItems } from "@/lib/teamData";
  */
 const EssenceSection: React.FC = () => {
   return (
-    <section className="relative left-1/2 w-screen -ml-[50vw] mb-20 bg-[#E9EDF1] lg:mb-32" aria-labelledby="essence-title">
+    <section className="relative w-full bg-[#E9EDF1] pb-16 lg:pb-24 overflow-hidden" aria-labelledby="essence-title">
+      {/* Textura de fundo que cobre toda a seção */}
       <div
         className="absolute inset-0 z-0"
         aria-hidden="true"
         style={{
-          backgroundImage: "url('/textura/textura cinza.png')",
+          backgroundImage: "url('/textura/textura cinza.webp')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'repeat',
-          opacity: 0.7,
+          opacity: 0.6,
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
+      {/* Divisor de forma que sobrepõe o fundo texturizado da Seção 2 com o azul da Seção 1 */}
+      <div className="w-full overflow-hidden leading-none relative z-10 pointer-events-none -mt-px mb-8 sm:mb-12">
+        <svg
+          className="relative block w-full h-8 sm:h-12 lg:h-16 text-[#0a1526]"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+          fill="currentColor"
+        >
+          <path d="M0,0 L1200,0 L1200,80 L0,0 Z" />
+        </svg>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
         {/* Header */}
         <div className="text-center mb-12 lg:mb-16">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#073A7D]/20 bg-[#073A7D]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#073A7D] mb-4">
+            Pilares
+          </span>
           <h2
             id="essence-title"
-            className="mb-4 text-3xl font-bold text-[#073A7D]"
+            className="mb-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#073A7D] tracking-tight"
           >
             Nossa Essência
           </h2>
-          <p className="mx-auto max-w-2xl text-xl text-[#162436]">
-            Missão, Visão e Valores que guiam cada projeto
+          <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-700">
+            Missão, Visão e Valores que guiam cada projeto e formam o DNA da CONSELT.
           </p>
         </div>
 

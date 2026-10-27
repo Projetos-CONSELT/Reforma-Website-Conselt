@@ -31,6 +31,10 @@ const MemberCard = React.memo(({ member }: MemberCardProps) => {
     .join("")
     .toUpperCase();
 
+  const webpUrl = member.image
+    ? member.image.replace(/\.(jpg|jpeg|png)$/i, ".webp")
+    : null;
+
   return (
     <>
       <article
@@ -43,15 +47,27 @@ const MemberCard = React.memo(({ member }: MemberCardProps) => {
       >
         {/* Avatar */}
         <div className="mb-4 flex justify-center">
-          <div className="relative mx-auto h-36 w-36 overflow-hidden rounded-full md:h-36 md:w-36">
-            {member.image ? (
-              <img
-                src={member.image}
-                alt={`Foto de ${member.name} - ${member.role}`}
-                className="w-36 h-36 rounded-full border-4 border-[#073A7D] object-cover shadow-sm"
-              />
-            ) : (
-              <span className="text-white font-bold text-lg">{initials}</span>
+          <div className="relative mx-auto h-36 w-36 overflow-hidden rounded-full border-4 border-[#073A7D] bg-slate-100 flex items-center justify-center shadow-sm">
+            {/* Fallback com iniciais que fica no fundo */}
+            <span className="text-slate-400 font-bold text-lg select-none">
+              {initials}
+            </span>
+            {member.image && (
+              <picture>
+                {webpUrl && <source srcSet={webpUrl} type="image/webp" />}
+                <img
+                  src={member.image}
+                  alt={`Foto de ${member.name} - ${member.role}`}
+                  width={144}
+                  height={144}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+              </picture>
             )}
           </div>
         </div>
