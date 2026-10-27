@@ -14,6 +14,7 @@ import { Logo } from "@/components/Logo";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AnalyticsTracker } from "../lib/analytics";
+import { PageLoader } from "@/components/PageLoader";
 
 function NotFoundComponent() {
   return (
@@ -215,6 +216,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <PageLoader />
       <AnalyticsTracker />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
