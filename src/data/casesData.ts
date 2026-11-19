@@ -40,6 +40,7 @@ export const CASES_DATA: CaseItem[] = [
     image: "/cases/constru.png",
     isPlaceholder: false,
     badgeTag: "Engenharia & Arquitetura",
+    websiteUrl: "https://construej.com.br",
     cardData: {
       desafio: "Conectar o aprendizado técnico de engenharia civil e arquitetura às demandas de mercado da região.",
       solucao: "Website institucional moderno com portfólio interativo de projetos, calculadora preliminar de escopo e formulário inteligente de orçamentos.",
@@ -141,6 +142,7 @@ export const CASES_DATA: CaseItem[] = [
     image: "/cases/consenso.png",
     isPlaceholder: false,
     badgeTag: "Consultoria Jurídica",
+    websiteUrl: "https://consensojr.com",
     cardData: {
       desafio: "Tornar a consultoria jurídica acessível e aproximar o Direito Preventivo de micro e pequenos empreendedores.",
       solucao: "Portal corporativo focado em Direito Preventivo, com catálogo explicativo de serviços (Contratos, Marcas e Estatutos) e agendamento de diagnóstico online.",
@@ -241,7 +243,7 @@ export const CASES_DATA: CaseItem[] = [
     challengeType: "Presença Digital",
     image: "/cases/sustenta.png",
     isPlaceholder: false,
-    badgeTag: "Engenharia Ambiental",
+    websiteUrl: "https://sustentaconsultoria.com",
     cardData: {
       desafio: "Transformar uma atuação ampla e técnica em uma presença digital clara, confiável e orientada a conversão.",
       solucao: "Plataforma institucional moderna com divisão estratégica de núcleos ambientais (Licenciamento, PGRS e Efluentes) e captação de clientes B2B.",
@@ -343,6 +345,7 @@ export const CASES_DATA: CaseItem[] = [
     image: "/cases/bioflora.png",
     isPlaceholder: false,
     badgeTag: "Agroindústria",
+    websiteUrl: "https://bioflorasubstratos.com.br",
     cardData: {
       desafio: "Comunicar a autoridade de 12+ anos em substratos agrícolas para o agronegócio de todo o Brasil.",
       solucao: "Portal corporativo com catálogo técnico interativo de produtos, fichas de rendimento por cultura agrícola e canal direto para compras no atacado.",
@@ -444,6 +447,7 @@ export const CASES_DATA: CaseItem[] = [
     image: "/cases/lapeg.png",
     isPlaceholder: false,
     badgeTag: "Petróleo & Gás",
+    websiteUrl: "https://lapeg.com",
     cardData: {
       desafio: "Comunicar infraestrutura científica e pesquisa avançada de petróleo e gás para o setor produtivo e agências reguladoras.",
       solucao: "Plataforma científica e comercial com tour pelos laboratórios, catálogo de ensaios com normas ANP/ASTM e solicitação direta de análises.",

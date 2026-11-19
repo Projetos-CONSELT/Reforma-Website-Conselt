@@ -53,6 +53,7 @@ export interface CaseItem {
   image?: string;
   badgeTag?: string;
   isPlaceholder?: boolean;
+  websiteUrl?: string;
   cardData: {
     desafio: string;
     solucao: string;
