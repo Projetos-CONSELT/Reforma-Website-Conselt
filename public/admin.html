@@ -40,7 +40,7 @@
       </div>
 
       <!-- Formulário de Login -->
-      <form id="login-form" class="space-y-4">
+      <form id="login-form" onsubmit="return false;" class="space-y-4">
         <div class="space-y-1.5">
           <label class="text-xs font-bold text-slate-700 uppercase tracking-wider block">E-mail</label>
           <input 
@@ -1097,12 +1097,6 @@
     let currentAnalyticsPeriod = '30d';
     let currentAnalyticsDevice = 'all';
     let currentAnalyticsSearch = '';
-
-    function formatDuration(seconds) {
-      const total = Math.max(0, Number(seconds) || 0);
-      if (total < 60) return `${total}s`;
-      return `${Math.floor(total / 60)}min ${total % 60}s`;
-    }
 
     function getFriendlyPageName(path) {
       if (!path || path === '/' || path.startsWith('/?')) return 'Página Inicial (Home)';
