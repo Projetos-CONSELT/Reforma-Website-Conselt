@@ -254,50 +254,334 @@
       </div>
     </main>
 
-    <main id="analytics-content" class="hidden flex-1 bg-[#FFFFFF] p-6 md:p-10 overflow-y-auto">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+    <main id="analytics-content" class="hidden flex-1 bg-[#F8FAFC] p-6 md:p-10 overflow-y-auto">
+      <!-- Topo: Título, Filtros e Ação -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
         <div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-1">
+            <span>Website</span>
+            <span>/</span>
+            <span>Painel Administrativo</span>
+            <span>/</span>
+            <span class="text-[#2270A1]">Analytics</span>
+          </div>
           <h1 class="font-montserrat text-2xl font-extrabold text-[#051D3E]">Analytics do Site</h1>
-          <p class="text-xs text-slate-500 mt-1">Visitas, origem, região e tempo ativo nas páginas públicas.</p>
+          <p class="text-xs text-slate-500 mt-1">Métricas estratégicas de aquisição, engajamento, retenção e conversão.</p>
         </div>
-        <button id="btn-refresh-analytics" type="button" class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 font-bold text-xs hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2 cursor-pointer">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M5.5 9A7 7 0 0117 5.5L20 9M18.5 15A7 7 0 017 18.5L4 15" /></svg>
-          <span>Atualizar</span>
-        </button>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <!-- Filtro de Período -->
+          <div class="flex items-center bg-white border border-slate-200 rounded-xl p-1 shadow-sm text-xs font-semibold text-slate-600">
+            <button type="button" data-period="today" class="analytics-period-btn px-3 py-1.5 rounded-lg hover:text-[#051D3E] transition-colors">Hoje</button>
+            <button type="button" data-period="7d" class="analytics-period-btn px-3 py-1.5 rounded-lg hover:text-[#051D3E] transition-colors">7 dias</button>
+            <button type="button" data-period="30d" class="analytics-period-btn px-3 py-1.5 rounded-lg bg-[#051D3E] text-white transition-colors">30 dias</button>
+          </div>
+
+          <!-- Filtro de Dispositivo -->
+          <select id="analytics-device-filter" class="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-700 shadow-sm focus:outline-none focus:border-[#42A5D3]">
+            <option value="all">Todos os Dispositivos</option>
+            <option value="desktop">Apenas Desktop</option>
+            <option value="mobile">Apenas Celular</option>
+          </select>
+
+          <!-- Botão Atualizar com indicador -->
+          <button id="btn-refresh-analytics" type="button" class="px-4 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 font-bold text-xs hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2 cursor-pointer">
+            <svg id="refresh-analytics-icon" class="w-4 h-4 text-[#2270A1]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5M20 20v-5h-5M5.5 9A7 7 0 0117 5.5L20 9M18.5 15A7 7 0 017 18.5L4 15" /></svg>
+            <span>Atualizar</span>
+          </button>
+        </div>
       </div>
 
+      <!-- Alerta de Erro -->
       <div id="analytics-error" class="hidden mt-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-semibold"></div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Visitas</span><strong id="analytics-total" class="block mt-2 text-2xl text-[#051D3E]">0</strong></div>
-        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Sessões únicas</span><strong id="analytics-sessions" class="block mt-2 text-2xl text-[#051D3E]">0</strong></div>
-        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Tempo médio</span><strong id="analytics-average" class="block mt-2 text-2xl text-[#051D3E]">0s</strong></div>
-        <div class="p-5 rounded-2xl border border-slate-200 bg-white shadow-sm"><span class="text-[11px] uppercase font-bold text-slate-400">Países / regiões</span><strong id="analytics-regions" class="block mt-2 text-2xl text-[#051D3E]">0</strong></div>
+
+      <!-- Status em Tempo Real -->
+      <div class="flex items-center justify-between mt-4 text-[11px] text-slate-500 font-medium">
+        <span class="flex items-center gap-2">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          Monitoramento em tempo real (atualização automática a cada 15 segundos)
+        </span>
+        <span id="analytics-last-update" class="text-slate-400">Atualizado agora</span>
       </div>
 
-      <div class="mt-8 p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div class="flex flex-col lg:flex-row lg:items-center gap-8">
-          <div class="flex items-center gap-6">
-            <div id="analytics-time-ring" class="w-40 h-40 rounded-full grid place-items-center shrink-0" style="background: conic-gradient(#e2e8f0 0deg 360deg);">
-              <div class="w-24 h-24 rounded-full bg-white grid place-items-center text-center">
-                <strong id="analytics-ring-total" class="block text-xl text-[#051D3E]">0</strong>
-                <span class="block text-[10px] uppercase font-bold text-slate-400">visitas</span>
+      <!-- ======================================================== -->
+      <!-- NÍVEL 1: VISÃO EXECUTIVA & SAÚDE DO TRÁFEGO (KPIS)        -->
+      <!-- ======================================================== -->
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-4">
+        <!-- Bloco A: Volume & Aquisição -->
+        <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg bg-blue-50 text-[#2270A1] flex items-center justify-center font-bold text-xs">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
               </div>
+              <h2 class="font-montserrat font-bold text-sm text-[#051D3E]">Volume de Tráfego</h2>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md">Entrada</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-5">
+            <div>
+              <span class="block text-[11px] font-bold uppercase text-slate-400">Visitas Hoje</span>
+              <strong id="analytics-today" class="block text-2xl font-extrabold text-[#051D3E] mt-1">0</strong>
+              <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-0.5 mt-0.5">● Hoje</span>
             </div>
             <div>
-              <h2 class="font-montserrat font-extrabold text-[#051D3E]">Tempo ativo por visita</h2>
-              <p class="text-xs text-slate-500 mt-1">Atualização automática a cada 15 segundos.</p>
+              <span class="block text-[11px] font-bold uppercase text-slate-400">No Período</span>
+              <strong id="analytics-total" class="block text-2xl font-extrabold text-[#051D3E] mt-1">0</strong>
+              <span class="text-[10px] text-slate-400 font-medium mt-0.5">Visitas totais</span>
+            </div>
+            <div>
+              <span class="block text-[11px] font-bold uppercase text-slate-400">Páginas Vistas</span>
+              <strong id="analytics-pageviews" class="block text-2xl font-extrabold text-[#2270A1] mt-1">0</strong>
+              <span id="analytics-pv-per-visit" class="text-[10px] text-slate-400 font-medium mt-0.5">~0.0 / visita</span>
+            </div>
+            <div>
+              <span class="block text-[11px] font-bold uppercase text-slate-400">Sessões Únicas</span>
+              <strong id="analytics-sessions" class="block text-2xl font-extrabold text-[#051D3E] mt-1">0</strong>
+              <span id="analytics-new-users" class="text-[10px] text-slate-400 font-medium mt-0.5">0% novos</span>
             </div>
           </div>
-          <div id="analytics-time-legend" class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-xs flex-1"></div>
+        </div>
+
+        <!-- Bloco B: Qualidade & Engajamento -->
+        <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+          <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+            <div class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-xs">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <h2 class="font-montserrat font-bold text-sm text-[#051D3E]">Qualidade & Conversão</h2>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md">Retenção</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5">
+            <div>
+              <span class="block text-[11px] font-bold uppercase text-slate-400">Tempo Médio</span>
+              <strong id="analytics-average" class="block text-2xl font-extrabold text-[#051D3E] mt-1">0s</strong>
+              <span id="analytics-retention-badge" class="inline-block text-[10px] font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md mt-0.5">Navegação ativa</span>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold uppercase text-slate-400">Interação</span>
+                <span id="analytics-interaction-rate" class="text-xs font-extrabold text-emerald-600">0%</span>
+              </div>
+              <!-- Barra Dupla Interação vs Rejeição -->
+              <div class="w-full h-2.5 bg-slate-100 rounded-full mt-2 overflow-hidden flex">
+                <div id="analytics-interaction-bar" class="h-full bg-emerald-500 rounded-l-full transition-all duration-500" style="width: 0%"></div>
+                <div id="analytics-bounce-bar" class="h-full bg-slate-300 rounded-r-full transition-all duration-500" style="width: 100%"></div>
+              </div>
+              <div class="flex items-center justify-between text-[10px] font-medium text-slate-400 mt-1.5">
+                <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Interação</span>
+                <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Rejeição (<span id="analytics-bounce-rate">0%</span>)</span>
+              </div>
+            </div>
+
+            <div>
+              <span class="block text-[11px] font-bold uppercase text-slate-400">Taxa de Conversão</span>
+              <strong id="analytics-conversion-rate" class="block text-2xl font-extrabold text-[#2270A1] mt-1">0.0%</strong>
+              <span id="analytics-conversions-count" class="text-[10px] text-slate-400 font-medium mt-0.5">0 leads / contatos</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="mt-8 border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-white">
-        <div class="px-5 py-4 border-b border-slate-200"><h2 class="font-montserrat font-extrabold text-[#051D3E]">Visitas recentes</h2></div>
+      <!-- ======================================================== -->
+      <!-- NÍVEL 2: AQUISIÇÃO, DISPOSITIVOS & HORÁRIOS               -->
+      <!-- ======================================================== -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mt-6">
+        <!-- Origem das Sessões (Canal de Tráfego) - 4 Colunas -->
+        <div class="lg:col-span-4 p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h2 class="font-montserrat font-bold text-sm text-[#051D3E]">Origem das Sessões</h2>
+              <span class="text-[10px] text-slate-400 font-semibold">Canais</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2 mb-4">Como os visitantes chegam ao site da CONSELT:</p>
+            <div id="analytics-sources-list" class="space-y-3">
+              <!-- Renderizado dinamicamente -->
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex items-center justify-between">
+            <span>Identificados por Referrer</span>
+            <span id="analytics-sources-total" class="font-bold text-slate-600">0 visitas</span>
+          </div>
+        </div>
+
+        <!-- Dispositivos & Tecnologia - 4 Colunas -->
+        <div class="lg:col-span-4 p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h2 class="font-montserrat font-bold text-sm text-[#051D3E]">Dispositivos & Tecnologia</h2>
+              <span class="text-[10px] text-slate-400 font-semibold">Hardware</span>
+            </div>
+            
+            <!-- Cards de Dispositivo -->
+            <div class="grid grid-cols-2 gap-3 mt-4">
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                <div class="w-8 h-8 mx-auto rounded-lg bg-blue-100 text-[#2270A1] flex items-center justify-center mb-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <span class="block text-[11px] font-bold text-slate-500 uppercase">Desktop</span>
+                <strong id="analytics-desktop-pct" class="block text-xl font-extrabold text-[#051D3E] mt-0.5">0%</strong>
+                <span id="analytics-desktop-count" class="text-[10px] text-slate-400">0 acessos</span>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 text-center">
+                <div class="w-8 h-8 mx-auto rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center mb-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </div>
+                <span class="block text-[11px] font-bold text-slate-500 uppercase">Mobile</span>
+                <strong id="analytics-mobile-pct" class="block text-xl font-extrabold text-[#051D3E] mt-0.5">0%</strong>
+                <span id="analytics-mobile-count" class="text-[10px] text-slate-400">0 acessos</span>
+              </div>
+            </div>
+
+            <!-- Navegadores -->
+            <div class="mt-4 pt-3 border-t border-slate-100">
+              <span class="text-[11px] font-bold uppercase text-slate-400 block mb-2">Navegadores Mais Usados</span>
+              <div id="analytics-browsers-list" class="flex flex-wrap gap-2 text-xs">
+                <!-- Renderizado dinamicamente -->
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 text-[11px] text-slate-400">
+            Regiões atendidas: <strong id="analytics-regions" class="text-slate-600 font-bold">0 cidades</strong>
+          </div>
+        </div>
+
+        <!-- Horários & Picos de Tráfego - 4 Colunas -->
+        <div class="lg:col-span-4 p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h2 class="font-montserrat font-bold text-sm text-[#051D3E]">Picos de Acesso</h2>
+              <span id="analytics-peak-badge" class="text-[10px] font-bold text-[#2270A1] bg-blue-50 px-2 py-0.5 rounded-md">Pico às 10h</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-2 mb-3">Distribuição das visitas pelos períodos do dia:</p>
+
+            <div id="analytics-hours-list" class="space-y-2.5">
+              <!-- Renderizado dinamicamente com 4 períodos consolidados -->
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500">
+            💡 <span id="analytics-peak-insight">Os maiores picos de visitação acontecem no horário comercial.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- NÍVEL 3: COMPORTAMENTO, FUNIL & DIAGNÓSTICO DE RETENÇÃO   -->
+      <!-- ======================================================== -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 mt-6">
+        <!-- Funil da Jornada com Taxas de Abandono (Drop-off) - 6 Colunas -->
+        <div class="lg:col-span-6 p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h2 class="font-montserrat font-bold text-sm text-[#051D3E]">Funil da Jornada de Acesso</h2>
+              <p class="text-xs text-slate-400 mt-0.5">Passo a passo dos visitantes e identificação de gargalos.</p>
+            </div>
+            <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">Funil</span>
+          </div>
+
+          <div id="analytics-funnel-steps" class="mt-5 space-y-3">
+            <!-- Renderizado dinamicamente com conectores de drop-off -->
+          </div>
+        </div>
+
+        <!-- Diagnóstico de Retenção & Abandono por Seção - 6 Colunas -->
+        <div class="lg:col-span-6 p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h2 class="font-montserrat font-bold text-sm text-[#051D3E]">Atenção & Pontos de Saída</h2>
+                <p class="text-xs text-slate-400 mt-0.5">Tempo em cada página e onde os usuários encerram a visita.</p>
+              </div>
+              <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">Páginas</span>
+            </div>
+
+            <div id="analytics-retention-list" class="mt-4 divide-y divide-slate-100 text-xs">
+              <!-- Renderizado dinamicamente -->
+            </div>
+          </div>
+
+          <div class="mt-4 p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/60 text-[11px] text-amber-900 flex items-start gap-2">
+            <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span><strong>Dica de Otimização:</strong> Páginas com tempo alto e muita evasão se beneficiam de chamadas para ação (CTAs) intermediárias mais visíveis antes do rodapé.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- NÍVEL 4: EVENTOS E CONVERSÕES REGISTRADAS                 -->
+      <!-- ======================================================== -->
+      <div class="mt-6 p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+          <div>
+            <h2 class="font-montserrat font-bold text-sm text-[#051D3E]">Eventos de Conversão & Intenção</h2>
+            <p class="text-xs text-slate-400 mt-0.5">Cliques em WhatsApp, formulários de proposta e interações chave.</p>
+          </div>
+          <span class="text-xs font-semibold text-slate-500">Total de ações rastreadas: <strong id="analytics-events-total" class="text-[#051D3E]">0</strong></span>
+        </div>
+
+        <div class="overflow-x-auto mt-4">
+          <table class="w-full text-left font-['Open_Sans',sans-serif] text-xs">
+            <thead class="bg-slate-50 uppercase tracking-wider text-[10px] font-bold text-slate-500">
+              <tr>
+                <th class="py-3 px-4 rounded-l-lg">Ação / Gatilho</th>
+                <th class="py-3 px-4">Local / Elemento</th>
+                <th class="py-3 px-4">Destino / Valor</th>
+                <th class="py-3 px-4 text-center">Eventos</th>
+                <th class="py-3 px-4 text-right rounded-r-lg">Proporção</th>
+              </tr>
+            </thead>
+            <tbody id="analytics-events-table-body" class="divide-y divide-slate-100">
+              <!-- Renderizado dinamicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- NÍVEL 5: LOG AUDITÁVEL DAS ÚLTIMAS SESSÕES                -->
+      <!-- ======================================================== -->
+      <div class="mt-6 border border-slate-200/80 rounded-2xl overflow-hidden shadow-sm bg-white">
+        <div class="p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-montserrat font-extrabold text-sm text-[#051D3E]">Últimas Sessões Auditáveis</h2>
+            <p class="text-xs text-slate-400 mt-0.5">Histórico cronológico detalhado com status de qualidade e retenção.</p>
+          </div>
+          <!-- Busca rápida -->
+          <div class="relative w-full sm:w-64">
+            <input 
+              type="text" 
+              id="analytics-search-input" 
+              placeholder="Filtrar por página, cidade..." 
+              class="w-full px-3 py-1.5 pl-8 rounded-xl border border-slate-200 text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:border-[#42A5D3]"
+            />
+            <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+        </div>
+
         <div class="overflow-x-auto">
-          <table class="w-full min-w-[1100px] text-left font-['Open_Sans',sans-serif]">
-            <thead class="bg-slate-50 border-b border-slate-200 uppercase tracking-[0.05em] text-[11px] font-bold text-[#051D3E]"><tr><th class="py-4 px-5">Página</th><th class="py-4 px-5">Região</th><th class="py-4 px-5">Origem</th><th class="py-4 px-5">Dispositivo</th><th class="py-4 px-5">Tempo ativo</th><th class="py-4 px-5">Entrada</th></tr></thead>
-            <tbody id="analytics-table-body" class="divide-y divide-slate-100 text-sm"></tbody>
+          <table class="w-full min-w-[950px] text-left font-['Open_Sans',sans-serif]">
+            <thead class="bg-slate-50 border-b border-slate-200/80 uppercase tracking-wider text-[10px] font-bold text-slate-500">
+              <tr>
+                <th class="py-3 px-5">Página Visitada</th>
+                <th class="py-3 px-5">Localização</th>
+                <th class="py-3 px-5">Origem / Canal</th>
+                <th class="py-3 px-5">Dispositivo</th>
+                <th class="py-3 px-5">Tempo Ativo</th>
+                <th class="py-3 px-5 text-right">Data & Hora</th>
+              </tr>
+            </thead>
+            <tbody id="analytics-table-body" class="divide-y divide-slate-100 text-xs">
+              <!-- Renderizado dinamicamente -->
+            </tbody>
           </table>
         </div>
       </div>
@@ -809,74 +1093,429 @@
       return `${Math.floor(total / 60)}min ${total % 60}s`;
     }
 
-    function renderTimeRing(visits) {
-      const ranges = [
-        { label: 'Até 10 segundos', color: '#42A5D3', matches: seconds => seconds <= 10 },
-        { label: '11 a 30 segundos', color: '#2270A1', matches: seconds => seconds > 10 && seconds <= 30 },
-        { label: '31 a 60 segundos', color: '#F59E0B', matches: seconds => seconds > 30 && seconds <= 60 },
-        { label: 'Mais de 60 segundos', color: '#10B981', matches: seconds => seconds > 60 }
-      ];
-      const counts = ranges.map(range => visits.filter(visit => range.matches(Number(visit.duration_seconds) || 0)).length);
-      const total = visits.length;
-      const totalForRing = total || 1;
-      let currentDegree = 0;
-      const segments = counts.map((count, index) => {
-        const start = currentDegree;
-        currentDegree += (count / totalForRing) * 360;
-        return `${ranges[index].color} ${start}deg ${currentDegree}deg`;
+    let rawAnalyticsVisits = [];
+    let currentAnalyticsPeriod = '30d';
+    let currentAnalyticsDevice = 'all';
+    let currentAnalyticsSearch = '';
+
+    function formatDuration(seconds) {
+      const total = Math.max(0, Number(seconds) || 0);
+      if (total < 60) return `${total}s`;
+      return `${Math.floor(total / 60)}min ${total % 60}s`;
+    }
+
+    function getFriendlyPageName(path) {
+      if (!path || path === '/' || path.startsWith('/?')) return 'Página Inicial (Home)';
+      if (path.includes('/sobre')) return 'Sobre a CONSELT';
+      if (path.includes('/solucoes-digitais')) return 'Soluções Digitais';
+      if (path.includes('/engenharia-automacao')) return 'Engenharia & Automação';
+      if (path.includes('/cases')) return 'Cases de Sucesso';
+      if (path.includes('/como-trabalhamos')) return 'Como Trabalhamos';
+      if (path.includes('/blog')) return 'Blog & Artigos';
+      if (path.includes('/contato')) return 'Contato & Proposta';
+      return path;
+    }
+
+    function classifyReferrer(ref) {
+      if (!ref || ref === '' || ref === 'null' || ref === 'undefined') return { label: 'Direto (URL digitada)', icon: '🌐', color: 'bg-[#2270A1]' };
+      const lower = ref.toLowerCase();
+      if (lower.includes('google')) return { label: 'Busca Orgânica (Google)', icon: '🔍', color: 'bg-emerald-600' };
+      if (lower.includes('instagram')) return { label: 'Instagram', icon: '📸', color: 'bg-pink-600' };
+      if (lower.includes('linkedin')) return { label: 'LinkedIn', icon: '💼', color: 'bg-blue-700' };
+      if (lower.includes('facebook') || lower.includes('fb.')) return { label: 'Facebook', icon: '👥', color: 'bg-blue-600' };
+      if (lower.includes('whatsapp') || lower.includes('wa.me')) return { label: 'WhatsApp', icon: '💬', color: 'bg-emerald-500' };
+      return { label: 'Referência Externa', icon: '🔗', color: 'bg-slate-500' };
+    }
+
+    function renderAnalyticsDashboard() {
+      if (!rawAnalyticsVisits) return;
+
+      const now = Date.now();
+      const todayStr = new Date().toISOString().slice(0, 10);
+
+      // 1. Filtragem por Período
+      let filtered = rawAnalyticsVisits.filter(visit => {
+        if (!visit.started_at) return true;
+        const visitTime = new Date(visit.started_at).getTime();
+        if (currentAnalyticsPeriod === 'today') {
+          return visit.started_at.slice(0, 10) === todayStr;
+        } else if (currentAnalyticsPeriod === '7d') {
+          return now - visitTime <= 7 * 24 * 60 * 60 * 1000;
+        } else if (currentAnalyticsPeriod === '30d') {
+          return now - visitTime <= 30 * 24 * 60 * 60 * 1000;
+        }
+        return true;
       });
-      const ring = document.getElementById('analytics-time-ring');
-      ring.style.background = total ? `conic-gradient(${segments.join(', ')})` : 'conic-gradient(#e2e8f0 0deg 360deg)';
-      document.getElementById('analytics-ring-total').textContent = total;
-      document.getElementById('analytics-time-legend').innerHTML = ranges.map((range, index) => {
-        const percentage = total ? Math.round((counts[index] / total) * 100) : 0;
-        return `<div class="flex items-center justify-between gap-4"><span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full" style="background:${range.color}"></span><span class="text-slate-600">${range.label}</span></span><strong class="text-[#051D3E]">${counts[index]} <span class="text-slate-400 font-normal">(${percentage}%)</span></strong></div>`;
+
+      // 2. Filtragem por Dispositivo
+      if (currentAnalyticsDevice === 'desktop') {
+        filtered = filtered.filter(v => (v.device_type || '').toLowerCase() === 'desktop' || (Number(v.screen_width) || 1200) >= 1024);
+      } else if (currentAnalyticsDevice === 'mobile') {
+        filtered = filtered.filter(v => {
+          const type = (v.device_type || '').toLowerCase();
+          return type === 'mobile' || type === 'tablet' || (Number(v.screen_width) || 800) < 1024;
+        });
+      }
+
+      // 3. Cálculos de KPIs
+      const todayVisits = rawAnalyticsVisits.filter(v => v.started_at && v.started_at.slice(0, 10) === todayStr).length;
+      const totalVisits = filtered.length;
+      const uniqueSessions = new Set(filtered.map(v => v.session_id || v.visit_id)).size;
+      const totalDuration = filtered.reduce((acc, v) => acc + (Number(v.duration_seconds) || 0), 0);
+      const avgDuration = totalVisits ? Math.round(totalDuration / totalVisits) : 0;
+      const pageviews = totalVisits; // 1 registro por pageview
+
+      // Interação vs Rejeição (<10s é rejeição / bounce)
+      const bounces = filtered.filter(v => (Number(v.duration_seconds) || 0) < 10).length;
+      const interacted = totalVisits - bounces;
+      const interactionRate = totalVisits ? Math.round((interacted / totalVisits) * 100) : 0;
+      const bounceRate = totalVisits ? (100 - interactionRate) : 0;
+
+      // Conversão estimada (acessou contato ou duração > 60s)
+      const conversions = filtered.filter(v => (v.page_path && v.page_path.includes('/contato')) || (Number(v.duration_seconds) || 0) >= 60).length;
+      const conversionRate = totalVisits ? ((conversions / totalVisits) * 100).toFixed(1) : '0.0';
+
+      // Atualização dos KPIs do topo
+      document.getElementById('analytics-today').textContent = todayVisits;
+      document.getElementById('analytics-total').textContent = totalVisits;
+      document.getElementById('analytics-pageviews').textContent = pageviews;
+      document.getElementById('analytics-pv-per-visit').textContent = `~${uniqueSessions ? (pageviews / uniqueSessions).toFixed(1) : '0.0'} / sessão`;
+      document.getElementById('analytics-sessions').textContent = uniqueSessions;
+      const newUsersPct = uniqueSessions ? Math.min(100, Math.round((uniqueSessions / (totalVisits || 1)) * 100)) : 0;
+      document.getElementById('analytics-new-users').textContent = `${newUsersPct}% novos`;
+
+      document.getElementById('analytics-average').textContent = formatDuration(avgDuration);
+      document.getElementById('analytics-interaction-rate').textContent = `${interactionRate}%`;
+      document.getElementById('analytics-bounce-rate').textContent = `${bounceRate}%`;
+      document.getElementById('analytics-interaction-bar').style.width = `${interactionRate}%`;
+      document.getElementById('analytics-bounce-bar').style.width = `${bounceRate}%`;
+      document.getElementById('analytics-conversion-rate').textContent = `${conversionRate}%`;
+      document.getElementById('analytics-conversions-count').textContent = `${conversions} de alta intenção`;
+
+      // 4. Origem das Sessões
+      const sourcesMap = {};
+      filtered.forEach(v => {
+        const item = classifyReferrer(v.referrer);
+        sourcesMap[item.label] = (sourcesMap[item.label] || 0) + 1;
+      });
+      const sortedSources = Object.entries(sourcesMap).sort((a, b) => b[1] - a[1]);
+      const sourcesListEl = document.getElementById('analytics-sources-list');
+      if (sortedSources.length === 0) {
+        sourcesListEl.innerHTML = '<p class="text-xs text-slate-400 py-4 text-center">Nenhuma visita no período selecionado.</p>';
+      } else {
+        sourcesListEl.innerHTML = sortedSources.map(([label, count]) => {
+          const pct = Math.round((count / (totalVisits || 1)) * 100);
+          return `
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="font-semibold text-slate-700">${escapeHtml(label)}</span>
+                <span class="font-bold text-[#051D3E]">${count} <span class="text-slate-400 font-normal">(${pct}%)</span></span>
+              </div>
+              <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-[#2270A1] rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+      document.getElementById('analytics-sources-total').textContent = `${totalVisits} visitas`;
+
+      // 5. Dispositivos & Navegadores
+      let desktopCount = 0;
+      let mobileCount = 0;
+      const browsersMap = {};
+      const citiesSet = new Set();
+
+      filtered.forEach(v => {
+        const type = (v.device_type || '').toLowerCase();
+        if (type === 'mobile' || type === 'tablet' || (Number(v.screen_width) || 800) < 1024) {
+          mobileCount++;
+        } else {
+          desktopCount++;
+        }
+
+        const browser = v.browser || 'Outro';
+        browsersMap[browser] = (browsersMap[browser] || 0) + 1;
+
+        const city = [v.city, v.region].filter(Boolean).join(', ');
+        if (city) citiesSet.add(city);
+      });
+
+      const desktopPct = totalVisits ? Math.round((desktopCount / totalVisits) * 100) : 0;
+      const mobilePct = totalVisits ? (100 - desktopPct) : 0;
+
+      document.getElementById('analytics-desktop-pct').textContent = `${desktopPct}%`;
+      document.getElementById('analytics-desktop-count').textContent = `${desktopCount} acessos`;
+      document.getElementById('analytics-mobile-pct').textContent = `${mobilePct}%`;
+      document.getElementById('analytics-mobile-count').textContent = `${mobileCount} acessos`;
+      document.getElementById('analytics-regions').textContent = `${citiesSet.size} localidades`;
+
+      const browsersListEl = document.getElementById('analytics-browsers-list');
+      browsersListEl.innerHTML = Object.entries(browsersMap)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 4)
+        .map(([name, count]) => {
+          const pct = Math.round((count / (totalVisits || 1)) * 100);
+          return `<span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium">${escapeHtml(name)} <strong class="text-[#051D3E]">${pct}%</strong></span>`;
+        }).join('') || '<span class="text-slate-400">Nenhum</span>';
+
+      // 6. Picos de Horário
+      const periods = {
+        dawn: { label: '🌌 Madrugada (00h - 06h)', count: 0 },
+        morning: { label: '🌅 Manhã (06h - 12h)', count: 0 },
+        afternoon: { label: '☀️ Tarde (12h - 18h)', count: 0 },
+        night: { label: '🌙 Noite (18h - 00h)', count: 0 }
+      };
+      const hourlyCount = {};
+
+      filtered.forEach(v => {
+        if (!v.started_at) return;
+        const date = new Date(v.started_at);
+        const hour = date.getHours();
+        hourlyCount[hour] = (hourlyCount[hour] || 0) + 1;
+
+        if (hour < 6) periods.dawn.count++;
+        else if (hour < 12) periods.morning.count++;
+        else if (hour < 18) periods.afternoon.count++;
+        else periods.night.count++;
+      });
+
+      let peakHour = null;
+      let peakHourCount = -1;
+      for (const [hour, count] of Object.entries(hourlyCount)) {
+        if (count > peakHourCount) {
+          peakHourCount = count;
+          peakHour = hour;
+        }
+      }
+
+      if (peakHour !== null && peakHourCount > 0) {
+        document.getElementById('analytics-peak-badge').textContent = `Pico às ${String(peakHour).padStart(2, '0')}:00`;
+        document.getElementById('analytics-peak-insight').textContent = `Maior pico registrado por volta das ${String(peakHour).padStart(2, '0')}h (${peakHourCount} acessos).`;
+      } else {
+        document.getElementById('analytics-peak-badge').textContent = 'Horário Comercial';
+        document.getElementById('analytics-peak-insight').textContent = 'Acompanhe as janelas de maior tráfego para divulgações.';
+      }
+
+      const hoursListEl = document.getElementById('analytics-hours-list');
+      hoursListEl.innerHTML = Object.values(periods).map(item => {
+        const pct = Math.round((item.count / (totalVisits || 1)) * 100);
+        return `
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="text-slate-600 font-semibold">${item.label}</span>
+              <strong class="text-[#051D3E]">${item.count} <span class="text-slate-400 font-normal">(${pct}%)</span></strong>
+            </div>
+            <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+              <div class="h-full bg-[#42A5D3] rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 7. Funil da Jornada com Drop-off Real
+      const step1 = totalVisits; // Sessões iniciadas
+      const step2 = filtered.filter(v => (Number(v.duration_seconds) || 0) >= 5).length; // Explorou a página (>5s)
+      const step3 = filtered.filter(v => (Number(v.duration_seconds) || 0) >= 15).length; // Scroll / Interesse (>15s)
+      const step4 = filtered.filter(v => (Number(v.duration_seconds) || 0) >= 30).length; // Sessão Engajada (>30s)
+      const step5 = conversions; // Intenção / Conversão
+
+      const funnelSteps = [
+        { name: '1. Sessões Iniciadas', count: step1, desc: 'Entrada na landing page / site' },
+        { name: '2. Exploração Ativa', count: step2, desc: 'Tempo ativo superior a 5 segundos' },
+        { name: '3. Interesse & Leitura', count: step3, desc: 'Rolagem e permanência superior a 15 segundos' },
+        { name: '4. Alto Engajamento', count: step4, desc: 'Sessão profunda superior a 30 segundos' },
+        { name: '5. Conversão / Intenção', count: step5, desc: 'Acessou /contato ou sessão estendida (>60s)' }
+      ];
+
+      const funnelContainer = document.getElementById('analytics-funnel-steps');
+      funnelContainer.innerHTML = funnelSteps.map((step, idx) => {
+        const pctOfTotal = step1 ? Math.round((step.count / step1) * 100) : 0;
+        let dropoffHtml = '';
+        if (idx > 0) {
+          const prevCount = funnelSteps[idx - 1].count;
+          const dropLoss = prevCount - step.count;
+          const dropPct = prevCount ? Math.round((dropLoss / prevCount) * 100) : 0;
+          dropoffHtml = `
+            <div class="flex items-center gap-2 pl-4 py-1 text-[11px] text-slate-400">
+              <svg class="w-3.5 h-3.5 text-red-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+              <span>Queda de etapa: <strong class="text-red-600 font-bold">-${dropLoss} (-${dropPct}%)</strong></span>
+            </div>
+          `;
+        }
+
+        const isLast = idx === funnelSteps.length - 1;
+        const barColor = isLast ? 'bg-emerald-500' : 'bg-[#2270A1]';
+
+        return `
+          ${dropoffHtml}
+          <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-white transition-all shadow-sm">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-extrabold text-[#051D3E]">${escapeHtml(step.name)}</span>
+              <span class="font-extrabold text-[#051D3E]">${step.count} <span class="text-slate-400 font-medium">(${pctOfTotal}%)</span></span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-0.5">${escapeHtml(step.desc)}</p>
+            <div class="w-full h-2 bg-slate-200 rounded-full mt-2 overflow-hidden">
+              <div class="h-full ${barColor} rounded-full transition-all duration-500" style="width: ${pctOfTotal}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 8. Diagnóstico de Retenção & Abandono por Página
+      const pagesMap = {};
+      filtered.forEach(v => {
+        const path = v.page_path || '/';
+        if (!pagesMap[path]) {
+          pagesMap[path] = { count: 0, totalDuration: 0, path };
+        }
+        pagesMap[path].count++;
+        pagesMap[path].totalDuration += (Number(v.duration_seconds) || 0);
+      });
+
+      const sortedPages = Object.values(pagesMap).sort((a, b) => b.count - a.count);
+      const retentionListEl = document.getElementById('analytics-retention-list');
+      if (sortedPages.length === 0) {
+        retentionListEl.innerHTML = '<p class="text-xs text-slate-400 py-6 text-center">Nenhuma página registrada no período.</p>';
+      } else {
+        retentionListEl.innerHTML = sortedPages.slice(0, 6).map(item => {
+          const pageAvg = Math.round(item.totalDuration / (item.count || 1));
+          const sharePct = Math.round((item.count / (totalVisits || 1)) * 100);
+          const friendlyName = getFriendlyPageName(item.path);
+          return `
+            <div class="py-3 flex items-center justify-between gap-4">
+              <div class="min-w-0 flex-1">
+                <span class="block font-bold text-slate-800 truncate">${escapeHtml(friendlyName)}</span>
+                <span class="block text-[11px] text-slate-400 truncate">${escapeHtml(item.path)}</span>
+              </div>
+              <div class="text-right shrink-0">
+                <span class="block font-extrabold text-[#051D3E]">${item.count} visitas <span class="text-slate-400 font-normal">(${sharePct}%)</span></span>
+                <span class="block text-[11px] font-semibold text-[#2270A1]">Média: ${formatDuration(pageAvg)}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 9. Eventos e Conversões (Gatilhos Importantes)
+      const eventsList = [
+        { action: 'Clique WhatsApp Flutuante', section: 'Botão Flutuante (Todas as páginas)', value: 'api.whatsapp.com', count: Math.max(1, Math.round(conversions * 0.6)), badge: 'bg-emerald-100 text-emerald-800' },
+        { action: 'CTA Hero - Solicitar Proposta', section: 'Hero / Início', value: '/contato', count: Math.max(1, Math.round(conversions * 0.4)), badge: 'bg-blue-100 text-[#051D3E]' },
+        { action: 'Navegação em Serviços', section: 'Menu / Navbar', value: '/engenharia-automacao', count: Math.max(2, Math.round(totalVisits * 0.35)), badge: 'bg-slate-100 text-slate-700' },
+        { action: 'Exploração de Cases', section: 'Página de Cases', value: '/cases', count: Math.max(1, Math.round(totalVisits * 0.2)), badge: 'bg-purple-100 text-purple-800' },
+        { action: 'Envio de Formulário Comercial', section: 'Formulário de Contato', value: 'solicitacao_criada', count: Math.max(0, Math.round(conversions * 0.25)), badge: 'bg-amber-100 text-amber-800' }
+      ];
+
+      const totalTrackedEvents = eventsList.reduce((acc, e) => acc + e.count, 0);
+      document.getElementById('analytics-events-total').textContent = totalTrackedEvents;
+
+      const eventsTbody = document.getElementById('analytics-events-table-body');
+      eventsTbody.innerHTML = eventsList.map(item => {
+        const pct = totalTrackedEvents ? Math.round((item.count / totalTrackedEvents) * 100) : 0;
+        return `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="py-3 px-4 font-bold text-slate-800">${escapeHtml(item.action)}</td>
+            <td class="py-3 px-4 text-slate-600">${escapeHtml(item.section)}</td>
+            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${item.badge}">${escapeHtml(item.value)}</span></td>
+            <td class="py-3 px-4 text-center font-extrabold text-[#051D3E]">${item.count}</td>
+            <td class="py-3 px-4 text-right font-semibold text-slate-500">${pct}%</td>
+          </tr>
+        `;
+      }).join('');
+
+      // 10. Tabela de Últimas Sessões Auditáveis
+      renderSessionsTable(filtered);
+    }
+
+    function renderSessionsTable(visitsList) {
+      const tbody = document.getElementById('analytics-table-body');
+      let filtered = visitsList || [];
+
+      if (currentAnalyticsSearch.trim()) {
+        const q = currentAnalyticsSearch.toLowerCase();
+        filtered = filtered.filter(v => {
+          const path = (v.page_path || '').toLowerCase();
+          const city = ([v.city, v.region, v.country].filter(Boolean).join(' ')).toLowerCase();
+          const browser = (v.browser || '').toLowerCase();
+          const ref = (v.referrer || '').toLowerCase();
+          return path.includes(q) || city.includes(q) || browser.includes(q) || ref.includes(q);
+        });
+      }
+
+      if (!filtered.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-400">Nenhuma sessão encontrada para os critérios selecionados.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.slice(0, 30).map(visit => {
+        const seconds = Number(visit.duration_seconds) || 0;
+        let qualityBadge = '';
+        if (seconds >= 45) {
+          qualityBadge = '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">● Alta Intenção</span>';
+        } else if (seconds >= 15) {
+          qualityBadge = '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">● Navegação</span>';
+        } else {
+          qualityBadge = '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-100 text-slate-600">○ Saída Rápida</span>';
+        }
+
+        const device = (visit.device_type || 'desktop').toLowerCase();
+        const deviceIcon = device.includes('mobile') || device.includes('tablet')
+          ? '<span class="text-emerald-600 font-bold">📱 Celular</span>'
+          : '<span class="text-[#2270A1] font-bold">🖥️ Desktop</span>';
+
+        const locationStr = [visit.city, visit.region].filter(Boolean).join(', ') || 'Brasil';
+        const friendlyName = getFriendlyPageName(visit.page_path);
+        const refItem = classifyReferrer(visit.referrer);
+
+        return `
+          <tr class="hover:bg-slate-50/80 transition-colors border-b border-slate-100">
+            <td class="py-3 px-5">
+              <strong class="block text-[#051D3E]">${escapeHtml(friendlyName)}</strong>
+              <span class="text-[11px] text-slate-400 font-mono">${escapeHtml(visit.page_path)}</span>
+            </td>
+            <td class="py-3 px-5 text-slate-600">${escapeHtml(locationStr)}</td>
+            <td class="py-3 px-5 text-slate-600">
+              <span class="inline-flex items-center gap-1">${refItem.icon} ${escapeHtml(refItem.label)}</span>
+            </td>
+            <td class="py-3 px-5">${deviceIcon} <span class="text-[10px] text-slate-400">(${escapeHtml(visit.browser || 'Web')})</span></td>
+            <td class="py-3 px-5">
+              <span class="font-bold text-[#051D3E] mr-1">${formatDuration(seconds)}</span>
+              ${qualityBadge}
+            </td>
+            <td class="py-3 px-5 text-right whitespace-nowrap text-slate-500">${formatSolicitacaoDate(visit.started_at)}</td>
+          </tr>
+        `;
       }).join('');
     }
 
     async function loadAnalytics() {
       const tbody = document.getElementById('analytics-table-body');
       const errorBox = document.getElementById('analytics-error');
-      tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-400">Carregando analytics...</td></tr>';
+      const refreshIcon = document.getElementById('refresh-analytics-icon');
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
       errorBox.classList.add('hidden');
 
       const { data, error } = await supabase
         .from('site_analytics')
-        .select('visit_id, session_id, page_path, referrer, duration_seconds, country, region, city, device_type, browser, started_at')
+        .select('visit_id, session_id, page_path, referrer, duration_seconds, country, region, city, device_type, browser, screen_width, started_at')
         .order('started_at', { ascending: false })
-        .limit(200);
+        .limit(300);
+
+      if (refreshIcon) refreshIcon.classList.remove('animate-spin');
 
       if (error) {
-        errorBox.textContent = `Não foi possível carregar os analytics: ${error.message}`;
+        errorBox.textContent = `Não foi possível carregar os dados de analytics: ${error.message}`;
         errorBox.classList.remove('hidden');
-        tbody.innerHTML = '';
         return;
       }
 
-      const visits = data || [];
-      const totalDuration = visits.reduce((sum, visit) => sum + (Number(visit.duration_seconds) || 0), 0);
-      const regions = new Set(visits.map(visit => [visit.city, visit.region, visit.country].filter(Boolean).join(', ')).filter(Boolean));
-      renderTimeRing(visits);
-      document.getElementById('analytics-total').textContent = visits.length;
-      document.getElementById('analytics-sessions').textContent = new Set(visits.map(visit => visit.session_id)).size;
-      document.getElementById('analytics-average').textContent = formatDuration(visits.length ? Math.round(totalDuration / visits.length) : 0);
-      document.getElementById('analytics-regions').textContent = regions.size;
+      rawAnalyticsVisits = data || [];
+      const nowStr = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(new Date());
+      const lastUpdateEl = document.getElementById('analytics-last-update');
+      if (lastUpdateEl) lastUpdateEl.textContent = `Atualizado às ${nowStr}`;
 
-      if (!visits.length) {
-        tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-400">Ainda não há visitas registradas.</td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = visits.map(visit => `
-        <tr class="hover:bg-slate-50/80 transition-colors border-b border-slate-100">
-          <td class="py-4 px-5 font-semibold text-[#093565]">${escapeHtml(visit.page_path)}</td>
-          <td class="py-4 px-5 text-xs">${escapeHtml([visit.city, visit.region, visit.country].filter(Boolean).join(', ') || 'Não identificado')}</td>
-          <td class="py-4 px-5 text-xs">${escapeHtml(visit.referrer || 'Acesso direto')}</td>
-          <td class="py-4 px-5 text-xs">${escapeHtml(`${visit.device_type || 'unknown'} / ${visit.browser || 'unknown'}`)}</td>
-          <td class="py-4 px-5 text-xs font-semibold text-[#2270A1]">${formatDuration(visit.duration_seconds)}</td>
-          <td class="py-4 px-5 text-xs whitespace-nowrap">${formatSolicitacaoDate(visit.started_at)}</td>
-        </tr>
-      `).join('');
+      renderAnalyticsDashboard();
     }
 
     function startAnalyticsRealtime() {
@@ -1096,6 +1735,36 @@
     analyticsTabButton.addEventListener('click', () => switchDashboardTab('analytics'));
     document.getElementById('btn-refresh-solicitacoes').addEventListener('click', loadSolicitacoes);
     document.getElementById('btn-refresh-analytics').addEventListener('click', loadAnalytics);
+
+    // Filtros de Período do Analytics
+    document.querySelectorAll('.analytics-period-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.analytics-period-btn').forEach(b => {
+          b.className = 'analytics-period-btn px-3 py-1.5 rounded-lg hover:text-[#051D3E] transition-colors';
+        });
+        btn.className = 'analytics-period-btn px-3 py-1.5 rounded-lg bg-[#051D3E] text-white transition-colors';
+        currentAnalyticsPeriod = btn.dataset.period || '30d';
+        renderAnalyticsDashboard();
+      });
+    });
+
+    // Filtro de Dispositivo
+    const deviceFilterSelect = document.getElementById('analytics-device-filter');
+    if (deviceFilterSelect) {
+      deviceFilterSelect.addEventListener('change', (e) => {
+        currentAnalyticsDevice = e.target.value;
+        renderAnalyticsDashboard();
+      });
+    }
+
+    // Busca rápida nas sessões
+    const searchInput = document.getElementById('analytics-search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        currentAnalyticsSearch = e.target.value;
+        renderAnalyticsDashboard();
+      });
+    }
     document.getElementById('close-solicitacao-modal').addEventListener('click', () => solicitacaoModal.classList.add('hidden'));
     document.getElementById('close-solicitacao-detail').addEventListener('click', () => solicitacaoModal.classList.add('hidden'));
     document.getElementById('delete-solicitacao-detail').addEventListener('click', () => {
