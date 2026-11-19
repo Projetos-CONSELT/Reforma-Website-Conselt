@@ -43,7 +43,7 @@ export const CASES_DATA: CaseItem[] = [
     cardData: {
       desafio: "Conectar o aprendizado técnico de engenharia civil e arquitetura às demandas de mercado da região.",
       solucao: "Website institucional moderno com portfólio interativo de projetos, calculadora preliminar de escopo e formulário inteligente de orçamentos.",
-      resultado: "+65% em solicitações de orçamentos online e redução de 40% no tempo de primeiro contato comercial.",
+      resultado: "Centralização profissional do portfólio de engenharia e arquitetura com canal ágil para solicitação de orçamentos e propostas comerciais.",
     },
     details: {
       contexto: {
@@ -116,8 +116,8 @@ export const CASES_DATA: CaseItem[] = [
         conteudo:
           "A Constru consolidou sua marca como referência em projetos de engenharia civil em Minas Gerais, registrando aumento substancial em orçamentos fechados logo nos primeiros meses pós-lançamento.",
         detalhes: [
-          "+65% de aumento no volume de solicitações de propostas pelo website",
-          "Redução de 40% no tempo de qualificação de leads pela equipe comercial",
+          "Canal digital estruturado para captação contínua de clientes em Uberlândia e região",
+          "Otimização no tempo de resposta e qualificação de demandas pela equipe técnica",
           "Mais de 30 projetos técnicos catalogados com navegação fluida em celulares e computadores",
         ],
       },
@@ -144,7 +144,7 @@ export const CASES_DATA: CaseItem[] = [
     cardData: {
       desafio: "Tornar a consultoria jurídica acessível e aproximar o Direito Preventivo de micro e pequenos empreendedores.",
       solucao: "Portal corporativo focado em Direito Preventivo, com catálogo explicativo de serviços (Contratos, Marcas e Estatutos) e agendamento de diagnóstico online.",
-      resultado: "+80% em agendamentos de reuniões de diagnóstico e consolidação como referência em consultoria jurídica preventiva em MG.",
+      resultado: "Aproximação direta com empreendedores, canal simplificado de pré-diagnóstico jurídico e consolidação da autoridade em Direito Preventivo.",
     },
     details: {
       contexto: {
@@ -217,7 +217,7 @@ export const CASES_DATA: CaseItem[] = [
         conteudo:
           "A Consenso Jr. alcançou novo patamar de captação digital, ampliando expressivamente sua cartela de contratos preventivos e consolidando sua liderança no ecossistema mineiro.",
         detalhes: [
-          "+80% de aumento em agendamentos de reuniões de diagnóstico pelo site",
+          "Aumento consistente no agendamento de reuniões de diagnóstico inicial pelo site",
           "Forte presença institucional em buscas no Google por direito preventivo em MG",
           "Ciclo de atendimento simplificado, reduzindo dúvidas repetitivas no primeiro contato",
         ],
@@ -245,7 +245,7 @@ export const CASES_DATA: CaseItem[] = [
     cardData: {
       desafio: "Transformar uma atuação ampla e técnica em uma presença digital clara, confiável e orientada a conversão.",
       solucao: "Plataforma institucional moderna com divisão estratégica de núcleos ambientais (Licenciamento, PGRS e Efluentes) e captação de clientes B2B.",
-      resultado: "+120% em contatos qualificados de indústrias e propriedades rurais e presença digital fortalecida em toda a região.",
+      resultado: "Presença digital corporativa de alto impacto, posicionamento como referência em sustentabilidade e captação ativa de demandas B2B.",
     },
     details: {
       contexto: {
@@ -318,7 +318,7 @@ export const CASES_DATA: CaseItem[] = [
         conteudo:
           "A Sustenta dobrou sua captação de clientes B2B pelo site, passando a ser consultada por empresas industriais de grande porte em Uberlândia e em todo o Triângulo Mineiro.",
         detalhes: [
-          "+120% de crescimento nas solicitações de propostas corporativas online",
+          "Atração contínua de demandas corporativas de indústrias, loteamentos e produtores rurais",
           "Tempo médio de permanência na página de serviços superior a 2 minutos",
           "Posicionamento consolidado como autoridade líder em engenharia ambiental universitária",
         ],
@@ -346,7 +346,7 @@ export const CASES_DATA: CaseItem[] = [
     cardData: {
       desafio: "Comunicar a autoridade de 12+ anos em substratos agrícolas para o agronegócio de todo o Brasil.",
       solucao: "Portal corporativo com catálogo técnico interativo de produtos, fichas de rendimento por cultura agrícola e canal direto para compras no atacado.",
-      resultado: "+50% na velocidade de cotações por atacado e presença comercial digital expandida para 8 novos estados brasileiros.",
+      resultado: "Catálogo técnico digital interativo para apoio direto à equipe de vendas e ampliação do alcance da marca agroindustrial em território nacional.",
     },
     details: {
       contexto: {
@@ -419,8 +419,8 @@ export const CASES_DATA: CaseItem[] = [
         conteudo:
           "A Bioflora modernizou sua operação comercial, acelerando o ciclo de negociação e conquistando distribuidores em múltiplos estados do país.",
         detalhes: [
-          "+50% de ganho de velocidade no atendimento e envio de cotações pela equipe comercial",
-          "Presença comercial expandida para mais de 8 novos estados no primeiro ano",
+          "Maior agilidade no suporte comercial aos representantes de campo com fichas técnicas interativas",
+          "Presença comercial expandida para múltiplos estados no primeiro ano",
           "Eliminação quase total da necessidade de envio de PDFs estáticos por e-mail",
         ],
       },
@@ -548,7 +548,7 @@ export const CASES_DATA: CaseItem[] = [
     cardData: {
       desafio: "Unir a produção constante de artigos informativos com captação direta de clientes corporativos para consultoria jurídica.",
       solucao: "Website corporativo integrado a portal de notícias e blog jurídico otimizado para SEO, com botões contextuais de agendamento de assessoria preventiva.",
-      resultado: "+300% de tráfego orgânico via Google e conversão recorrente de leitores do blog em novos contratos de consultoria jurídica.",
+      resultado: "Transformação da produção de artigos jurídicos em canal ativo de atração orgânica e captação recorrente de novos clientes corporativos.",
     },
     details: {
       contexto: {
@@ -621,8 +621,8 @@ export const CASES_DATA: CaseItem[] = [
         conteudo:
           "A Magna multiplicou seu alcance digital, transformando o blog no principal canal de atração de novos clientes para suas soluções de consultoria jurídica preventiva.",
         detalhes: [
-          "+300% de aumento no tráfego orgânico mensal vindo de buscas no Google",
-          "Mais de 3.000 leitores recorrentes por mês no blog jurídico da Magna",
+          "Atração contínua de leitores e empreendedores a partir de buscas orgânicas no Google por dúvidas jurídicas",
+          "Construção de audiência qualificada e recorrente no blog jurídico da Magna",
           "Conversão consistente de leitores em reuniões de diagnóstico e novos projetos fechados",
         ],
       },
