@@ -328,6 +328,16 @@ function CasesPage() {
                   <span>Ver case completo</span>
                   <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
+                {caseItem.websiteUrl && (
+                  <a
+                    href={caseItem.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full mt-2 py-3 px-5 rounded-xl bg-primary/10 hover:bg-primary border border-primary/30 hover:border-primary text-primary hover:text-primary-foreground font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-soft hover:shadow-glow"
+                  >
+                    Visitar site
+                  </a>
+                )}
               </div>
             ))}
           </div>
@@ -400,18 +410,7 @@ function CasesPage() {
                         <p className="text-xs text-primary font-medium">
                           {activeCase.details.contexto.pergunta}
                         </p>
-                        {activeCase.websiteUrl && (
-                          <div className="mt-4 flex justify-center">
-                            <a
-                              href={activeCase.websiteUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/80 transition-colors"
-                            >
-                              Visitar site
-                            </a>
-                          </div>
-                        )}
+                        
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed mt-3">
@@ -441,18 +440,7 @@ function CasesPage() {
                         <p className="text-xs text-amber-400 font-medium">
                           {activeCase.details.desafio.pergunta}
                         </p>
-                        {activeCase.websiteUrl && (
-                          <div className="mt-4 flex justify-center">
-                            <a
-                              href={activeCase.websiteUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/80 transition-colors"
-                            >
-                              Visitar site
-                            </a>
-                          </div>
-                        )}
+                        
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed mt-3">
@@ -482,18 +470,7 @@ function CasesPage() {
                         <p className="text-xs text-sky-400 font-medium">
                           {activeCase.details.objetivo.pergunta}
                         </p>
-                        {activeCase.websiteUrl && (
-                          <div className="mt-4 flex justify-center">
-                            <a
-                              href={activeCase.websiteUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/80 transition-colors"
-                            >
-                              Visitar site
-                            </a>
-                          </div>
-                        )}
+                        
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed mt-3">
@@ -523,18 +500,7 @@ function CasesPage() {
                         <p className="text-xs text-indigo-400 font-medium">
                           {activeCase.details.diagnostico.pergunta}
                         </p>
-                        {activeCase.websiteUrl && (
-                          <div className="mt-4 flex justify-center">
-                            <a
-                              href={activeCase.websiteUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/80 transition-colors"
-                            >
-                              Visitar site
-                            </a>
-                          </div>
-                        )}
+                        
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed mt-3">
@@ -564,18 +530,7 @@ function CasesPage() {
                         <p className="text-xs text-primary font-medium">
                           {activeCase.details.solucao.pergunta}
                         </p>
-                        {activeCase.websiteUrl && (
-                          <div className="mt-4 flex justify-center">
-                            <a
-                              href={activeCase.websiteUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/80 transition-colors"
-                            >
-                              Visitar site
-                            </a>
-                          </div>
-                        )}
+                        
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed mt-3">
@@ -605,18 +560,7 @@ function CasesPage() {
                         <p className="text-xs text-purple-400 font-medium">
                           {activeCase.details.processo.pergunta}
                         </p>
-                        {activeCase.websiteUrl && (
-                          <div className="mt-4 flex justify-center">
-                            <a
-                              href={activeCase.websiteUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/80 transition-colors"
-                            >
-                              Visitar site
-                            </a>
-                          </div>
-                        )}
+                        
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed mt-3">
@@ -646,18 +590,7 @@ function CasesPage() {
                         <p className="text-xs text-emerald-400 font-medium">
                           {activeCase.details.resultado.pergunta}
                         </p>
-                        {activeCase.websiteUrl && (
-                          <div className="mt-4 flex justify-center">
-                            <a
-                              href={activeCase.websiteUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/80 transition-colors"
-                            >
-                              Visitar site
-                            </a>
-                          </div>
-                        )}
+                        
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed mt-3">
