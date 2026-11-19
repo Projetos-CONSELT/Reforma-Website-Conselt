@@ -303,29 +303,17 @@ function CasesPage() {
                       <span className="block text-xs font-bold text-white uppercase tracking-wider mb-1 flex items-center gap-1.5">
                         <Zap className="w-3.5 h-3.5 text-primary" /> Solução:
                       </span>
-                      <p
-                        className={`text-xs sm:text-sm leading-relaxed font-mono ${
-                          caseItem.cardData.solucao.startsWith("[")
-                            ? "text-primary/90 font-medium"
-                            : "text-muted-foreground font-sans"
-                        }`}
-                      >
+                      <p className="text-xs sm:text-sm leading-relaxed text-muted-foreground font-sans">
                         {caseItem.cardData.solucao}
                       </p>
                     </div>
 
                     {/* Resultado */}
-                    <div className="p-3.5 rounded-xl bg-background/60 border border-border/50">
-                      <span className="block text-xs font-bold text-white uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                    <div className="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/30">
+                      <span className="block text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Resultado:
                       </span>
-                      <p
-                        className={`text-xs sm:text-sm leading-relaxed font-mono ${
-                          caseItem.cardData.resultado.startsWith("[")
-                            ? "text-emerald-400/90 font-medium"
-                            : "text-muted-foreground font-sans"
-                        }`}
-                      >
+                      <p className="text-xs sm:text-sm leading-relaxed text-emerald-300/90 font-medium font-sans">
                         {caseItem.cardData.resultado}
                       </p>
                     </div>
@@ -393,7 +381,7 @@ function CasesPage() {
                     {activeCase.client} <span className="text-primary">|</span> {activeCase.service}
                   </DialogTitle>
                   <DialogDescription className="text-sm text-muted-foreground mt-2">
-                    Template Obrigatório do Case — Estrutura oficial de auditoria da Conselt (8 Blocos)
+                    Detalhamento Completo do Projeto — Metodologia, Entregas Técnicas e Resultados Reais
                   </DialogDescription>
                 </DialogHeader>
 

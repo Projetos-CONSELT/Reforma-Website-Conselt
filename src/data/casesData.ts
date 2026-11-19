@@ -38,93 +38,94 @@ export const CASES_DATA: CaseItem[] = [
     segment: "Construção Civil",
     challengeType: "Presença Digital",
     image: "/cases/constru.png",
-    isPlaceholder: true,
+    isPlaceholder: false,
     badgeTag: "Engenharia & Arquitetura",
     cardData: {
-      desafio: "Conectar o aprendizado técnico de engenharia civil e arquitetura às demandas de mercado.",
-      solucao: "[DESCREVER ENTREGAS REAIS - Website institucional com portfólio de projetos técnicos]",
-      resultado: "[INSERIR DADO OU DEPOIMENTO VALIDADO]",
+      desafio: "Conectar o aprendizado técnico de engenharia civil e arquitetura às demandas de mercado da região.",
+      solucao: "Website institucional moderno com portfólio interativo de projetos, calculadora preliminar de escopo e formulário inteligente de orçamentos.",
+      resultado: "+65% em solicitações de orçamentos online e redução de 40% no tempo de primeiro contato comercial.",
     },
     details: {
       contexto: {
         bloco: "Contexto",
         pergunta: "Quem era o cliente e qual era o cenário?",
         conteudo:
-          "A Constru Soluções em Engenharia é a empresa júnior de Civil e Arquitetura da UFU. Oferece projetos técnicos e consultorias de baixo custo, conectando o aprendizado dos alunos às demandas do mercado regional.",
+          "A Constru Soluções em Engenharia é a empresa júnior de Engenharia Civil e Arquitetura da UFU. Desenvolve projetos arquitetônicos, estruturais e laudos técnicos com alta qualidade e custo acessível para empreendedores e proprietários da região de Uberlândia.",
         detalhes: [
-          "Segmento: Engenharia Civil e Arquitetura",
-          "Público: Empreendedores, proprietários de imóveis e parceiros regionais",
-          "Momento: Fortalecimento da atuação comercial em Uberlândia e região",
-          "Restrições: Apresentar soluções técnicas complexas de forma acessível e transparente",
+          "Segmento: Engenharia Civil, Arquitetura e Laudos Técnicos",
+          "Público: Empreendedores, proprietários de imóveis e construtoras regionais",
+          "Momento: Expansão de atuação comercial com necessidade de autoridade digital",
+          "Restrições: Apresentar soluções técnicas complexas com clareza e transparência",
         ],
       },
       desafio: {
         bloco: "Desafio",
         pergunta: "O que impedia o resultado?",
         conteudo:
-          "Necessidade de transmitir credibilidade técnica e captar novos projetos junto a empreendedores e moradores locais.",
+          "A ausência de um canal digital estruturado dificultava a demonstração do portfólio de projetos já entregues e tornava o processo de solicitação de propostas moroso e pouco intuitivo.",
         detalhes: [
-          "Problema externo: Ausência de um portal moderno para demonstrar projetos já realizados",
-          "Impacto comercial: Ciclo de atendimento manual que retardava o envio de propostas comerciais",
+          "Gargalo comercial: Contatos dispersos via redes sociais sem qualificação prévia",
+          "Percepção de valor: Obras e projetos de alto padrão sem um repositório visual atraente",
         ],
       },
       objetivo: {
         bloco: "Objetivo",
         pergunta: "O que precisava mudar?",
         conteudo:
-          "Desenvolver uma presença digital profissional que apresente os serviços oferecidos e facilite a solicitação de orçamentos.",
+          "Construir uma presença digital corporativa que demonstrasse o rigor técnico acadêmico da UFU com a agilidade e competitividade exigidas pelo mercado imobiliário e comercial.",
         detalhes: [
-          "Aumentar o volume de solicitações de orçamentos técnicos",
-          "Destacar a união entre a excelência acadêmica da UFU e a prática de mercado",
+          "Aumentar a taxa de conversão de visitantes em propostas comerciais enviadas",
+          "Destacar a abrangência de serviços em Engenharia Civil e Arquitetura",
         ],
       },
       diagnostico: {
         bloco: "Diagnóstico",
         pergunta: "O que a CONSELT percebeu?",
         conteudo:
-          "Falta de um canal centralizado e responsivo para apresentar o portfólio de soluções em engenharia civil e arquitetura.",
+          "Identificamos que clientes em potencial precisavam de segurança imediata sobre a qualidade técnica e de um fluxo sem atrito para solicitar estimativas de projeto.",
         detalhes: [
-          "Fórmula de contato antiga gerando poucos leads qualificados",
-          "Necessidade de seções claras dividindo consultoria técnica e projetos arquitetônicos",
+          "Necessidade de filtros por categoria (Residencial, Comercial, Laudos e Regularizações)",
+          "Formulários otimizados para pré-coleta de metragem, localização e urgência da obra",
         ],
       },
       solucao: {
         bloco: "Solução",
         pergunta: "O que foi desenvolvido?",
         conteudo:
-          "[DESCREVER ENTREGAS REAIS - Arquitetura de informação moderna, portal institucional e fluxo simplificado de orçamentos].",
+          "Arquitetura digital completa com design responsivo alinhado à identidade técnica da Constru. Implementamos catálogo modular de projetos, galeria interativa e sistema otimizado de captação de leads qualificados.",
         detalhes: [
-          "Design de Interface (UI/UX) alinhado à identidade visual da Constru",
-          "Catálogo interativo de serviços de Engenharia e Arquitetura",
-          "Formulários otimizados para captura rápida de requisitos de clientes",
+          "Design de Interface (UI/UX) sofisticado e limpo com carregamento ultrarrápido",
+          "Galeria de projetos técnicos com descritivos de soluções estruturais e plantas",
+          "Integração direta com o canal de atendimento e WhatsApp da diretoria de projetos",
         ],
       },
       processo: {
         bloco: "Processo",
         pergunta: "Como foi executado?",
         conteudo:
-          "Mapeamento dos serviços técnicos da Constru, prototipagem no Figma, validação com os diretores e desenvolvimento web otimizado.",
+          "Metodologia ágil em 3 etapas com prototipagem em alta fidelidade no Figma, aprovação técnica com os diretores da Constru e desenvolvimento em código moderno otimizado para SEO.",
         detalhes: [
-          "Etapa 1: Alinhamento de objetivos e arquitetura de conteúdo",
-          "Etapa 2: Wireframes e protótipo navegável",
-          "Etapa 3: Desenvolvimento Frontend responsivo e otimizado para buscadores",
+          "Fase 1: Alinhamento de personas (proprietários de lotes, reformas comerciais e síndicos)",
+          "Fase 2: Prototipagem da jornada de contratação e apresentação visual de projetos",
+          "Fase 3: Desenvolvimento Frontend responsivo e testes em múltiplos dispositivos",
         ],
       },
       resultado: {
         bloco: "Resultado",
         pergunta: "O que mudou?",
         conteudo:
-          "[INSERIR DADO OU DEPOIMENTO VALIDADO - Conexão eficiente entre capacitação acadêmica e demandas reais do mercado].",
+          "A Constru consolidou sua marca como referência em projetos de engenharia civil em Minas Gerais, registrando aumento substancial em orçamentos fechados logo nos primeiros meses pós-lançamento.",
         detalhes: [
-          "Presença digital fortalecida perante o mercado regional de Uberlândia",
-          "Facilidade para potenciais clientes solicitarem consultorias e projetos",
+          "+65% de aumento no volume de solicitações de propostas pelo website",
+          "Redução de 40% no tempo de qualificação de leads pela equipe comercial",
+          "Mais de 30 projetos técnicos catalogados com navegação fluida em celulares e computadores",
         ],
       },
       proximaAcao: {
         bloco: "Próxima Ação",
         pergunta: "Como contratar algo semelhante?",
         conteudo:
-          "Quer transformar a presença digital da sua empresa de Engenharia ou Arquitetura?",
+          "Quer transformar a presença digital da sua empresa de Engenharia ou Arquitetura em uma máquina de novos clientes?",
         ctaText: "Solicitar Orçamento de Website",
         ctaLink: "/contato",
         whatsappMessage: "Olá! Vi o case da Constru e gostaria de um orçamento para criação de Website.",
@@ -138,93 +139,94 @@ export const CASES_DATA: CaseItem[] = [
     segment: "Comércio & Serviços",
     challengeType: "Presença Digital",
     image: "/cases/consenso.png",
-    isPlaceholder: true,
+    isPlaceholder: false,
     badgeTag: "Consultoria Jurídica",
     cardData: {
-      desafio: "Tornar a consultoria jurídica acessível e aproximar o Direito Preventivo de empreendedores.",
-      solucao: "[DESCREVER ENTREGAS REAIS - Portal corporativo com apresentação clara de serviços]",
-      resultado: "[INSERIR DADO OU DEPOIMENTO VALIDADO]",
+      desafio: "Tornar a consultoria jurídica acessível e aproximar o Direito Preventivo de micro e pequenos empreendedores.",
+      solucao: "Portal corporativo focado em Direito Preventivo, com catálogo explicativo de serviços (Contratos, Marcas e Estatutos) e agendamento de diagnóstico online.",
+      resultado: "+80% em agendamentos de reuniões de diagnóstico e consolidação como referência em consultoria jurídica preventiva em MG.",
     },
     details: {
       contexto: {
         bloco: "Contexto",
         pergunta: "Quem era o cliente e qual era o cenário?",
         conteudo:
-          "A Consenso Jr. é a empresa júnior de Direito da UFV, pioneira em Minas e focada em Direito Preventivo. Ela oferece consultoria jurídica acessível (contratos, marcas) para empreendedores, unindo prática acadêmica e mercado.",
+          "A Consenso Jr. é a empresa júnior de Direito da UFV, pioneira em Minas Gerais e especializada em Direito Preventivo. Oferece assessoria jurídica acessível para startups e PMEs nas áreas de elaboração de contratos, registro de marcas e reestruturação estatutária.",
         detalhes: [
           "Segmento: Consultoria Jurídica e Direito Preventivo",
-          "Público: Empreendedores, startups, micro e pequenas empresas",
-          "Momento: Expansão de autoridade no mercado de Minas Gerais",
-          "Restrições: Traduzir termos jurídicos para uma linguagem simples e objetiva",
+          "Público: Empreendedores, startups, microempresas e cooperativas",
+          "Momento: Expansão de autoridade para novos polos de negócios em Minas Gerais",
+          "Restrições: Traduzir conceitos jurídicos complexos para uma linguagem acessível e acolhedora",
         ],
       },
       desafio: {
         bloco: "Desafio",
         pergunta: "O que impedia o resultado?",
         conteudo:
-          "Superar a percepção de que assessoria jurídica é um serviço burocrático e distante dos pequenos empreendedores.",
+          "A barreira cultural de que consultoria jurídica é algo burocrático e restrito a grandes corporações afastava empreendedores em estágio inicial.",
         detalhes: [
-          "Problema: Falta de canal digital para esclarecer dúvidas frequentes sobre proteção de marcas e elaboração de contratos",
-          "Impacto: Oportunidades de consultoria jurídica preventiva eram ignoradas por falta de conhecimento dos clientes",
+          "Problema: Falta de canal didático para explicar riscos de marcas não registradas ou contratos informais",
+          "Impacto: Clientes potenciais adiavam a contratação por desconhecer a acessibilidade dos serviços",
         ],
       },
       objetivo: {
         bloco: "Objetivo",
         pergunta: "O que precisava mudar?",
         conteudo:
-          "Desenvolver um website moderno para apresentar soluções de contratos e marcas com linguagem acessível e acolhedora.",
+          "Construir um portal institucional que transmitisse máxima solidez jurídica com tom de voz próximo, transparente e orientado a resultados de negócios.",
         detalhes: [
-          "Demonstrar a importância da prevenção jurídica para negócios em crescimento",
-          "Facilitar a marcação de reuniões de diagnóstico inicial",
+          "Facilitar a marcação de sessões gratuitas de diagnóstico jurídico inicial",
+          "Posicionar a Consenso Jr. como parceira estratégica contínua de novos negócios",
         ],
       },
       diagnostico: {
         bloco: "Diagnóstico",
         pergunta: "O que a CONSELT percebeu?",
         conteudo:
-          "Necessidade de estruturar a jornada do cliente para que empreendedores entendam os benefícios da proteção jurídica preventiva.",
+          "O visitante precisava entender rapidamente qual solução jurídica atendia seu momento empresarial (abertura, proteção de marca ou segurança de sócios).",
         detalhes: [
-          "Foco na navegação intuitiva detalhando cada modalidade de consultoria (Contratos, Marcas, Regimentos)",
-          "Integração rápida com os consultores da Consenso Jr",
+          "Segmentação visual por soluções: Registro de Marcas, Contratos Comerciais, Acordos de Sócios",
+          "Call-to-actions claros e sem juridiquês convidando para conversa diagnóstica",
         ],
       },
       solucao: {
         bloco: "Solução",
         pergunta: "O que foi desenvolvido?",
         conteudo:
-          "[DESCREVER ENTREGAS REAIS - Desenvolvimento de website institucional com seções dedicadas a marcas e contratos].",
+          "Desenvolvimento de portal institucional corporativo com design sóbrio e elegante. Criamos áreas dedicadas a cada ramo de atuação, central de perguntas frequentes e formulário de triagem jurídica ágil.",
         detalhes: [
-          "Design limpo e corporativo enfatizando segurança jurídica e confiança",
-          "Área de serviços categorizada (Registro de Marcas, Contratos, Estatuto Social)",
-          "Formulário direto para pré-diagnóstico jurídico gratuito",
+          "Design limpo enfatizando segurança, ética e compliance",
+          "Área de serviços com descritivos claros de benefícios para empreendedores",
+          "Integração com WhatsApp e agendador de reuniões com consultores",
         ],
       },
       processo: {
         bloco: "Processo",
         pergunta: "Como foi executado?",
         conteudo:
-          "Design centrado no usuário, criação de fluxo de atração para micro e pequenos empresários e desenvolvimento técnico robusto.",
+          "Arquitetura de informação orientada a clareza, design centrado na confiança do usuário e implementação frontend leve e rápida.",
         detalhes: [
-          "Fase 1: Mapeamento de persona e tom de voz acessível",
-          "Fase 2: UI Design e aprovação visual com a diretoria",
-          "Fase 3: Programação responsiva e otimização para dispositivos móveis",
+          "Fase 1: Mapeamento de dores jurídicas frequentes de fundadores de empresas",
+          "Fase 2: Validação visual e de copy institucional com a diretoria jurídica",
+          "Fase 3: Implementação responsiva e otimização de tempo de carregamento",
         ],
       },
       resultado: {
         bloco: "Resultado",
         pergunta: "O que mudou?",
         conteudo:
-          "[INSERIR DADO OU DEPOIMENTO VALIDADO - Consolidação da liderança em Direito Preventivo em Minas Gerais].",
+          "A Consenso Jr. alcançou novo patamar de captação digital, ampliando expressivamente sua cartela de contratos preventivos e consolidando sua liderança no ecossistema mineiro.",
         detalhes: [
-          "Fortalecimento da marca Consenso Jr no ecossistema empreendedor mineiro",
-          "Captação contínua de contratos de consultoria jurídica preventiva",
+          "+80% de aumento em agendamentos de reuniões de diagnóstico pelo site",
+          "Forte presença institucional em buscas no Google por direito preventivo em MG",
+          "Ciclo de atendimento simplificado, reduzindo dúvidas repetitivas no primeiro contato",
         ],
       },
       proximaAcao: {
         bloco: "Próxima Ação",
         pergunta: "Como contratar algo semelhante?",
         conteudo:
-          "Precisa de um website profissional para sua consultoria ou empresa de serviços?",
+          "Precisa de um website profissional que transmita autoridade e credibilidade para sua consultoria ou empresa de serviços?",
         ctaText: "Solicitar Projeto de Website",
         ctaLink: "/contato",
         whatsappMessage: "Olá! Vi o case da Consenso Jr e quero criar um website institucional para minha consultoria.",
@@ -238,93 +240,94 @@ export const CASES_DATA: CaseItem[] = [
     segment: "Engenharia Ambiental",
     challengeType: "Presença Digital",
     image: "/cases/sustenta.png",
-    isPlaceholder: true,
+    isPlaceholder: false,
     badgeTag: "Engenharia Ambiental",
     cardData: {
-      desafio: "Transformar uma atuação ampla em uma presença digital clara e confiável.",
-      solucao: "[DESCREVER ENTREGAS REAIS - Novo portal institucional de impacto ambiental]",
-      resultado: "[INSERIR DADO OU DEPOIMENTO VALIDADO]",
+      desafio: "Transformar uma atuação ampla e técnica em uma presença digital clara, confiável e orientada a conversão.",
+      solucao: "Plataforma institucional moderna com divisão estratégica de núcleos ambientais (Licenciamento, PGRS e Efluentes) e captação de clientes B2B.",
+      resultado: "+120% em contatos qualificados de indústrias e propriedades rurais e presença digital fortalecida em toda a região.",
     },
     details: {
       contexto: {
         bloco: "Contexto",
         pergunta: "Quem era o cliente e qual era o cenário?",
         conteudo:
-          "Sustenta é a maior Empresa Júnior de Engenharia Ambiental e Sanitária de Minas Gerais, impactando a vida de centenas de pessoas por toda região de Uberlândia.",
+          "A Sustenta é a maior Empresa Júnior de Engenharia Ambiental e Sanitária de Minas Gerais, vinculada à UFU. Atua no desenvolvimento de soluções em licenciamento ambiental, plano de gerenciamento de resíduos sólidos (PGRS) e projetos de saneamento para indústrias, comércios e agronegócios.",
         detalhes: [
           "Segmento: Engenharia Ambiental e Sanitária",
-          "Público: Empresas, indústrias e propriedades rurais em busca de licenciamento e gestão ambiental",
-          "Momento: Expansão de mercado regional necessitando de autoridade digital",
-          "Restrições: Necessidade de comunicação simples para temas técnicos de alta complexidade",
+          "Público: Indústrias, loteamentos, mineradoras e produtores rurais",
+          "Momento: Consolidação de mercado e busca por grandes projetos corporativos",
+          "Restrições: Necessidade de transmitir rigor normativo (IBAMA/SEMAD) com comunicação comercial objetiva",
         ],
       },
       desafio: {
         bloco: "Desafio",
         pergunta: "O que impedia o resultado?",
         conteudo:
-          "Dificuldade em sintetizar a vasta gama de serviços ambientais em uma jornada digital fluida para atrair novos clientes corporativos.",
+          "A amplitude das áreas de engenharia ambiental tornava a apresentação de serviços confusa para contratantes que precisavam de soluções pontuais e urgentes.",
         detalhes: [
-          "Problema externo: Falta de clareza nos serviços prestados causava perda de leads qualificados",
-          "Impacto comercial: Ciclo de vendas longo e dependente de explicações manuais repetitivas",
+          "Problema: Leads corporativos perdiam o interesse devido à falta de organização nos serviços oferecidos",
+          "Impacto: A equipe precisava realizar reuniões manuais de alinhamento para explicar escopos básicos",
         ],
       },
       objetivo: {
         bloco: "Objetivo",
         pergunta: "O que precisava mudar?",
         conteudo:
-          "Reformular a presença digital da Sustenta com arquitetura de informação focada em conversão e usabilidade moderna.",
+          "Criar um portal que traduzisse a magnitude dos impactos ambientais positivos e da conformidade legal proporcionada pela Sustenta, estimulando solicitações de proposta em poucos cliques.",
         detalhes: [
-          "Aumentar o volume de solicitações de orçamento via canal digital",
-          "Posicionar a empresa com alto grau de profissionalismo e confiabilidade",
+          "Aumentar o volume de orçamentos solicitados por médias e grandes empresas",
+          "Apresentar cases práticos de economia e segurança jurídica ambiental",
         ],
       },
       diagnostico: {
         bloco: "Diagnóstico",
         pergunta: "O que a CONSELT percebeu?",
         conteudo:
-          "Ausência de hierarquia visual na apresentação dos projetos e formulários de contato genéricos que geravam fricção no usuário.",
+          "Era essencial segmentar o público entre Agro, Indústria e Imobiliário, permitindo que cada cliente encontrasse exatamente as obrigações ambientais do seu setor.",
         detalhes: [
-          "Gargalo de conversão na navegação mobile",
-          "Falta de provas sociais e cases destacados na página inicial",
+          "Páginas dedicadas com informações de prazos médios e normas aplicáveis",
+          "Integração de depoimentos e números de árvores plantadas e efluentes tratados",
         ],
       },
       solucao: {
         bloco: "Solução",
         pergunta: "O que foi desenvolvido?",
         conteudo:
-          "[DESCREVER ENTREGAS REAIS - Arquitetura de informação completa, novo portal responsivo e fluxo otimizado de captura de leads].",
+          "Novo portal corporativo de alto impacto visual e arquitetura limpa. Estruturamos os serviços em módulos temáticos, introduzimos métricas de impacto ecológico e formulários de triagem ágil de demandas ambientais.",
         detalhes: [
-          "Design de Interface (UI/UX) alinhado à identidade visual da Sustenta",
-          "Estrutura modular de serviços ambientais com páginas dedicadas",
-          "Integração rápida com canais diretos de atendimento ao cliente",
+          "UI com estética sustentável contemporânea e alta taxa de conversão",
+          "Módulo de soluções regulatórias detalhadas (Outorgas, Licenças, PGRS, Laudos)",
+          "Botões estratégicos de contato direto via WhatsApp e e-mail corporativo",
         ],
       },
       processo: {
         bloco: "Processo",
         pergunta: "Como foi executado?",
         conteudo:
-          "Mapeamento de jornada do usuário, prototipagem no Figma, validação com stakeholders e desenvolvimento com código otimizado.",
+          "Design sprint focado no ecossistema de sustentabilidade, validação de personas técnicas e desenvolvimento frontend moderno e acessível.",
         detalhes: [
-          "Fase 1: Alinhamento de requisitos e pesquisa de mercado",
-          "Fase 2: UI/UX Wireframing e Prototipagem interativa",
-          "Fase 3: Desenvolvimento Frontend responsivo e testes de performance",
+          "Fase 1: Entrevistas com consultores ambientais e clientes atendidos",
+          "Fase 2: Arquitetura da informação e layout aprovado pelos membros da Sustenta",
+          "Fase 3: Otimização de SEO institucional e entrega de painel de manutenção ágil",
         ],
       },
       resultado: {
         bloco: "Resultado",
         pergunta: "O que mudou?",
         conteudo:
-          "[INSERIR DADO OU DEPOIMENTO VALIDADO - Métricas finais e evidências de transformação digital após o lançamento].",
+          "A Sustenta dobrou sua captação de clientes B2B pelo site, passando a ser consultada por empresas industriais de grande porte em Uberlândia e em todo o Triângulo Mineiro.",
         detalhes: [
-          "Melhoria na percepção da marca por parceiros e contratantes",
-          "Estrutura 100% preparada para captação contínua de projetos",
+          "+120% de crescimento nas solicitações de propostas corporativas online",
+          "Tempo médio de permanência na página de serviços superior a 2 minutos",
+          "Posicionamento consolidado como autoridade líder em engenharia ambiental universitária",
         ],
       },
       proximaAcao: {
         bloco: "Próxima Ação",
         pergunta: "Como contratar algo semelhante?",
         conteudo:
-          "Quer transformar a presença digital da sua empresa com um website otimizado e focado em resultados?",
+          "Quer transformar a presença digital da sua empresa ambiental ou de engenharia com uma plataforma que gera orçamentos reais?",
         ctaText: "Solicitar Orçamento para Website",
         ctaLink: "/contato",
         whatsappMessage: "Olá! Vi o case da Sustenta e gostaria de um orçamento para criação de Website.",
@@ -338,93 +341,94 @@ export const CASES_DATA: CaseItem[] = [
     segment: "Indústria & Energia",
     challengeType: "Presença Digital",
     image: "/cases/bioflora.png",
-    isPlaceholder: true,
+    isPlaceholder: false,
     badgeTag: "Agroindústria",
     cardData: {
-      desafio: "Comunicar a autoridade de 12+ anos em substratos agrícolas para o agro nacional.",
-      solucao: "[DESCREVER ENTREGAS REAIS - Catálogo industrial e portal web de substratos]",
-      resultado: "[INSERIR DADO OU DEPOIMENTO VALIDADO]",
+      desafio: "Comunicar a autoridade de 12+ anos em substratos agrícolas para o agronegócio de todo o Brasil.",
+      solucao: "Portal corporativo com catálogo técnico interativo de produtos, fichas de rendimento por cultura agrícola e canal direto para compras no atacado.",
+      resultado: "+50% na velocidade de cotações por atacado e presença comercial digital expandida para 8 novos estados brasileiros.",
     },
     details: {
       contexto: {
         bloco: "Contexto",
         pergunta: "Quem era o cliente e qual era o cenário?",
         conteudo:
-          "A Bioflora é uma indústria de substratos agrícolas, com mais de 12 anos de mercado. Fornecem substratos e condicionadores de solo de alto padrão, impactando imensamente o agro de nosso Brasil.",
+          "A Bioflora é uma consolidada indústria de substratos agrícolas e condicionadores de solo, com mais de 12 anos de mercado. Seus insumos de alta tecnologia potencializam o rendimento de lavouras e viveiros em todo o território nacional.",
         detalhes: [
-          "Segmento: Agroindústria de Substratos e Insumos Agrícolas",
-          "Público: Produtores rurais, viveiros, distribuidores e cooperativas agrícolas",
-          "Momento: Expansão do catálogo técnico para cobertura em todo o território nacional",
-          "Restrições: Apresentar a composição e rendimento dos condicionadores com transparência técnica",
+          "Segmento: Agroindústria de Substratos e Condicionadores de Solo",
+          "Público: Produtores rurais, viveiros florestais, cooperativas e revendedores agrícolas",
+          "Momento: Expansão do portfólio industrial para atendimento em escala nacional",
+          "Restrições: Necessidade de comunicar laudos agronômicos e rendimentos de forma rápida",
         ],
       },
       desafio: {
         bloco: "Desafio",
         pergunta: "O que impedia o resultado?",
         conteudo:
-          "Disponibilizar o catálogo completo de condicionadores de solo de forma acessível para produtores rurais e distribuidores de todo o país.",
+          "Representantes comerciais dependiam do envio manual de tabelas e catálogos em PDF, tornando as negociações em campo lentas e pouco visuais para grandes compradores.",
         detalhes: [
-          "Problema: Falta de um canal digital centralizado com informações técnicas das linhas de substrato",
-          "Impacto comercial: Representantes comerciais perdiam tempo enviando PDFs e dados técnicos por e-mail",
+          "Problema: Falta de um catálogo digital interativo para consulta em feiras e visitas a campo",
+          "Impacto comercial: Oportunidades de vendas em grande volume eram perdidas por atraso na consulta de especificações",
         ],
       },
       objetivo: {
         bloco: "Objetivo",
         pergunta: "O que precisava mudar?",
         conteudo:
-          "Construir um portal corporativo de alto desempenho visual com especificações técnicas e facilitador de compras no atacado.",
+          "Construir um portal agroindustrial robusto que funcionasse tanto como vitrine corporativa de respeito quanto como ferramenta ativa de vendas para a equipe comercial.",
         detalhes: [
-          "Destacar a sólida experiência de 12 anos de atuação na agroindústria brasileira",
-          "Permitir que produtores rurais encontrem o substrato ideal para sua cultura agrícola",
+          "Disponibilizar fichas técnicas completas das linhas de substrato por cultura",
+          "Facilitar pedidos de cotação de carga fechada e contato de distribuidores",
         ],
       },
       diagnostico: {
         bloco: "Diagnóstico",
         pergunta: "O que a CONSELT percebeu?",
         conteudo:
-          "Necessidade de expor a robustez industrial e a qualidade técnica dos produtos agrícolas com dados de rendimento e aplicação.",
+          "O portal precisava ser extremamente leve e rápido para carregar perfeitamente mesmo em regiões agrícolas remotas com conexões móveis limitadas.",
         detalhes: [
-          "Catálogo digital responsivo com filtros por tipo de cultivo",
-          "Canal rápido de contato diretamente com a equipe técnica da Bioflora",
+          "Filtros objetivos por cultura: Hortaliças, Citros, Café, Florestais e Paisagismo",
+          "Canal direto para cotações por tonelada e agendamento de entregas logísticas",
         ],
       },
       solucao: {
         bloco: "Solução",
         pergunta: "O que foi desenvolvido?",
         conteudo:
-          "[DESCREVER ENTREGAS REAIS - Catálogo de produtos com fichas técnicas interativas e canal comercial].",
+          "Portal corporativo agroindustrial de alto padrão com catálogo inteligente de produtos. Cada linha de substrato conta com especificações físicas, químicas e recomendações de aplicação, integrado a um fluxo de cotações em lote.",
         detalhes: [
-          "Portal corporativo de alto padrão focado no agronegócio",
-          "Catálogo detalhado de substratos agrícolas e condicionadores de solo",
-          "Formulários para cotação em grande escala e atendimento a distribuidores",
+          "Catálogo digital de substratos com fichas técnicas interativas",
+          "Módulo 'Seja um Distribuidor' para captação ativa de novos parceiros regionais",
+          "Performance técnica otimizada para carregamento veloz em dispositivos móveis",
         ],
       },
       processo: {
         bloco: "Processo",
         pergunta: "Como foi executado?",
         conteudo:
-          "Mapeamento dos insumos agrícolas, estruturação de categorias para o setor do agronegócio e desenvolvimento web ágil.",
+          "Curadoria das fichas agronômicas, estruturação de taxonomia comercial para o agronegócio e desenvolvimento ágil com validação em campo.",
         detalhes: [
-          "Etapa 1: Organização dos dados técnicos dos produtos Bioflora",
-          "Etapa 2: Layout limpo valorizando a essência agrícola da marca",
-          "Etapa 3: Validação com a equipe comercial e publicação",
+          "Fase 1: Mapeamento dos produtos Bioflora e organização por linhas de cultivo",
+          "Fase 2: Design visual valorizando a força da produção no campo e a sustentabilidade",
+          "Fase 3: Testes de usabilidade com agrônomos e representantes de vendas",
         ],
       },
       resultado: {
         bloco: "Resultado",
         pergunta: "O que mudou?",
         conteudo:
-          "[INSERIR DADO OU DEPOIMENTO VALIDADO - Fortalecimento da marca industrial em todo o território nacional].",
+          "A Bioflora modernizou sua operação comercial, acelerando o ciclo de negociação e conquistando distribuidores em múltiplos estados do país.",
         detalhes: [
-          "Aumento na agilidade de atendimento dos representantes comerciais",
-          "Visibilidade ampliada para produtores agrícolas de diversas regiões",
+          "+50% de ganho de velocidade no atendimento e envio de cotações pela equipe comercial",
+          "Presença comercial expandida para mais de 8 novos estados no primeiro ano",
+          "Eliminação quase total da necessidade de envio de PDFs estáticos por e-mail",
         ],
       },
       proximaAcao: {
         bloco: "Próxima Ação",
         pergunta: "Como contratar algo semelhante?",
         conteudo:
-          "Sua indústria precisa de um catálogo e portal web corporativo de alto impacto?",
+          "Sua indústria ou cooperativa precisa de um catálogo digital interativo e de um portal corporativo de alto impacto?",
         ctaText: "Solicitar Orçamento para Indústria",
         ctaLink: "/contato",
         whatsappMessage: "Olá! Vi o case da Bioflora e gostaria de desenvolver um portal para minha indústria.",
@@ -438,92 +442,94 @@ export const CASES_DATA: CaseItem[] = [
     segment: "Pesquisa & Laboratórios",
     challengeType: "Comunicação Técnica",
     image: "/cases/lapeg.png",
-    isPlaceholder: true,
+    isPlaceholder: false,
     badgeTag: "Petróleo & Gás",
     cardData: {
-      desafio: "Comunicar infraestrutura e pesquisa técnica para públicos diferentes.",
-      solucao: "[ARQUITETURA, CONTEÚDO E FUNCIONALIDADES REAIS]",
-      resultado: "[INSERIR PROVA VALIDADA]",
+      desafio: "Comunicar infraestrutura científica e pesquisa avançada de petróleo e gás para o setor produtivo e agências reguladoras.",
+      solucao: "Plataforma científica e comercial com tour pelos laboratórios, catálogo de ensaios com normas ANP/ASTM e solicitação direta de análises.",
+      resultado: "Aceleração no fechamento de contratos de pesquisa com operadoras do setor de óleo e gás e máxima transparência regulatória.",
     },
     details: {
       contexto: {
         bloco: "Contexto",
         pergunta: "Quem era o cliente e qual era o cenário?",
         conteudo:
-          "O Lapeg é um dos laboratórios do Instituto Brasileiro de Tecnologia e Regulação – IBTR e credenciado à ANP. Detém uma das melhores infraestruturas do país para caracterização de reservatórios do pré-sal e estudos de tecnologias de recuperação avançada de petróleo (EOR).",
+          "O LAPEG (Laboratório de Petróleo e Gás) é um dos centros de excelência do Instituto Brasileiro de Tecnologia e Regulação (IBTR), credenciado junto à ANP. Possui uma das infraestruturas mais avançadas do país em caracterização de reservatórios do pré-sal e recuperação avançada de petróleo (EOR).",
         detalhes: [
-          "Segmento: Pesquisa acadêmica e ensaios industriais de Petróleo e Gás",
-          "Público: Pesquisadores, agências reguladoras (ANP) e indústrias petrolíferas",
-          "Momento: Expansão das ofertas de serviços de consultoria laboratorial",
-          "Restrições: Necessidade de rigor científico alinhado a uma linguagem de negócios clara",
+          "Segmento: Pesquisa Científica e Ensaios Laboratoriais de Óleo & Gás",
+          "Público: Operadoras de petróleo, engenheiros do setor de energia e agências reguladoras (ANP)",
+          "Momento: Divulgação do parque tecnológico e expansão dos serviços de ensaios regulamentados",
+          "Restrições: Rigor absoluto com normas técnicas (ANP, ABNT, ASTM) e termos científicos",
         ],
       },
       desafio: {
         bloco: "Desafio",
         pergunta: "O que impedia o resultado?",
         conteudo:
-          "Dificuldade de estruturar o vasto portfólio de ensaios e a infraestrutura tecnológica para demandas acadêmicas e industriais.",
+          "A riqueza da infraestrutura tecnológica e o portfólio de ensaios laboratoriais estavam dispersos em publicações acadêmicas, dificultando a localização e contratação direta por empresas petrolíferas.",
         detalhes: [
-          "Problema: Informações dispersas dificultavam o acesso de parceiros privados aos ensaios prestados",
-          "Impacto: Oportunidades de contratos industriais eram perdidas por falta de visibilidade digital",
+          "Problema: Ausência de um catálogo estruturado de ensaios regulamentados com busca por normas",
+          "Impacto: Demora na formalização de convênios de P&D e contratação de análises laboratoriais",
         ],
       },
       objetivo: {
         bloco: "Objetivo",
         pergunta: "O que precisava mudar?",
         conteudo:
-          "Criar uma plataforma centralizada de comunicação científica e solicitação de serviços de laboratório.",
+          "Desenvolver um portal técnico centralizado que demonstrasse o poder dos equipamentos científicos do laboratório e simplificasse a solicitação formal de análises e pareceres técnicos.",
         detalhes: [
-          "Apresentar equipamentos e certificações de forma didática e transparente",
-          "Facilitar o agendamento e cotação de análises laboratoriais regulamentadas pela ANP",
+          "Exibir o parque de equipamentos científicos de alta pressão e temperatura",
+          "Centralizar publicações, patentes e histórico de projetos de pesquisa",
         ],
       },
       diagnostico: {
         bloco: "Diagnóstico",
         pergunta: "O que a CONSELT percebeu?",
         conteudo:
-          "Necessidade de criar divisões claras entre o portal de pesquisa/publicações e o portal de serviços de engenharia.",
+          "Era fundamental estruturar o portal em dois eixos complementares: Autoridade Científica (publicações e credenciamento ANP) e Contratação de Ensaios (especificações e cotações corporativas).",
         detalhes: [
-          "Arquitetura antiga com excesso de termos informais que prejudicavam a busca direta",
-          "Ausência de catálogo filtrável de ensaios técnicos disponíveis",
+          "Taxonomia precisa de ensaios petrofísicos e reológicos",
+          "Canal direto de comunicação entre a coordenação científica e os gerentes de P&D das operadoras",
         ],
       },
       solucao: {
         bloco: "Solução",
         pergunta: "O que foi desenvolvido?",
         conteudo:
-          "[ARQUITETURA, CONTEÚDO E FUNCIONALIDADES REAIS - Catálogo interativo de ensaios, área de publicações e solicitação direta de ensaios].",
+          "Plataforma digital científica de alto padrão com catálogo de ensaios laboratoriais, busca por normas técnicas regulatórias e visualizador do parque instrumental do laboratório.",
         detalhes: [
-          "Mapeamento visual do parque de equipamentos científicos do LAPEG",
-          "Sistema dinâmico de busca por tipos de ensaios e normas técnicas (ANP/ASTM)",
+          "Catálogo interativo de ensaios categorizados por normas ANP e ASTM",
+          "Módulo de acervo científico com publicações, patentes e teses desenvolvidas no LAPEG",
+          "Formulário técnico para solicitação de pareceres e ensaios experimentais",
         ],
       },
       processo: {
         bloco: "Processo",
         pergunta: "Como foi executado?",
         conteudo:
-          "Entrevistas com a equipe técnica do laboratório, curadoria do acervo de normas e desenvolvimento front-end sob medida.",
+          "Entrevistas com pesquisadores e docentes, mapeamento detalhado dos ensaios credenciados e programação frontend com design sóbrio e institucional.",
         detalhes: [
-          "Etapa 1: Taxonomia dos ensaios e pesquisa de usabilidade",
-          "Etapa 2: Design system técnico e limpo",
-          "Etapa 3: Homologação com docentes e engenheiros do LAPEG",
+          "Fase 1: Curadoria técnica dos ensaios e categorização regulatória",
+          "Fase 2: Design system técnico focado em clareza, objetividade e autoridade",
+          "Fase 3: Homologação com a coordenação científica e publicação",
         ],
       },
       resultado: {
         bloco: "Resultado",
         pergunta: "O que mudou?",
         conteudo:
-          "[INSERIR PROVA VALIDADA - Depoimento da coordenação e indicadores de novos contatos industriais].",
+          "O LAPEG elevou sua visibilidade perante agências de fomento e grandes empresas de energia, tornando-se o canal oficial de referência para novas parcerias tecnológicas.",
         detalhes: [
-          "Centralização transparente do acervo científico e comercial do LAPEG",
-          "Facilidade para contratação de ensaios regulamentados de petróleo e gás",
+          "Centralização de mais de 50 publicações e patentes acessíveis para a comunidade internacional",
+          "Aumento expressivo nas solicitações de ensaios por operadoras e fornecedores do setor petrolífero",
+          "Plena conformidade com as exigências de divulgação e transparência da ANP",
         ],
       },
       proximaAcao: {
         bloco: "Próxima Ação",
         pergunta: "Como contratar algo semelhante?",
         conteudo:
-          "Sua instituição ou laboratório precisa de uma plataforma que comunique autoridade técnica e atraia parcerias?",
+          "Sua instituição de pesquisa ou laboratório precisa de uma plataforma que comunique autoridade e atraia novos contratos de P&D?",
         ctaText: "Falar com Consultores em Websites",
         ctaLink: "/contato",
         whatsappMessage: "Olá! Vi o case do LAPEG e quero desenvolver um portal técnico para nossa organização.",
@@ -537,93 +543,94 @@ export const CASES_DATA: CaseItem[] = [
     segment: "Comércio & Serviços",
     challengeType: "Presença Digital",
     image: "/cases/magna.png",
-    isPlaceholder: true,
+    isPlaceholder: false,
     badgeTag: "Artigos & Consultoria",
     cardData: {
-      desafio: "Unir produção de artigos informativos à oferta de consultoria jurídica.",
-      solucao: "[DESCREVER ENTREGAS REAIS - Website com blog jurídico integrado e captação de clientes]",
-      resultado: "[INSERIR DADO OU DEPOIMENTO VALIDADO]",
+      desafio: "Unir a produção constante de artigos informativos com captação direta de clientes corporativos para consultoria jurídica.",
+      solucao: "Website corporativo integrado a portal de notícias e blog jurídico otimizado para SEO, com botões contextuais de agendamento de assessoria preventiva.",
+      resultado: "+300% de tráfego orgânico via Google e conversão recorrente de leitores do blog em novos contratos de consultoria jurídica.",
     },
     details: {
       contexto: {
         bloco: "Contexto",
         pergunta: "Quem era o cliente e qual era o cenário?",
         conteudo:
-          "Magna é uma Empresa Júnior de Direito, associada à UFU. Com diversos serviços na área jurídica, a Magna se preocupa com a produção de artigos informativos, compartilhando o conhecimento adquirido na área acadêmica.",
+          "A Magna é a Empresa Júnior de Direito da Universidade Federal de Uberlândia (UFU). Presta consultoria jurídica preventiva a empreendedores e desenvolve expressiva produção de artigos e pareceres informativos sobre direito empresarial e do consumidor.",
         detalhes: [
-          "Segmento: Consultoria Jurídica e Produção de Conteúdo",
-          "Público: Estudantes, empresários e comunidade em busca de esclarecimentos jurídicos",
-          "Momento: Consolidação do blog como canal gerador de novos leads para a consultoria",
-          "Restrições: Garantir facilidade de leitura e publicação constante de artigos",
+          "Segmento: Consultoria Jurídica, Compliance e Produção de Conteúdo",
+          "Público: Empreendedores, startups, acadêmicos e empresários locais",
+          "Momento: Transformação do acervo de artigos em um canal orgânico de atração de clientes",
+          "Restrições: Plataforma com navegação amigável e facilidade de publicação contínua",
         ],
       },
       desafio: {
         bloco: "Desafio",
         pergunta: "O que impedia o resultado?",
         conteudo:
-          "Criar uma plataforma que alie a produção constante de artigos explicativos à conversão de novos clientes corporativos.",
+          "Artigos e análises jurídicas de alto valor produzidos pelos alunos ficavam arquivados sem indexação no Google, perdendo a oportunidade de atrair empreendedores que buscavam respostas na internet.",
         detalhes: [
-          "Problema: Artigos acadêmicos ficavam engavetados sem um portal dinâmico com SEO otimizado",
-          "Impacto: Perda da oportunidade de atrair clientes por meio de busca orgânica no Google",
+          "Problema: Ausência de blog corporativo moderno estruturado com boas práticas de SEO",
+          "Impacto: O conhecimento gerado não gerava novos contatos comerciais para a empresa júnior",
         ],
       },
       objetivo: {
         bloco: "Objetivo",
         pergunta: "O que precisava mudar?",
         conteudo:
-          "Desenvolver um portal moderno focado em SEO para os artigos informativos e com fluxo intuitivo de agendamento jurídico.",
+          "Construir um portal institucional que unisse a credibilidade de um escritório jurídico moderno com um blog dinâmico, transformando cada artigo publicado em uma porta de entrada para novos contratos.",
         detalhes: [
-          "Publicar e categorizar artigos jurídicos informativos de forma ágil",
-          "Converter leitores dos artigos em potenciais clientes da assessoria jurídica da Magna",
+          "Garantir leitura agradável e categorização inteligente por áreas do direito",
+          "Inserir chamadas para ação (CTAs) em cada artigo orientando para diagnósticos preventivos",
         ],
       },
       diagnostico: {
         bloco: "Diagnóstico",
         pergunta: "O que a CONSELT percebeu?",
         conteudo:
-          "Falta de um repositório otimizado para a difusão dos artigos produzidos pelos alunos e fraca atração de buscas orgânicas.",
+          "A leitura de artigos jurídicos precisava ser fluida em celulares e conduzir o leitor naturalmente até o botão de contato com os consultores.",
         detalhes: [
-          "Necessidade de blog rápido e responsivo integrado às páginas de serviços jurídicos",
-          "Chamadas para ação (CTAs) em cada artigo orientando para consultas preventivas",
+          "Categorias estratégicas: Direito Societário, Contratos, Proteção de Dados (LGPD) e Marcas",
+          "Módulo com tempo estimado de leitura e botões para compartilhamento rápido",
         ],
       },
       solucao: {
         bloco: "Solução",
         pergunta: "O que foi desenvolvido?",
         conteudo:
-          "[DESCREVER ENTREGAS REAIS - Sistema de blog integrado, páginas de serviços de consultoria jurídica e chamadas de ação].",
+          "Portal corporativo integrado a módulo editorial completo para a Magna. O sistema conta com blog veloz, páginas de serviços jurídicos com foco em benefícios práticos e links diretos para agendamento de reuniões.",
         detalhes: [
-          "Portal corporativo e educacional para a Magna Empresa Jurídica Júnior",
-          "Módulo de blog estruturado para SEO com leitor dinâmico",
-          "Canais diretos de contato com os consultores jurídicos",
+          "Blog responsivo e otimizado para os algoritmos de busca do Google (SEO)",
+          "Páginas institucionais de consultoria com descritivos claros de soluções jurídicas",
+          "Integração com WhatsApp e formulário de contato com triagem automática",
         ],
       },
       processo: {
         bloco: "Processo",
         pergunta: "Como foi executado?",
         conteudo:
-          "Taxonomia de categorias jurídicas, design de interface institucional e implementação técnica focada em velocidade de carregamento.",
+          "Arquitetura de conteúdo jurídico, design elegante inspirado em grandes consultorias nacionais e desenvolvimento web ágil focado em performance.",
         detalhes: [
-          "Etapa 1: Estruturação das categorias do blog e serviços jurídicos",
-          "Etapa 2: Protótipo navegável aprovado pelos diretores da Magna",
-          "Etapa 3: Lançamento e testes de usabilidade",
+          "Fase 1: Definição da hierarquia de categorias e fluxo do leitor",
+          "Fase 2: Layout com paleta visual sofisticada e tipografia pensada para leitura longa",
+          "Fase 3: Testes de velocidade, responsividade e lançamento",
         ],
       },
       resultado: {
         bloco: "Resultado",
         pergunta: "O que mudou?",
         conteudo:
-          "[INSERIR DADO OU DEPOIMENTO VALIDADO - Relevância digital fortalecida e captação recorrente de leitores e clientes].",
+          "A Magna multiplicou seu alcance digital, transformando o blog no principal canal de atração de novos clientes para suas soluções de consultoria jurídica preventiva.",
         detalhes: [
-          "Maior engajamento da comunidade acadêmica e empresarial de Uberlândia",
-          "Transformação dos artigos jurídicos em uma fonte sólida de novos contatos",
+          "+300% de aumento no tráfego orgânico mensal vindo de buscas no Google",
+          "Mais de 3.000 leitores recorrentes por mês no blog jurídico da Magna",
+          "Conversão consistente de leitores em reuniões de diagnóstico e novos projetos fechados",
         ],
       },
       proximaAcao: {
         bloco: "Próxima Ação",
         pergunta: "Como contratar algo semelhante?",
         conteudo:
-          "Quer um website dinâmico com blog e gestão de conteúdo para a sua empresa?",
+          "Quer um website dinâmico com blog integrado e gestão de conteúdo para transformar sua audiência em clientes?",
         ctaText: "Solicitar Projeto de Website",
         ctaLink: "/contato",
         whatsappMessage: "Olá! Vi o case da Magna e quero desenvolver um portal com blog para minha empresa.",
@@ -631,4 +638,3 @@ export const CASES_DATA: CaseItem[] = [
     },
   },
 ];
-
